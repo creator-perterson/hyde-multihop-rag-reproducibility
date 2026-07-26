@@ -1,0 +1,42 @@
+\begin{table*}[t]
+\centering
+\caption{Strict equal-budget retrieval-only query-form diagnostic and paired contrasts with \texttt{BAAI/bge-base-en-v1.5}.}
+\label{tab:equal_budget_retrieval_diagnostic}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X r r r r}
+\toprule
+Dataset & Generated query form & Mean words & Any hit@10 & All hit@10 & Recall@10 \\
+\midrule
+HotpotQA & Keyword/entity expansion & 38.370 & 0.9900 & 0.9240 & 0.9570 \\
+HotpotQA & Direct rewrite & 39.392 & 0.9860 & 0.8800 & 0.9330 \\
+HotpotQA & Question decomposition & 39.640 & 0.9900 & 0.8740 & 0.9320 \\
+\rowcolor{gray!10} HotpotQA & Document-like passage & 39.246 & \best{0.9940} & \best{0.9260} & \best{0.9600} \\
+\midrule
+2Wiki & Keyword/entity expansion & 38.170 & 0.9920 & 0.6760 & 0.8410 \\
+2Wiki & Direct rewrite & 39.628 & 0.9680 & 0.4760 & 0.7190 \\
+2Wiki & Question decomposition & 40.008 & 0.9980 & 0.4540 & 0.7295 \\
+\rowcolor{gray!10} 2Wiki & Document-like passage & 39.172 & \best{1.0000} & \best{0.7520} & \best{0.9035} \\
+\bottomrule
+\end{tabularx}
+\medskip
+\begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X r r r}
+\toprule
+Dataset & Baseline form & $N$ & $\Delta$ All hit@10 [95\% CI] & $\Delta$ Recall@10 [95\% CI] \\
+\midrule
+HotpotQA & Direct rewrite & 500 & +0.0460 [+0.0200, +0.0720] & +0.0270 [+0.0120, +0.0410] \\
+HotpotQA & Question decomposition & 500 & +0.0520 [+0.0260, +0.0800] & +0.0280 [+0.0140, +0.0430] \\
+HotpotQA & Keyword/entity expansion & 500 & +0.0020 [-0.0180, +0.0220] & +0.0030 [-0.0080, +0.0140] \\
+\midrule
+2Wiki & Direct rewrite & 500 & +0.2760 [+0.2360, +0.3160] & +0.1845 [+0.1620, +0.2070] \\
+2Wiki & Question decomposition & 500 & +0.2980 [+0.2580, +0.3420] & +0.1740 [+0.1530, +0.1940] \\
+2Wiki & Keyword/entity expansion & 500 & +0.0760 [+0.0440, +0.1080] & +0.0625 [+0.0460, +0.0800] \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Each row evaluates 500 examples. All forms use the same Qwen3.7-Max generator, one generation call per question, a 40-word target with a shared 64-token generation cap, the same BGE-base encoder, query serialization and encoder truncation, and top-$k=10$. Retrieval encodes the original question plus the generated text, serialized as \texttt{question}, the label \texttt{Generated retrieval text:}, and the generated output; the document-like row is therefore $[q;G_{\mathrm{doc}}(q)]$, not $G_{\mathrm{doc}}(q)$ alone. The table is retrieval-only: reader answers are not regenerated. Bold marks the largest point estimate in each dataset block; shaded rows mark the document-like form. The lower panel reports document-like passage minus the named baseline using question-level paired bootstrap 95\% percentile intervals ($B=2000$, seed 13). Realized mean length ranges from 38.170 to 40.008 words.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

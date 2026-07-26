@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering
+\caption{Local candidate-corpus statistics for the released processed splits.}
+\label{tab:corpus_statistics}
+\small
+\begin{threeparttable}
+\setlength{\tabcolsep}{5pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r}
+\toprule
+Statistic & HotpotQA & 2WikiMultihopQA \\
+\midrule
+Questions & 500 & 500 \\
+Total candidate paragraphs & 4977 & 5000 \\
+Unique titles & 4931 & 3273 \\
+Mean / median source-pool records contributed per question & 10.0 / 10 & 10 / 10 \\
+Source-pool records contributed per question, min--max & 3--10 & 10--10 \\
+Mean gold supporting titles & 2.00 & 2.42 \\
+Mean supporting paragraphs & 2.00 & 2.42 \\
+Mean / median distractor paragraphs & 8.0 / 8 & 7.6 / 8 \\
+Corpus organization & Joint index over local pools & Joint index over local pools \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Source-pool records are the records contributed by each released question-level candidate pool before all records are unioned into a dataset-level joint index. Retrieval is performed over the full joint corpus, not over a separate per-question pool. Exact duplicate title--paragraph records are retained before indexing; if the same paragraph appears in multiple question-level pools, each occurrence remains a separate document with a source-question-specific document identifier. Dense, BM25, and hybrid retrieval encode only document titles and paragraph texts. Question identifiers, supporting-evidence flags, gold answers, and evaluation metadata are retained in JSONL artifacts for analysis but are excluded from retrieval representations.
+\item In both released processed splits, each annotated supporting title is associated with exactly one gold supporting paragraph record for every question, which explains why the mean supporting-title and supporting-paragraph counts are identical.
+\item Supporting-title metrics collapse duplicate retrieved titles before computing any-hit@10, all-hit@10, and supporting-title recall@10.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

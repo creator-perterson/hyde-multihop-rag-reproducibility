@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Paired statistical reliability checks on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:paired_reliability}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X
+                            >{\raggedright\arraybackslash}X
+                            r r r c r}
+\toprule
+Baseline & Target & $\Delta$EM [95\% CI] & $\Delta$F1 [95\% CI] & $N$ & W$\rightarrow$C / C$\rightarrow$W & McNemar $p$ \\
+\midrule
+One-step Dense RAG & HyDE-style RAG & \best{0.0900 [0.0620, 0.1200]} & \best{0.0906 [0.0634, 0.1192]} & 500 & 53 / 8 & $<0.0001$ \\
+Single-query Reformulation RAG & HyDE-style RAG & 0.0880 [0.0600, 0.1180] & \best{0.0976 [0.0690, 0.1266]} & 500 & 52 / 8 & $<0.0001$ \\
+BM25 + Dense Hybrid & HyDE-style RAG & 0.0440 [0.0160, 0.0740] & 0.0529 [0.0264, 0.0803] & 500 & 37 / 15 & 0.0032 \\
+Rule-based Evidence-Expanded Iterative Retrieval & HyDE-style RAG & 0.0480 [0.0220, 0.0740] & 0.0540 [0.0296, 0.0788] & 500 & 35 / 11 & 0.0005 \\
+HyDE-style RAG & HyDE-style RAG + Guarded Canonicalization & 0.0040 [0.0000, 0.0100] & 0.0030 [0.0000, 0.0080] & 500 & 2 / 0 & 0.5000 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Confidence intervals are paired bootstrap intervals over the same 500 examples. W$\rightarrow$C and C$\rightarrow$W count exact-match answer transitions from the baseline to the target. McNemar $p$ is an exact binomial test over discordant EM outcomes. The guarded-canonicalization row is included to show that the answer-standardization effect is conservative and small in magnitude, while the main HyDE gain is associated with improved complete-evidence retrieval.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Implemented baseline and control retrieval parameters used in the frozen HotpotQA artifacts.}
+\label{tab:baseline_implementation_parameters}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.16\textwidth}
+                            >{\raggedright\arraybackslash}p{0.27\textwidth}
+                            >{\raggedright\arraybackslash}p{0.28\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Method & Query or document construction & Ranking and fusion rule & Frozen parameters and artifact notes \\
+\midrule
+BM25 RAG & Query tokens are extracted from the original question by lowercasing and matching \texttt{[a-z0-9]+}. Each corpus record is represented as \texttt{title title text}, so the title receives a two-count lexical boost and the paragraph body appears once. & Standard BM25 lexical scoring with Robertson-style IDF, term-frequency saturation, and document-length normalization. No stopword removal, stemming, phrase matching, synonym expansion, or learned reranking is applied. & $k_1=1.5$, $b=0.75$, top-$k=10$. The retained-duplicate local index is used for the canonical table rows; the deduplicated variant is reported only in Table~\ref{tab:dedup_retrieval_sensitivity}. \\
+BM25 + Dense Hybrid & The dense input list is the one-step \texttt{all-MiniLM-L6-v2} top-10 list; the lexical input list is the BM25 top-10 list above. Both lists contain title and paragraph text only, with analysis metadata excluded from retrieval representations. & Reciprocal-rank fusion over the two ranked lists: $\mathrm{score}(d)=I[d\in D]/(60+r_D(d))+I[d\in B]/(60+r_B(d))$. Missing-list contributions are zero; fused documents are sorted by this score. & Dense weight $=1.0$, BM25 weight $=1.0$, RRF constant $=60$, dense candidates $=10$, BM25 candidates $=10$, final top-$k=10$. No dense/BM25 raw-score calibration is used. \\
+Multi-query RAG & Three deterministic query variants are built from the question: the original question, a capitalized-or-numeric entity-term query, and a non-stopword keyword query. A punctuation-normalized fallback is used only if fewer than three distinct variants are available. No LLM is used. & Each query is encoded with the same dense encoder and retrieves 10 candidates. Candidate lists are fused by weighted reciprocal-rank fusion, with query-index weights $0.5^j$ in the frozen HotpotQA artifact and RRF constant $60$; ties are broken by the best weighted dense similarity stored for the candidate. & Number of queries $=3$, per-query candidates $=10$, final top-$k=10$, \texttt{query\_decay}$=0.5$. The frozen artifact has the same top-10 document set as one-step Dense RAG for all 500 HotpotQA examples, but only 39/500 examples have the same order; reader context order can therefore change without adding new documents. \\
+Rule-based Evidence-Expanded Iterative Retrieval & The first stage is the one-step dense top-10 retrieval. The second stage constructs four dense queries: the original question plus one expanded query for each of the first three first-round documents, formatted as the question, the related evidence title, and up to 700 characters of related evidence text. No reader output and no LLM call are used to form these queries. & The four dense queries each retrieve 10 candidates. Candidate documents are merged by document ID; each candidate keeps its maximum adjusted dense similarity, with weight $1.0$ for the original query and $0.97$ for evidence-expanded queries. The final list is sorted by the retained adjusted score. & First-round expansion documents $=3$, per-query candidates $=10$, retrieval query executions per question $=4$, final top-$k=10$. This is a fixed heuristic iterative control rather than a reproduction of IRCoT. The final top-10 is a re-ranked union of the second-stage candidate set, not a simple append to the first-stage list. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item These rows describe the implemented retrieval baselines and controls used for the reported HotpotQA comparisons. Dense retrieval, Multi-query retrieval, Rule-based Evidence-Expanded Iterative Retrieval, and HyDE-style retrieval all use the same \texttt{sentence-transformers/all-MiniLM-L6-v2} encoder and normalized FAISS inner-product search unless a row states otherwise. Multi-query and Rule-based Evidence-Expanded Iterative Retrieval are fixed heuristic controls, and Single-query Reformulation is a matched-call mechanism control; they are not claimed as faithful public-method reproductions. The matched-call Single-query Reformulation and HyDE-style query prompts are specified in Section~\ref{sec:supp_prompt_api}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

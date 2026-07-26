@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering
+\caption{Secondary generalization check on the released IRCoT 2WikiMultihopQA \texttt{test\_subsampled} split.}
+\label{tab:2wiki_generalization}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r}
+\toprule
+Method & Any hit@10 & All hit@10 & Recall@10 & EM & F1 \\
+\midrule
+One-step Dense RAG & 0.9840 & 0.3580 & 0.6695 & 0.5400 & 0.5767 \\
+BM25 RAG & \best{0.9980} & 0.4320 & 0.7250 & 0.5840 & 0.6169 \\
+BM25 + Dense Hybrid & \best{0.9980} & 0.4480 & 0.7330 & 0.5840 & 0.6220 \\
+HyDE-style RAG & 0.9940 & \best{0.6680} & \best{0.8575} & \best{0.6620} & \best{0.7289} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All methods use Qwen3.7-Max, $N=500$, and top-$k=10$. The 2WikiMultihopQA split is used as a secondary generalization check rather than as the main benchmark. All rows use the same processed local-corpus protocol and evidence-grounded short-answer reader prompt. BM25 and Hybrid tie on EM, but Hybrid obtains slightly higher token F1; both remain below HyDE-style RAG.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

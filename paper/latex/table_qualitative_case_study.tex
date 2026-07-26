@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{Artifact-grounded qualitative case studies emphasizing HyDE retrieval.}
+\label{tab:qualitative_cases}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.17\textwidth}
+                            >{\raggedright\arraybackslash}p{0.27\textwidth}
+                            >{\raggedright\arraybackslash}p{0.23\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Case type & Question summary & Prediction / evidence state & Interpretation \\
+\midrule
+HyDE evidence acquisition & "Ew!" is a song by a television host born where? & Dense: United States; HyDE: Bay Ridge, Brooklyn; Gold: Bay Ridge, Brooklyn; Dense support partial (1/2); HyDE support full (2/2) & HyDE retrieves the missing supporting title without an exact normalized answer-string match in the hypothetical passage, turning a partial-evidence Dense failure into a correct answer. \\
+HyDE evidence acquisition & How many films were directed by the director of Wise Blood? & Dense: I don't know; HyDE: 37; Gold: 37; Dense support partial (1/2), missing John Huston; HyDE support full (2/2) & HyDE retrieves the director page needed for the second hop and turns a partial-support Dense abstention into a correct count answer. \\
+Answer-standardization boundary & Which star of Zork was also the voice of Pac-Man? & HyDE: Marty Ingels; Gold: Martin Ingerman; HyDE support full (2/2) & The reader returns the professional name Marty Ingels, whereas the benchmark gold answer uses the birth name Martin Ingerman. The two names refer to the same person, illustrating that exact-match evaluation can count semantically valid aliases as errors. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Cases were selected from rule-filtered candidates using frozen HotpotQA per-example artifacts: Dense and HyDE reader outputs, supporting-title states, and HyDE answer-overlap audit rows. They are illustrative rather than additional evaluation examples.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

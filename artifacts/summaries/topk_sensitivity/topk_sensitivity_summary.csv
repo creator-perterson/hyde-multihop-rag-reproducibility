@@ -1,0 +1,9 @@
+dataset,method,n,rank_depth,all_hit_at5,all_hit_at10,all_hit_at20,recall_at5,recall_at10,recall_at20,mean_worst_support_rank_capped,median_worst_support_rank_capped,missing_worst_rank_count,source_file
+HotpotQA,Dense,500,20,0.506,0.63,0.724,0.734,0.808,0.857,9.556,5.0,138,local-artifacts\topk_sensitivity\retrieval\ircot_hotpotqa_test500_dense_top20_retrieval.jsonl
+HotpotQA,BM25,500,20,0.508,0.732,0.852,0.731,0.859,0.925,7.976,5.0,74,local-artifacts\topk_sensitivity\retrieval\ircot_hotpotqa_test500_bm25_top20_retrieval.jsonl
+HotpotQA,Direct rewrite,500,20,0.476,0.618,0.71,0.716,0.799,0.848,9.9,6.0,145,local-artifacts\topk_sensitivity\retrieval\ircot_hotpotqa_test500_direct_rewrite_top20_retrieval.jsonl
+HotpotQA,HyDE,500,20,0.776,0.868,0.908,0.88,0.928,0.951,5.196,2.0,46,local-artifacts\topk_sensitivity\retrieval\ircot_hotpotqa_test500_hyde_top20_retrieval.jsonl
+2WikiMultihopQA,Dense,500,20,0.274,0.358,0.422,0.6185,0.6695,0.71,14.496,21.0,289,local-artifacts\topk_sensitivity\retrieval\ircot_2wiki_test500_dense_top20_retrieval.jsonl
+2WikiMultihopQA,BM25,500,20,0.33,0.432,0.474,0.6645,0.725,0.7495,13.308,21.0,263,local-artifacts\topk_sensitivity\retrieval\ircot_2wiki_test500_bm25_top20_retrieval.jsonl
+2WikiMultihopQA,Direct rewrite,500,20,0.286,0.368,0.424,0.6335,0.68,0.714,14.346,21.0,288,local-artifacts\topk_sensitivity\retrieval\ircot_2wiki_test500_direct_rewrite_top20_retrieval.jsonl
+2WikiMultihopQA,HyDE,500,20,0.588,0.668,0.714,0.8085,0.8575,0.8825,8.81,4.0,143,local-artifacts\topk_sensitivity\retrieval\ircot_2wiki_test500_hyde_top20_retrieval.jsonl

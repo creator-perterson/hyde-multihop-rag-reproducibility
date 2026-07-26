@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{Supporting-title completeness and reader accuracy on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:evidence_completeness_buckets_supp}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X l r r r r}
+\toprule
+Scope & Supporting-title bucket & $N$ & EM & F1 & Mean title recall \\
+\midrule
+All retrieval-only method-example observations & full title support & 2181 & \best{0.7240} & \best{0.8584} & 1.0000 \\
+All retrieval-only method-example observations & partial title support & 780 & 0.3846 & 0.4744 & 0.5000 \\
+All retrieval-only method-example observations & no title support & 39 & 0.0769 & 0.0872 & 0.0000 \\
+\midrule
+HyDE-style RAG only & full title support & 434 & \best{0.7396} & \best{0.8720} & 1.0000 \\
+HyDE-style RAG only & partial title support & 60 & 0.3500 & 0.4472 & 0.5000 \\
+HyDE-style RAG only & no title support & 6 & 0.0000 & 0.0000 & 0.0000 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Full title support means all annotated supporting titles are retrieved in the top-10 evidence set; partial title support means at least one but not all supporting titles are retrieved. The pooled rows are descriptive method-example observations across the six retrieval-only methods and therefore are not treated as independent examples.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

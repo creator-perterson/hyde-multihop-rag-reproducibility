@@ -1,0 +1,42 @@
+\begin{table*}[t]
+\centering
+\caption{Full corpus-scale retrieval stress-test results. Local rows reuse the retained-duplicate BGE local-index artifacts from the main stronger-encoder reproduction table; only the 50k and 100k rows use newly expanded stress-test corpora.}
+\label{tab:corpus_scale_stress_full}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabularx}{\textwidth}{l r >{\raggedright\arraybackslash}X r r r >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+Dataset & Docs & Query input & Any & All & Recall & HyDE delta vs. question & HyDE delta vs. rewrite \\
+\midrule
+HotpotQA & Local & Question only & 0.9940 & 0.8820 & 0.9380 & -- & -- \\
+HotpotQA & Local & Single rewritten query & 0.9920 & 0.8340 & 0.9130 & -- & -- \\
+HotpotQA & Local & Question + hypothetical passage & 0.9940 & \best{0.9200} & \best{0.9570} & All +0.0380 [0.0100, 0.0660]; recall +0.0190 [0.0050, 0.0340] & All +0.0860 [0.0560, 0.1160]; recall +0.0440 [0.0280, 0.0590] \\
+\midrule
+HotpotQA & 50k & Question only & 0.9820 & 0.7480 & 0.8650 & -- & -- \\
+HotpotQA & 50k & Single rewritten query & 0.9720 & 0.6520 & 0.8120 & -- & -- \\
+HotpotQA & 50k & Question + hypothetical passage & 0.9860 & \best{0.8560} & \best{0.9210} & All +0.1080 [0.0680, 0.1460]; recall +0.0560 [0.0350, 0.0770] & All +0.2040 [0.1620, 0.2440]; recall +0.1090 [0.0860, 0.1320] \\
+\midrule
+HotpotQA & 100k & Question only & 0.9800 & 0.6960 & 0.8380 & -- & -- \\
+HotpotQA & 100k & Single rewritten query & 0.9680 & 0.5960 & 0.7820 & -- & -- \\
+HotpotQA & 100k & Question + hypothetical passage & 0.9780 & \best{0.8340} & \best{0.9060} & All +0.1380 [0.1000, 0.1780]; recall +0.0680 [0.0470, 0.0890] & All +0.2380 [0.1940, 0.2800]; recall +0.1240 [0.0990, 0.1480] \\
+\midrule
+2Wiki & Local & Question only & 0.9980 & 0.5100 & 0.7655 & -- & -- \\
+2Wiki & Local & Single rewritten query & 1.0000 & 0.4720 & 0.7380 & -- & -- \\
+2Wiki & Local & Question + hypothetical passage & 1.0000 & \best{0.7800} & \best{0.9130} & All +0.2700 [0.2300, 0.3100]; recall +0.1475 [0.1290, 0.1675] & All +0.3080 [0.2680, 0.3520]; recall +0.1750 [0.1545, 0.1960] \\
+\midrule
+2Wiki & 50k & Question only & 1.0000 & 0.4460 & 0.7270 & -- & -- \\
+2Wiki & 50k & Single rewritten query & 0.9960 & 0.4040 & 0.6900 & -- & -- \\
+2Wiki & 50k & Question + hypothetical passage & 0.9980 & \best{0.6900} & \best{0.8655} & All +0.2440 [0.2040, 0.2840]; recall +0.1385 [0.1175, 0.1595] & All +0.2860 [0.2440, 0.3280]; recall +0.1755 [0.1545, 0.1980] \\
+\midrule
+2Wiki & 100k & Question only & 1.0000 & 0.4180 & 0.7105 & -- & -- \\
+2Wiki & 100k & Single rewritten query & 0.9940 & 0.3600 & 0.6620 & -- & -- \\
+2Wiki & 100k & Question + hypothetical passage & 0.9980 & \best{0.6500} & \best{0.8440} & All +0.2320 [0.1900, 0.2760]; recall +0.1335 [0.1110, 0.1560] & All +0.2900 [0.2460, 0.3340]; recall +0.1820 [0.1585, 0.2055] \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Local denotes the original retained-duplicate local index used in the main stronger-encoder reproduction table (4,977 HotpotQA documents and 5,000 2Wiki documents). The rounded 5k stress-test cache is not used as a local-index replicate because the stress-construction script exact-deduplicates title--paragraph records before expansion and, for HotpotQA, pads the 4,977-document local corpus to 5,000 with train distractors. The 50k and 100k corpora preserve all released test-corpus records and add exact-title--paragraph-deduplicated contexts sampled from the corresponding IRCoT processed training split. All rows use \texttt{BAAI/bge-base-en-v1.5}, CLS pooling, 512-token dense inputs, top-$k=10$, and the frozen generated query artifacts used in the stronger-encoder reproduction. Deltas are computed only for the HyDE query row and use paired bootstrap 95\% confidence intervals over 500 per-example retrieval scores. The summary CSV is \texttt{local-artifacts/corpus\_scale\_stress/corpus\_scale\_retrieval\_summary.csv}; Local retrieval JSONL files are the stronger-encoder reproduction artifacts in \texttt{local-artifacts/results}, while expanded-corpus retrieval JSONL files and embedding caches are stored under \texttt{local-artifacts/corpus\_scale\_stress}. This gold-preserving distractor expansion is a diagnostic stress test and should not be interpreted as full-wiki retrieval.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

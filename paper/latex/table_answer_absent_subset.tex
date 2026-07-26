@@ -1,0 +1,21 @@
+\begin{table*}[t]
+\centering
+\caption{Answer-absent subset paired analysis.}
+\label{tab:answer_absent_subset}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r r r c c c}
+\toprule
+Dataset & $N$ & Dense all-hit & HyDE all-hit & Dense recall & HyDE recall & Dense F1 & HyDE F1 & $\Delta$F1 [95\% CI] & W$\rightarrow$C / C$\rightarrow$W & McNemar $p$ \\
+\midrule
+HotpotQA & 208 & 0.5817 & 0.7596 & 0.7812 & 0.8654 & 0.6110 & 0.6730 & 0.0620 [0.0170, 0.1080] & 20 / 8 & 0.0357 \\
+2WikiMultihopQA & 153 & 0.3856 & 0.6863 & 0.6797 & 0.8480 & 0.4058 & 0.6076 & 0.2019 [0.1372, 0.2671] & 30 / 3 & $<0.0001$ \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The subset contains examples where the normalized gold-answer string is absent from the generated HyDE hypothetical passage under the rules in Table~\ref{tab:answer_overlap_definition}. All rows reuse frozen retrieval and reader answer artifacts. The diagnostic reduces the exact answer-string overlap explanation, but it does not rule out paraphrased answer content, benchmark contamination, or model memorization.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\caption{Targeted Qwen-Turbo reader paired check on fixed equal-budget evidence.}
+\label{tab:equal_budget_reader_check}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{lXrrrrcc}
+\toprule
+Dataset & Baseline $\rightarrow$ doc-like & Baseline EM/F1 & Doc-like EM/F1 & $\Delta$EM & $\Delta$F1 [95\% CI] & W$\rightarrow$C / C$\rightarrow$W & McNemar $p$ \\
+\midrule
+HotpotQA & Direct rewrite $\rightarrow$ doc-like & 0.4960/0.6294 & 0.5660/0.7046 & 0.0700 & 0.0752 [0.0495, 0.1001] & 45 / 10 & $<0.0001$ \\
+HotpotQA & Keyword/entity expansion $\rightarrow$ doc-like & 0.5500/0.6777 & 0.5660/0.7046 & 0.0160 & 0.0269 [0.0053, 0.0503] & 24 / 16 & 0.2682 \\
+2Wiki & Direct rewrite $\rightarrow$ doc-like & 0.3460/0.4148 & 0.3620/0.4498 & 0.0160 & 0.0350 [0.0006, 0.0727] & 48 / 40 & 0.4557 \\
+2Wiki & Keyword/entity expansion $\rightarrow$ doc-like & 0.3640/0.4498 & 0.3620/0.4498 & -0.0020 & 0.0000 [-0.0354, 0.0342] & 36 / 37 & 1.0000 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows reuse the fixed top-10 evidence from the strict equal-budget BGE-base retrieval diagnostic and regenerate only reader answers with \texttt{qwen-turbo}. $\Delta$ values are document-like passage minus the named baseline over 500 paired examples. F1 intervals are paired bootstrap 95\% confidence intervals. W$\rightarrow$C and C$\rightarrow$W are EM transitions for document-like versus the baseline; McNemar's exact test is computed on these discordant EM counts.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

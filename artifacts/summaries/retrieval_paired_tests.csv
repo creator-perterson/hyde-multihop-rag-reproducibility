@@ -1,0 +1,9 @@
+dataset,baseline,target,n,baseline_any_hit,target_any_hit,delta_any_hit,delta_any_hit_ci_low,delta_any_hit_ci_high,baseline_all_hit,target_all_hit,delta_all_hit,delta_all_hit_ci_low,delta_all_hit_ci_high,baseline_support_recall,target_support_recall,delta_support_recall,delta_support_recall_ci_low,delta_support_recall_ci_high,both_full,baseline_only_full,target_only_full,neither_full,mcnemar_exact_p
+HotpotQA,Dense RAG,HyDE-style RAG,500,0.986,0.988,0.002,-0.008,0.012,0.63,0.868,0.238,0.2,0.278,0.808,0.928,0.12,0.101,0.141,314,1,120,65,9.178259891220421e-35
+HotpotQA,Single-query Reformulation RAG,HyDE-style RAG,500,0.98,0.988,0.008,0.0,0.018,0.618,0.868,0.25,0.214,0.286,0.799,0.928,0.129,0.109,0.15,309,0,125,66,4.70197740328915e-38
+HotpotQA,Question + rewritten query,Question + hypothetical passage,500,0.978,0.988,0.01,0.0,0.02,0.628,0.868,0.24,0.202,0.278,0.803,0.928,0.125,0.106,0.147,311,3,123,63,7.84059433975869e-33
+HotpotQA,Hybrid RAG,HyDE-style RAG,500,0.99,0.988,-0.002,-0.012,0.006,0.748,0.868,0.12,0.084,0.156,0.869,0.928,0.059,0.041,0.078,358,16,76,50,1.599715299110622e-10
+HotpotQA,Iterative RAG,HyDE-style RAG,500,0.986,0.988,0.002,-0.008,0.012,0.754,0.868,0.114,0.078,0.148,0.87,0.928,0.058,0.039,0.078,362,15,72,51,4.2605364788467554e-10
+2WikiMultihopQA,Dense RAG,HyDE-style RAG,500,0.984,0.994,0.01,0.002,0.02,0.358,0.668,0.31,0.268,0.352,0.6695,0.8575,0.188,0.1665,0.2085,177,2,157,164,3.481624563413281e-44
+2WikiMultihopQA,BM25 RAG,HyDE-style RAG,500,0.998,0.994,-0.004,-0.012,0.004,0.432,0.668,0.236,0.194,0.278,0.725,0.8575,0.1325,0.1115,0.155,201,15,133,151,8.286637386844961e-25
+2WikiMultihopQA,Hybrid RAG,HyDE-style RAG,500,0.998,0.994,-0.004,-0.012,0.004,0.448,0.668,0.22,0.18,0.262,0.733,0.8575,0.1245,0.102,0.1475,209,15,125,151,8.894877270372545e-23

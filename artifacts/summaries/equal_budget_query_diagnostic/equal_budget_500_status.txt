@@ -1,0 +1,23 @@
+﻿started 2026-07-23T12:35:07
+dataset_start hotpotqa 2026-07-23T12:35:07
+skip hotpotqa keyword_expansion rows_before=500 2026-07-23T12:35:07
+skip hotpotqa direct_rewrite rows_before=500 2026-07-23T12:35:07
+skip hotpotqa question_decomposition rows_before=500 2026-07-23T12:35:07
+skip hotpotqa document_like_passage rows_before=500 2026-07-23T12:35:07
+complete hotpotqa keyword_expansion rows=500 2026-07-23T12:35:07
+complete hotpotqa direct_rewrite rows=500 2026-07-23T12:35:07
+complete hotpotqa question_decomposition rows=500 2026-07-23T12:35:07
+complete hotpotqa document_like_passage rows=500 2026-07-23T12:35:07
+dataset_done hotpotqa 2026-07-23T12:35:07
+dataset_start 2wiki 2026-07-23T12:35:07
+skip 2wiki keyword_expansion rows_before=500 2026-07-23T12:35:07
+skip 2wiki direct_rewrite rows_before=500 2026-07-23T12:35:07
+skip 2wiki question_decomposition rows_before=500 2026-07-23T12:35:07
+skip 2wiki document_like_passage rows_before=500 2026-07-23T12:35:07
+complete 2wiki keyword_expansion rows=500 2026-07-23T12:35:07
+complete 2wiki direct_rewrite rows=500 2026-07-23T12:35:07
+complete 2wiki question_decomposition rows=500 2026-07-23T12:35:07
+complete 2wiki document_like_passage rows=500 2026-07-23T12:35:07
+dataset_done 2wiki 2026-07-23T12:35:07
+retrieval_done 2026-07-23T12:39:21
+done 2026-07-23T12:39:21

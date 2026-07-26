@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\caption{Answer-overlap robustness analysis on HotpotQA.}
+\label{tab:hyde_overlap_robustness}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r r c}
+\toprule
+Group & $N$ & Dense all-hit & HyDE all-hit & $\Delta$ all-hit & Dense F1 & HyDE F1 & W$\rightarrow$C / C$\rightarrow$W \\
+\midrule
+all examples & 500 & 0.6300 & 0.8680 & 0.2380 & 0.7199 & 0.8105 & 53 / 8 \\
+answer in hyde & 292 & 0.6644 & 0.9452 & 0.2808 & 0.7976 & 0.9085 & 33 / 0 \\
+answer not in hyde & 208 & 0.5817 & 0.7596 & 0.1779 & 0.6110 & 0.6730 & 20 / 8 \\
+nontrivial answer in hyde & 252 & 0.6825 & 0.9365 & 0.2540 & 0.8130 & 0.8953 & 22 / 0 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Groups are defined by normalized string overlap between the gold answer and the generated hypothetical passage using the rules in Table~\ref{tab:answer_overlap_definition}. The answer-not-in-HyDE row is the robustness slice most relevant to answer-memory concerns; it uses existing answer files and does not require new LLM calls.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

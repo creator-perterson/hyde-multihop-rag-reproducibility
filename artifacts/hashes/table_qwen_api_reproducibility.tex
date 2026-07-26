@@ -1,0 +1,34 @@
+\begin{table*}[t]
+\centering
+\caption{Hosted Qwen API reproducibility record for frozen generation artifacts.}
+\label{tab:qwen_api_reproducibility}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.20\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Field & Frozen record or limitation \\
+\midrule
+Provider and interface & Alibaba Cloud Bailian/DashScope OpenAI-compatible chat-completions interface, accessed through the local \texttt{LLM\_BASE\_URL} environment variable. API credentials and endpoint URL are not stored in the artifact release. \\
+API model string & Reported primary reader, query-generation, and verifier artifacts use the hosted API model string \texttt{qwen3.7-max}. The post-hoc equal-budget query-form generation also uses \texttt{qwen3.7-max}, while the targeted equal-budget reader robustness check uses \texttt{qwen-turbo} as a second hosted reader and is reported separately. The model string is stored in the local JSONL artifacts when the generation wrapper writes model metadata. \\
+Snapshot/version & No immutable provider-side snapshot identifier was available for the hosted \texttt{qwen3.7-max} alias. Canonical runs are therefore frozen by local prompt and output artifacts rather than by a public model checkpoint. \\
+Module model-string consistency & Primary HyDE generation, matched-call query reformulation, reader, 2Wiki, and verifier runs use the same API model string, \texttt{qwen3.7-max}. The post-hoc equal-budget query-form generation also uses \texttt{qwen3.7-max} but is not part of the primary frozen scoring window. The Qwen-Turbo check intentionally changes only the reader over fixed equal-budget retrieval evidence. Because these are hosted aliases rather than immutable snapshots, the paper does not claim replay against the exact same provider-internal model state after an alias evolves. \\
+Experiment window & Primary Qwen3.7-Max artifacts were generated or frozen between 2026-07-02 and 2026-07-09 local time. Post-hoc equal-budget Qwen3.7-Max query-form generations were frozen between 2026-07-21 and 2026-07-23 local time. The targeted Qwen-Turbo fixed-evidence reader artifacts were frozen between 2026-07-23 and 2026-07-25 local time. Artifact-level windows and paths are listed in Table~\ref{tab:model_invocation_ledger}. \\
+Endpoint region/type & Endpoint type is OpenAI-compatible \texttt{/v1} chat completions. Provider region was not exported into the local JSONL artifacts and is therefore not claimed as a reproducible field. \\
+Temperature and output budgets & \texttt{temperature=0.0}. Configured \texttt{max\_tokens}: HyDE passage generation = 64; rewritten-query generation = 64; reader answer generation = 64; verifier JSON generation = 64. Temperature 0 is used to reduce sampling variation, but byte-identical replay is not claimed for a hosted alias. \\
+\texttt{top\_p}, seed, and thinking mode & No \texttt{top\_p}, seed, logprob, response-format, or reasoning/thinking-mode parameter is explicitly sent by the wrapper, so provider defaults apply where relevant. Seed-controlled replay and thinking-mode equivalence are therefore not claimed. \\
+Retry and timeout policy & Timeout is 60 seconds by default. Each request is attempted up to 3 times with 5 seconds between retries. If all retries fail, the script raises the final exception rather than writing a synthetic answer row. The \texttt{--resume} option skips completed IDs already present in the output JSONL and appends only missing rows. \\
+API failure replacement policy & Reported \texttt{qwen3.7-max} HyDE, matched-call, 2Wiki, reader, and verifier runs, as well as the \texttt{qwen-turbo} fixed-evidence reader check, use completed rows from the frozen output files. Failed requests are rerun only as missing rows under \texttt{--resume}; they are not silently replaced by hand-written answers. \\
+Prompt version/hash & Prompt-builder script SHA-256 prefixes: HyDE \texttt{89ECB4FB}, reader \texttt{98904C37}, query reformulation \texttt{FF9EA7EF}, equal-budget query-form \texttt{A234A00B}, verifier \texttt{BB2495BC}. Canonical HotpotQA prompt-file SHA-256 prefixes: HyDE generation \texttt{4D43047C}, HyDE reader \texttt{DCBC0B3E}, verifier risk-120 \texttt{763D188C}. Equal-budget prompt-file SHA-256 prefixes: HotpotQA keyword \texttt{048B13BE}, direct \texttt{2777A456}, decomposition \texttt{4244BD3E}, document-like \texttt{FF4A4ECF}; 2Wiki keyword \texttt{EC679B8B}, direct \texttt{E7464644}, decomposition \texttt{BF51AE1A}, document-like \texttt{CF15FFFD}. \\
+Malformed JSON handling & Reader, HyDE, and query-reformulation generations are stored as raw text predictions and are not JSON-parsed. Verifier outputs are parsed as JSON when possible, with substring JSON extraction for wrapped responses. If verifier parsing fails, or if the parsed object lacks a nonempty \texttt{final\_answer} field, the fail-safe policy retains the initial reader answer $a_0$; malformed verifier text is never used as a candidate final answer. No automatic re-request is triggered solely by malformed JSON or JSON parse failure. \\
+Verifier JSON parse audit & The canonical HotpotQA HyDE verifier artifact contains 120 verifier rows generated with \texttt{max\_tokens=64}. All 120 \texttt{prediction} fields were successfully parsed as direct JSON objects; substring fallback was used for 0 rows; final JSON parse failures were 0; empty verifier outputs were 0. All 120 verifier rows store the model field \texttt{qwen3.7-max}. The wrapper does not retain provider \texttt{finish\_reason} fields or per-request retry counters, and no automatic re-request rule is triggered solely by suspected output truncation. \\
+Raw request/response retention & Local artifacts retain the full user prompt text, retrieved evidence, prediction text, model field, gold-answer metadata for scoring, and supporting-fact metadata. They do not retain the provider-side raw request envelope, raw response envelope, request IDs, token accounting, latency, billing, or per-request provider timestamps. Local artifact modification times provide freeze timestamps in the ledger. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Because the hosted model alias may evolve, all reported generations are accompanied by frozen raw prompts, local raw text outputs, local artifact freeze timestamps, and stored model strings. This table supports artifact-level reproducibility and rescoring, not exact replay of a provider-internal model snapshot or provider-side request log reconstruction.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

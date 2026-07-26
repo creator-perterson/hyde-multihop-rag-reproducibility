@@ -1,0 +1,37 @@
+\begin{table*}[t]
+\centering
+\caption{2WikiMultihopQA paired statistics and secondary absolute results.}
+\label{tab:2wiki_paired_statistics}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\textit{Panel A: absolute retrieval-reader results.}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r}
+\toprule
+Method & Any hit@10 & All hit@10 & Recall@10 & EM & F1 \\
+\midrule
+One-step Dense RAG & 0.9840 & 0.3580 & 0.6695 & 0.5400 & 0.5767 \\
+BM25 RAG & \best{0.9980} & 0.4320 & 0.7250 & 0.5840 & 0.6169 \\
+BM25 + Dense Hybrid & \best{0.9980} & 0.4480 & 0.7330 & 0.5840 & 0.6220 \\
+HyDE-style RAG & 0.9940 & \best{0.6680} & \best{0.8575} & \best{0.6620} & \best{0.7289} \\
+\bottomrule
+\end{tabularx}
+
+\vspace{5pt}
+\textit{Panel B: paired HyDE-over-baseline diagnostics.}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X
+                            r r c r r c}
+\toprule
+Baseline $\rightarrow$ target & $\Delta$EM [95\% CI] & $\Delta$F1 [95\% CI] & EM W$\rightarrow$C / C$\rightarrow$W & $\Delta$All@10 [95\% CI] & $\Delta$Recall@10 [95\% CI] & All@10 W$\rightarrow$C / C$\rightarrow$W \\
+\midrule
+Dense RAG $\rightarrow$ HyDE-style RAG & 0.1220 [0.0900, 0.1580] & 0.1523 [0.1186, 0.1881] & 72 / 11 & 0.3100 [0.2680, 0.3520] & 0.1880 [0.1665, 0.2085] & 157 / 2 \\
+BM25 RAG $\rightarrow$ HyDE-style RAG & 0.0780 [0.0480, 0.1120] & 0.1121 [0.0793, 0.1450] & 54 / 15 & 0.2360 [0.1940, 0.2780] & 0.1325 [0.1115, 0.1550] & 133 / 15 \\
+BM25 + Dense Hybrid $\rightarrow$ HyDE-style RAG & 0.0780 [0.0480, 0.1080] & 0.1069 [0.0751, 0.1399] & 53 / 14 & 0.2200 [0.1800, 0.2620] & 0.1245 [0.1020, 0.1475] & 125 / 15 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The 2WikiMultihopQA split is used as a secondary generalization check rather than as the main benchmark. Panel B uses the same 500 paired examples and frozen reader/retrieval artifacts. Answer-side intervals are paired bootstrap intervals over EM and F1 deltas; retrieval-side intervals are paired bootstrap intervals over all-support hit@10 and supporting-title recall@10 deltas. W$\rightarrow$C/C$\rightarrow$W count exact-match answer transitions for answer rows and target-only/baseline-only full-support retrieval for retrieval rows.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

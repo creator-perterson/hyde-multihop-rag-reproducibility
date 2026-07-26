@@ -1,0 +1,6 @@
+method,top_k,prompt,any_hit,all_hit,mean_recall,em,f1,wrong,answer_file
+TF-IDF RAG,5,-,0.9450,0.4500,0.6975,,,,
+Dense RAG,5,infer,0.9850,0.5050,0.7450,0.4350,0.5392,113,local-artifacts\results\hotpotqa_top5_infer_answers_200.jsonl
+Dense RAG,10,infer,0.9900,0.7050,0.8475,0.5050,0.6130,99,local-artifacts\results\hotpotqa_top10_infer_answers_200.jsonl
+Iterative RAG,10,infer,0.9800,0.8000,0.8900,0.4800,0.6194,104,local-artifacts\results\hotpotqa_iterative_top10_infer_answers_200.jsonl
+Iterative RAG,10,extractive,0.9800,0.8000,0.8900,0.5050,0.6697,99,local-artifacts\results\hotpotqa_iterative_top10_extractive_answers_200.jsonl

@@ -1,0 +1,153 @@
+% LaTeX table snippets for the Agentic RAG manuscript.
+% Required packages:
+% \usepackage{booktabs}
+% \usepackage{threeparttable}
+% \usepackage{tabularx}
+% \usepackage[table]{xcolor}
+% Recommended macro:
+% \newcommand{\best}[1]{\cellcolor{gray!15}\textbf{#1}}
+
+\begin{table*}[t]
+\centering
+\caption{Main results on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:main_results}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X l r r r r r r r}
+\toprule
+Method & Reader model & $N$ & Top-$k$ & Any hit@10 & All hit@10 & Recall@10 & EM & F1 \\
+\midrule
+LLM-only / No Retrieval & Qwen3.7-Max & 500 & 0 & -- & -- & -- & 0.5200 & 0.6658 \\
+One-step Dense RAG & Qwen3.7-Max & 500 & 10 & 0.9860 & 0.6300 & 0.8080 & 0.5940 & 0.7199 \\
+Multi-query RAG & Qwen3.7-Max & 500 & 10 & 0.9860 & 0.6300 & 0.8080 & 0.5860 & 0.7028 \\
+BM25 RAG & Qwen3.7-Max & 500 & 10 & 0.9860 & 0.7320 & 0.8590 & 0.6240 & 0.7436 \\
+BM25 + Dense Hybrid & Qwen3.7-Max & 500 & 10 & 0.9900 & 0.7480 & 0.8690 & 0.6400 & 0.7577 \\
+Evidence-guided Iterative Retrieval & Qwen3.7-Max & 500 & 10 & 0.9860 & 0.7540 & 0.8700 & 0.6360 & 0.7565 \\
+HyDE-style RAG & Qwen3.7-Max & 500 & 10 & \best{0.9880} & \best{0.8680} & \best{0.9280} & \best{0.6840} & \best{0.8105} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All methods are evaluated on the released IRCoT HotpotQA \texttt{test\_subsampled} split with 500 examples. This setting uses the released processed data and our local retrieval/reader pipeline; it should not be described as a full reproduction of the original full-wiki IRCoT setup. The Multi-query row has the same supporting-title hit metrics as one-step Dense RAG because it retrieves the same top-10 document sets under the selected rule-based query variants, although the ranking order changes. The iterative row uses the canonical Qwen3.7-Max rerun aligned with the reader model and prompt configuration used throughout the main comparison. The small guarded canonicalization diagnostic is reported in the supplement rather than as a primary result row.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{HyDE query-composition diagnostic on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:hyde_query_ablation}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r}
+\toprule
+Query used for dense retrieval & Any hit@10 & All hit@10 & Recall@10 & EM & F1 \\
+\midrule
+Question only & 0.9860 & 0.6300 & 0.8080 & 0.5940 & 0.7199 \\
+Hypothetical passage only & \best{0.9880} & 0.8480 & 0.9180 & 0.6780 & 0.7986 \\
+Question + hypothetical passage & \best{0.9880} & \best{0.8680} & \best{0.9280} & \best{0.6840} & \best{0.8105} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows use the same MiniLM dense index, top-$k=10$, generated hypothetical passages, extractive reader prompt, and Qwen3.7-Max reader. The question-only row reproduces the one-step dense retrieval baseline. The hypothetical-only row uses the generated passage only as the retrieval query; the reader receives only retrieved evidence passages.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Paired statistical reliability checks on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:paired_reliability}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X
+                            >{\raggedright\arraybackslash}X
+                            r r r c r}
+\toprule
+Baseline & Target & $\Delta$EM [95\% CI] & $\Delta$F1 [95\% CI] & $N$ & W$\rightarrow$C / C$\rightarrow$W & McNemar $p$ \\
+\midrule
+One-step Dense RAG & HyDE-style RAG & \best{0.0900 [0.0620, 0.1200]} & \best{0.0906 [0.0634, 0.1192]} & 500 & 53 / 8 & $<0.0001$ \\
+BM25 + Dense Hybrid & HyDE-style RAG & 0.0440 [0.0160, 0.0740] & 0.0529 [0.0264, 0.0803] & 500 & 37 / 15 & 0.0032 \\
+Evidence-guided Iterative Retrieval & HyDE-style RAG & 0.0480 [0.0220, 0.0740] & 0.0540 [0.0296, 0.0788] & 500 & 35 / 11 & 0.0005 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Confidence intervals are paired bootstrap intervals over the same 500 examples. W$\rightarrow$C and C$\rightarrow$W count exact-match answer transitions from the baseline to the target. McNemar $p$ is an exact binomial test over discordant EM outcomes. The guarded canonicalization diagnostic is intentionally omitted from this main reliability table because its effect is small and supplemental.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Supporting-title completeness and reader accuracy on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:evidence_completeness_buckets}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X l r r r r}
+\toprule
+Scope & Supporting-title bucket & $N$ & EM & F1 & Mean title recall \\
+\midrule
+All retrieval-only method-example observations & full title support & 2181 & \best{0.7240} & \best{0.8584} & 1.0000 \\
+All retrieval-only method-example observations & partial title support & 780 & 0.3846 & 0.4744 & 0.5000 \\
+All retrieval-only method-example observations & no title support & 39 & 0.0769 & 0.0872 & 0.0000 \\
+\midrule
+HyDE-style RAG only & full title support & 434 & \best{0.7396} & \best{0.8720} & 1.0000 \\
+HyDE-style RAG only & partial title support & 60 & 0.3500 & 0.4472 & 0.5000 \\
+HyDE-style RAG only & no title support & 6 & 0.0000 & 0.0000 & 0.0000 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Full title support means all annotated supporting titles are retrieved in the top-10 evidence set; partial title support means at least one but not all supporting titles are retrieved. The pooled rows are descriptive method-example observations across the six retrieval-only methods and therefore are not treated as independent examples. They are used to diagnose the relationship between supporting-title completeness and answer quality.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Secondary generalization check on the released IRCoT 2WikiMultihopQA \texttt{test\_subsampled} split.}
+\label{tab:2wiki_generalization}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X l r r r r r r r}
+\toprule
+Method & Reader model & $N$ & Top-$k$ & Any hit@10 & All hit@10 & Recall@10 & EM & F1 \\
+\midrule
+One-step Dense RAG & Qwen3.7-Max & 500 & 10 & 0.9840 & 0.3580 & 0.6695 & 0.5400 & 0.5767 \\
+BM25 RAG & Qwen3.7-Max & 500 & 10 & \best{0.9980} & 0.4320 & 0.7250 & 0.5840 & 0.6169 \\
+BM25 + Dense Hybrid & Qwen3.7-Max & 500 & 10 & \best{0.9980} & 0.4480 & 0.7330 & 0.5840 & 0.6220 \\
+HyDE-style RAG & Qwen3.7-Max & 500 & 10 & 0.9940 & \best{0.6680} & \best{0.8575} & \best{0.6620} & \best{0.7289} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The 2WikiMultihopQA split is used as a secondary generalization check rather than as the main benchmark. All rows use the same processed local-corpus protocol, top-10 evidence setting, and extractive reader prompt. BM25 and Hybrid tie on EM, but Hybrid obtains slightly higher token F1; both remain below HyDE-style RAG.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Retrieval-only HyDE query-composition check on the released IRCoT 2WikiMultihopQA \texttt{test\_subsampled} split.}
+\label{tab:2wiki_hyde_query_mechanism}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r}
+\toprule
+Query used for dense retrieval & $N$ & Any hit@10 & All hit@10 & Recall@10 \\
+\midrule
+Question only & 500 & 0.9840 & 0.3580 & 0.6695 \\
+Hypothetical passage only & 500 & \best{0.9940} & 0.6640 & 0.8530 \\
+Question + hypothetical passage & 500 & \best{0.9940} & \best{0.6680} & \best{0.8575} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item This low-cost diagnostic reuses the existing 2Wiki HyDE generations and dense index, without additional reader calls. The question-only and question-plus-hypothetical rows correspond to the Dense and HyDE-style retrieval rows in Table~\ref{tab:2wiki_generalization}. Complete supporting-title retrieval is higher for the hypothetical-only row than for question-only retrieval, while keeping the original question provides a small additional anchor.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

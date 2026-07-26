@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\centering
+\scriptsize
+\caption{Paired retrieval-side reliability tests. All comparisons use the same 500 paired examples per dataset. Intervals are paired bootstrap 95\% confidence intervals over per-example deltas. McNemar's exact test is computed on all-support hit@10 transitions; W$\rightarrow$C denotes target-only full-support retrieval and C$\rightarrow$W denotes baseline-only full-support retrieval.}
+\label{tab:retrieval_paired_tests}
+\begin{tabularx}{\textwidth}{lXrrrr}
+\toprule
+Dataset & Baseline $\rightarrow$ target & $\Delta$ All@10 & $\Delta$ Recall@10 & W$\rightarrow$C / C$\rightarrow$W & $p$ \\
+\midrule
+HotpotQA & Dense RAG $\rightarrow$ HyDE-style RAG & 0.2380 [0.2000, 0.2780] & 0.1200 [0.1010, 0.1410] & 120 / 1 & $<0.0001$ \\
+HotpotQA & Single-query Reformulation RAG $\rightarrow$ HyDE-style RAG & 0.2500 [0.2140, 0.2860] & 0.1290 [0.1090, 0.1500] & 125 / 0 & $<0.0001$ \\
+HotpotQA & Question + rewritten query $\rightarrow$ Question + hypothetical passage & 0.2400 [0.2020, 0.2780] & 0.1250 [0.1060, 0.1470] & 123 / 3 & $<0.0001$ \\
+HotpotQA & Hybrid RAG $\rightarrow$ HyDE-style RAG & 0.1200 [0.0840, 0.1560] & 0.0590 [0.0410, 0.0780] & 76 / 16 & $<0.0001$ \\
+HotpotQA & Rule-based Evidence-Expanded Iterative Retrieval $\rightarrow$ HyDE-style RAG & 0.1140 [0.0780, 0.1480] & 0.0580 [0.0390, 0.0780] & 72 / 15 & $<0.0001$ \\
+2WikiMultihopQA & Dense RAG $\rightarrow$ HyDE-style RAG & 0.3100 [0.2680, 0.3520] & 0.1880 [0.1665, 0.2085] & 157 / 2 & $<0.0001$ \\
+2WikiMultihopQA & BM25 RAG $\rightarrow$ HyDE-style RAG & 0.2360 [0.1940, 0.2780] & 0.1325 [0.1115, 0.1550] & 133 / 15 & $<0.0001$ \\
+2WikiMultihopQA & Hybrid RAG $\rightarrow$ HyDE-style RAG & 0.2200 [0.1800, 0.2620] & 0.1245 [0.1020, 0.1475] & 125 / 15 & $<0.0001$ \\
+\bottomrule
+\end{tabularx}
+\end{table*}

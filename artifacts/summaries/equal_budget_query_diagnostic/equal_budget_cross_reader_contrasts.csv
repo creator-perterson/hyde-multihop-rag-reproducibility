@@ -1,0 +1,5 @@
+dataset,reader,baseline,target,n,delta_em,delta_em_ci_low,delta_em_ci_high,delta_f1,delta_f1_ci_low,delta_f1_ci_high,both_correct,baseline_only_correct,target_only_correct,both_wrong,wrong_to_correct,correct_to_wrong,mcnemar_exact_p
+HotpotQA,qwenturbo,direct_rewrite,document_like_passage,500,0.07,0.042,0.098,0.07519259330041939,0.04946076879642097,0.10010126984126984,238,10,45,207,45,10,2.0572645155203517e-06
+2WikiMultihopQA,qwenturbo,direct_rewrite,document_like_passage,500,0.016,-0.02,0.052,0.03497280597451329,0.0006087301587301574,0.0726602329919403,133,40,48,279,48,40,0.45574127943791326
+HotpotQA,qwenturbo,keyword_expansion,document_like_passage,500,0.016,-0.008,0.042,0.026901059489111718,0.005293524222446015,0.05033536199819684,259,16,24,201,24,16,0.26818725105476915
+2WikiMultihopQA,qwenturbo,keyword_expansion,document_like_passage,500,-0.002,-0.036,0.032,-3.530868530868538e-05,-0.0353516965016965,0.03416747786747787,145,37,36,282,36,37,1.0

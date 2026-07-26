@@ -1,0 +1,13 @@
+dataset,method,index_policy,n,any_hit_at10,all_hit_at10,recall_at10,duplicate_title_slots_per_q,duplicate_exact_slots_per_q,input_docs,dedup_docs,removed_exact_duplicates
+HotpotQA,Dense,retain_duplicates,500,0.986,0.63,0.808,0.098,0.098,4977,4931,46
+HotpotQA,Hybrid,retain_duplicates,500,0.99,0.748,0.869,0.092,0.092,4977,4931,46
+HotpotQA,HyDE,retain_duplicates,500,0.988,0.868,0.928,0.116,0.116,4977,4931,46
+HotpotQA,Dense,deduplicate_title_paragraph,500,0.986,0.632,0.809,0.0,0.0,4977,4931,46
+HotpotQA,Hybrid,deduplicate_title_paragraph,500,0.99,0.752,0.871,0.0,0.0,4977,4931,46
+HotpotQA,HyDE,deduplicate_title_paragraph,500,0.988,0.868,0.928,0.0,0.0,4977,4931,46
+2WikiMultihopQA,Dense,retain_duplicates,500,0.984,0.358,0.6695,1.842,1.842,5000,3273,1727
+2WikiMultihopQA,Hybrid,retain_duplicates,500,0.998,0.448,0.733,1.362,1.362,5000,3273,1727
+2WikiMultihopQA,HyDE,retain_duplicates,500,0.994,0.668,0.8575,1.464,1.464,5000,3273,1727
+2WikiMultihopQA,Dense,deduplicate_title_paragraph,500,0.992,0.392,0.692,0.0,0.0,5000,3273,1727
+2WikiMultihopQA,Hybrid,deduplicate_title_paragraph,500,1.0,0.46,0.7415,0.0,0.0,5000,3273,1727
+2WikiMultihopQA,HyDE,deduplicate_title_paragraph,500,0.996,0.676,0.8625,0.0,0.0,5000,3273,1727

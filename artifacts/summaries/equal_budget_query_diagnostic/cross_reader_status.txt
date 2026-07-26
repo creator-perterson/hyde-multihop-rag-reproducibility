@@ -1,0 +1,15 @@
+started 2026-07-25T18:20:12
+skip_prompts hotpotqa keyword_expansion rows_before=500 2026-07-25T18:20:12
+skip_prompts hotpotqa direct_rewrite rows_before=500 2026-07-25T18:20:12
+skip_prompts hotpotqa document_like_passage rows_before=500 2026-07-25T18:20:12
+skip_prompts 2wiki keyword_expansion rows_before=500 2026-07-25T18:20:12
+skip_prompts 2wiki direct_rewrite rows_before=500 2026-07-25T18:20:12
+skip_prompts 2wiki document_like_passage rows_before=500 2026-07-25T18:20:12
+skip_reader hotpotqa keyword_expansion qwenturbo rows_before=500 2026-07-25T18:20:12
+skip_reader hotpotqa direct_rewrite qwenturbo rows_before=500 2026-07-25T18:20:12
+skip_reader hotpotqa document_like_passage qwenturbo rows_before=500 2026-07-25T18:20:12
+skip_reader 2wiki keyword_expansion qwenturbo rows_before=500 2026-07-25T18:20:12
+skip_reader 2wiki direct_rewrite qwenturbo rows_before=500 2026-07-25T18:20:12
+skip_reader 2wiki document_like_passage qwenturbo rows_before=500 2026-07-25T18:20:12
+summary_done 2026-07-25T18:20:13
+done 2026-07-25T18:20:13

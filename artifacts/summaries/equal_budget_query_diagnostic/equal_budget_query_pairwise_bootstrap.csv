@@ -1,0 +1,7 @@
+dataset,baseline_query_mode,target_query_mode,n,all_support_hit@10_delta,all_support_hit@10_ci_low,all_support_hit@10_ci_high,supporting_title_recall@10_delta,supporting_title_recall@10_ci_low,supporting_title_recall@10_ci_high
+HotpotQA,direct_rewrite,document_like_passage,500,0.046,0.02,0.072,0.027,0.012,0.041
+HotpotQA,question_decomposition,document_like_passage,500,0.052,0.026,0.08,0.028,0.014,0.043
+HotpotQA,keyword_expansion,document_like_passage,500,0.002,-0.018,0.022,0.003,-0.008,0.014
+2WikiMultihopQA,direct_rewrite,document_like_passage,500,0.276,0.236,0.316,0.1845,0.162,0.207
+2WikiMultihopQA,question_decomposition,document_like_passage,500,0.298,0.258,0.342,0.174,0.153,0.194
+2WikiMultihopQA,keyword_expansion,document_like_passage,500,0.076,0.044,0.108,0.0625,0.046,0.08

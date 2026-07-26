@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Retrieval-side sensitivity to exact title--paragraph deduplication in the local joint index.}
+\label{tab:dedup_retrieval_sensitivity}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X l r r r r r r}
+\toprule
+Dataset & Method & Retain all@10 & Dedup all@10 & $\Delta$ all & Retain recall & Dedup recall & $\Delta$ recall \\
+\midrule
+HotpotQA & Dense & 0.6300 & 0.6320 & +0.0020 & 0.8080 & 0.8090 & +0.0010 \\
+HotpotQA & Hybrid & 0.7480 & 0.7520 & +0.0040 & 0.8690 & 0.8710 & +0.0020 \\
+HotpotQA & HyDE & 0.8680 & 0.8680 & +0.0000 & 0.9280 & 0.9280 & +0.0000 \\
+2WikiMultihopQA & Dense & 0.3580 & 0.3920 & +0.0340 & 0.6695 & 0.6920 & +0.0225 \\
+2WikiMultihopQA & Hybrid & 0.4480 & 0.4600 & +0.0120 & 0.7330 & 0.7415 & +0.0085 \\
+2WikiMultihopQA & HyDE & 0.6680 & 0.6760 & +0.0080 & 0.8575 & 0.8625 & +0.0050 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Retain duplicates uses the canonical joint local index with repeated title--paragraph records preserved. Dedup removes exact normalized title--paragraph duplicates before retrieval, then rebuilds dense, BM25, hybrid, and HyDE retrieval artifacts with the same top-$k=10$ setting. Metrics still collapse duplicate supporting titles during evaluation. Reader answers are not regenerated for the deduplicated indexes, so EM/F1 are not reported in this table.
+\item The CSV artifact additionally reports average duplicate title slots and exact duplicate slots in the retrieved top-10 lists.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

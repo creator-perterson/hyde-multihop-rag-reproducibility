@@ -1,0 +1,23 @@
+\begin{table}[t]
+\centering
+\caption{HyDE hypothetical-passage answer-overlap diagnostic on HotpotQA.}
+\label{tab:hyde_overlap_diagnostic}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\columnwidth}{>{\raggedright\arraybackslash}X r r r}
+\toprule
+Group & $N$ & All hit@10 & Recall@10 \\
+\midrule
+All examples & 500 & 0.8680 & 0.9280 \\
+Gold answer string appears & 292 & 0.9452 & 0.9726 \\
+Gold answer string absent & 208 & 0.7596 & 0.8654 \\
+Non-trivial answer string appears & 252 & 0.9365 & 0.9683 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item A match is a normalized string diagnostic over generated hypothetical passages using the rules in Table~\ref{tab:answer_overlap_definition}. The hypothetical passage is used only as a retrieval query and is not included in the reader evidence prompt.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}

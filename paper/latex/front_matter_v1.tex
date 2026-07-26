@@ -1,0 +1,12 @@
+\title{\textbf{A Controlled Study of HyDE-Style Query Expansion}\\
+\textbf{for Multi-Hop Evidence Acquisition}}
+
+\author{Anonymous submission}
+
+\date{}
+
+\maketitle
+
+\begin{abstract}
+Retrieval-augmented generation (RAG) often fails on multi-hop question answering when retrieval omits part of the required supporting evidence. We present a controlled diagnostic study of HyDE-style document-like query expansion for this retrieval bottleneck, rather than a new retriever architecture. In the studied fixed-depth, training-free protocol, an LLM generates a concise hypothetical supporting passage for each question; the question and passage are concatenated for dense retrieval, and the reader receives only the question and retrieved corpus evidence and is instructed to answer from that evidence. On the 500-example HotpotQA processed split, HyDE-style RAG improves all-support hit@10 from 0.6300 to 0.8680 and answer F1 from 0.7199 to 0.8105 over one-step Dense RAG. A matched-call query-reformulation control reaches 0.6180 all-support hit@10 and 0.7130 F1, indicating that one additional query-side LLM call alone does not explain the gain. A secondary 2WikiMultihopQA evaluation shows the same direction relative to dense, BM25, and hybrid retrieval. The effect remains positive with a no-retuning BGE-base encoder check and under retrieval stress tests of up to 100k passages. Under equal generation budgets, document-like passages consistently outperform direct rewriting and question decomposition, while their comparison with keyword/entity expansion is dataset-dependent. Overall, the paper's mechanism conclusion is limited to retrieval-stage supporting-title and paragraph-text acquisition under the evaluated processed local-corpus protocol.
+\end{abstract}

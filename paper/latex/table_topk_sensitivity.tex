@@ -1,0 +1,27 @@
+\begin{table*}[t]
+\centering
+\caption{Top-$k$ sensitivity and supporting-title rank audit for fixed-ranking retrieval variants.}
+\label{tab:topk_sensitivity}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{llrrrrrrrrr}
+\toprule
+Dataset & Method & All@5 & All@10 & All@20 & Rec@5 & Rec@10 & Rec@20 & Capped mean worst rank & Capped median worst rank & Miss@20 \\
+\midrule
+HotpotQA & Dense & 0.5060 & 0.6300 & 0.7240 & 0.7340 & 0.8080 & 0.8570 & 9.56 & 5.0 & 138 \\
+HotpotQA & BM25 & 0.5080 & 0.7320 & 0.8520 & 0.7310 & 0.8590 & 0.9250 & 7.98 & 5.0 & 74 \\
+HotpotQA & Direct rewrite & 0.4760 & 0.6180 & 0.7100 & 0.7160 & 0.7990 & 0.8480 & 9.90 & 6.0 & 145 \\
+HotpotQA & HyDE & 0.7760 & 0.8680 & 0.9080 & 0.8800 & 0.9280 & 0.9510 & 5.20 & 2.0 & 46 \\
+2WikiMultihopQA & Dense & 0.2740 & 0.3580 & 0.4220 & 0.6185 & 0.6695 & 0.7100 & 14.50 & 21.0 & 289 \\
+2WikiMultihopQA & BM25 & 0.3300 & 0.4320 & 0.4740 & 0.6645 & 0.7250 & 0.7495 & 13.31 & 21.0 & 263 \\
+2WikiMultihopQA & Direct rewrite & 0.2860 & 0.3680 & 0.4240 & 0.6335 & 0.6800 & 0.7140 & 14.35 & 21.0 & 288 \\
+2WikiMultihopQA & HyDE & 0.5880 & 0.6680 & 0.7140 & 0.8085 & 0.8575 & 0.8825 & 8.81 & 4.0 & 143 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows are rescored from top-20 retrieval artifacts generated from frozen questions and frozen generated query text; no new LLM calls are used. The depth-sensitive RRF fusion control is omitted because changing the per-branch candidate depth for top-20 fusion changes the fused top-10 ranking relative to the canonical fusion rows in Tables~\ref{tab:main_results} and~\ref{tab:2wiki_generalization}. All@k requires all annotated supporting titles to appear within the first k retrieved documents. Rec@k is mean supporting-title recall at k. Capped worst-rank columns use the worst supporting-title rank per question, with supports not retrieved in the top 20 capped at 21; Miss@20 counts examples with at least one supporting title still absent by rank 20.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

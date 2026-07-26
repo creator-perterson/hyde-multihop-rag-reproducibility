@@ -1,0 +1,53 @@
+\section{Method}
+\label{sec:method}
+
+\subsection{Overview}
+\label{sec:method_overview}
+
+Under the evaluated protocol, multi-hop question answering is treated as evidence-grounded retrieval followed by reading. Given a question, the studied pipeline generates a concise hypothetical supporting passage, retrieves evidence with the question plus this passage, and asks an evidence-grounded short-answer LLM reader to produce an answer. Figure~\ref{fig:method_pipeline} summarizes the protocol, and Figure~\ref{fig:hyde_mechanism_overlap} summarizes the query-composition variants used in the diagnostic analysis.
+
+The studied design centers on evidence acquisition rather than answer correction. HyDE-style retrieval targets supporting-title completeness before answer generation, with an artifact-level supporting-paragraph audit used to test whether title hits correspond to the processed gold paragraph texts. We additionally include a small exploratory guarded canonicalization diagnostic for answer-format risk cases; its selector, guards, and transition counts are reported in the supplement rather than treated as part of the primary method.
+
+\subsection{Formal Protocol and Boundaries}
+\label{sec:formal_protocol}
+
+The primary retrieval-reader protocol takes as input a question $q$, a candidate corpus $\mathcal{C}=\{d_i\}_{i=1}^{N}$, and a retrieval budget $k$. Each document $d_i$ contains a title and paragraph text. The protocol returns an initial evidence-grounded short answer $a_0$ from retrieved corpus evidence.
+
+\textbf{Primary retrieval-reader protocol.} A query-side generator $G$ maps the question to a hypothetical passage $h=G(q)$. The primary HyDE-style row uses the fixed dense retrieval query composition $[q;h]$; the question-only, rewritten-query, question-plus-rewritten-query, and hypothetical-only variants are query-composition diagnostic inputs rather than alternate final protocols. The primary inference rule is
+\[
+\begin{array}{l}
+h=G(q),\\[2pt]
+E_k=\mathrm{TopK}_{d\in\mathcal{C}}\,\mathrm{sim}(f([q;h]),f(d)),\\[2pt]
+a_0=R(q,E_k).
+\end{array}
+\]
+
+This protocol makes the reader-only evidence boundary explicit: the final reader never receives the hypothetical passage $h$ as evidence; it sees only $E_k$.
+
+\subsection{Hypothetical Document Generation}
+\label{sec:hypothetical_document_generation}
+
+The hypothetical document generation module converts the original question into a retrieval-oriented passage. For each question, the LLM is prompted to write a concise passage that could contain the facts needed to answer the question. Its role is to provide a richer semantic query for retrieval.
+
+This module targets multi-hop questions whose lexical cues can be sparse or indirect. A single question embedding may retrieve one supporting page while missing the second hop, especially when the second entity is only implied by the first piece of evidence. The hypothetical passage can make likely relations, entities, and answer types more explicit, giving dense retrieval a broader semantic target without requiring gold supporting facts.
+
+\subsection{HyDE-Style Dense Retrieval}
+\label{sec:hyde_retrieval}
+
+HyDE-style retrieval uses the original question and the hypothetical passage as a combined dense query. In the main protocol, we first build a paragraph-level dense index over the local candidate corpus. Each document is represented by the concatenation of its title and paragraph text, encoded with the Sentence-Transformers implementation family introduced by Sentence-BERT \cite{reimers2019sentencebert}, using the \texttt{all-MiniLM-L6-v2} MiniLM-based encoder \cite{wang2020minilm}. The resulting embeddings are normalized and stored in a FAISS inner-product index \cite{johnson2019billion}. Because embeddings are normalized, inner-product search corresponds to cosine-style nearest-neighbour retrieval. BGE-base is used in the post-hoc stronger-encoder, equal-budget, corpus-scale, and hard-negative robustness diagnostics, without changing the primary MiniLM protocol or the reader prompts.
+
+For each question, we concatenate the question with the generated hypothetical passage and encode the combined text with the same encoder. The resulting query embedding is searched against the dense index, and the top-$k$ documents are retained as the evidence set for the reader. The generated hypothetical passage is capped at 900 characters before query serialization, and all dense query-composition variants share the same MiniLM tokenizer and 256-token right-truncation policy documented in Supplement Section~\ref{supp:sec:supp_dense_encoder_truncation}.
+
+The technical motivation for this module is that it targets supporting-evidence acquisition while preserving a bounded pipeline. Unlike full reasoning-trace retrieval, it does not require multi-step chain-of-thought generation or an open-ended planning agent. Unlike post-hoc verification, it acts before answer generation, where missing supporting pages or paragraphs can still be addressed by retrieving more complete context. The experiments therefore treat supporting-title completeness as the main diagnostic for whether the retrieval module works, and audit the same retrieval outputs at the normalized title--paragraph-text level where processed support flags are available.
+
+\subsection{Evidence-Grounded Short-Answer LLM Reader}
+\label{sec:short_answer_reader}
+
+The evidence-grounded short-answer LLM reader converts the retrieved evidence set into a short factual answer. For each question, we serialize the top retrieved documents as ranked evidence blocks containing the document title and paragraph text. Each paragraph is truncated to a fixed character budget to keep the prompt compact while preserving the local context needed for answer generation.
+
+The reader prompt instructs the model to use only the provided evidence, combine facts across evidence items when needed, and return only the exact short answer phrase requested by the question. The answer is not required to be a contiguous span copied from a single evidence passage: the reader may combine evidence items and perform simple date, age, comparison, or yes/no reasoning, while being explicitly instructed not to rely on information outside the retrieved evidence. The prompt also includes generic short-answer formatting instructions derived from common multi-hop QA answer types, including yes/no questions, location questions, date or age comparisons, and role or position questions. These generic formatting instructions were fixed before the canonical evaluation pass and applied unchanged to HotpotQA and 2WikiMultihopQA. They are intended to reduce answer-format drift without giving the reader access to gold answers or evaluation labels. In the main experiments, the reader is called through an OpenAI-compatible API interface with temperature-0 decoding.
+
+\subsection{Implementation Details}
+\label{sec:implementation_boundary}
+
+All generation modules use fixed prompt templates. The HyDE prompt asks for one concise hypothetical supporting passage, and the reader prompt asks for an exact short answer from retrieved evidence only. The generation wrapper calls Qwen3.7-Max through an OpenAI-compatible API interface with \texttt{temperature=0.0}. The reported \texttt{max\_tokens} settings are 64 for HyDE passage generation, 64 for rewritten-query generation, and 64 for reader answers. The prompt JSONL artifacts retain gold-answer metadata for evaluation and auditing, but the gold answer is not inserted into the prompt text shown to the model.

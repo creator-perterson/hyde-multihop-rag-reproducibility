@@ -1,0 +1,9 @@
+dataset,query_mode,n,mean_words,min_words,max_words
+HotpotQA,keyword_expansion,500,38.37,23,43
+HotpotQA,direct_rewrite,500,39.392,36,44
+HotpotQA,question_decomposition,500,39.64,36,45
+HotpotQA,document_like_passage,500,39.246,33,44
+2WikiMultihopQA,keyword_expansion,500,38.17,25,45
+2WikiMultihopQA,direct_rewrite,500,39.628,36,45
+2WikiMultihopQA,question_decomposition,500,40.008,36,47
+2WikiMultihopQA,document_like_passage,500,39.172,33,44

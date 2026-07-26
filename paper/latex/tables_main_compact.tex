@@ -1,0 +1,53 @@
+% Compact main-paper tables for the HyDE-enhanced RAG manuscript.
+
+\begin{table*}[t]
+\centering
+\caption{Main results on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:main_results}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r}
+\toprule
+Method & Any hit@10 & All hit@10 & Recall@10 & EM & F1 \\
+\midrule
+LLM-only / No Retrieval & -- & -- & -- & 0.5200 & 0.6658 \\
+One-step Dense RAG & 0.9860 & 0.6300 & 0.8080 & 0.5940 & 0.7199 \\
+Multi-query RAG & 0.9860 & 0.6300 & 0.8080 & 0.5860 & 0.7028 \\
+Single-query Reformulation RAG & 0.9800 & 0.6180 & 0.7990 & 0.5960 & 0.7130 \\
+BM25 RAG & 0.9860 & 0.7320 & 0.8590 & 0.6240 & 0.7436 \\
+BM25 + Dense Hybrid & \best{0.9900} & 0.7480 & 0.8690 & 0.6400 & 0.7577 \\
+Rule-based Evidence-Expanded Iterative Retrieval & 0.9860 & 0.7540 & 0.8700 & 0.6360 & 0.7565 \\
+\rowcolor{gray!10} HyDE-style RAG & 0.9880 & \best{0.8680} & \best{0.9280} & \best{0.6840} & \best{0.8105} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Bold marks column maxima; the shaded row marks the primary HyDE-style retrieval-reader method. All rows are evaluated on 500 HotpotQA examples with the hosted API model string \texttt{qwen3.7-max} as the reader. Retrieval rows use top-$k=10$ evidence; the LLM-only row has no retrieval. This setting uses the processed local-corpus protocol and should not be described as a full reproduction of the original full-wiki IRCoT setup. Dense, BM25, and Hybrid are implemented lightweight retrieval baselines; Single-query Reformulation RAG is a matched-call mechanism control; Multi-query RAG and Rule-based Evidence-Expanded Iterative Retrieval are fixed heuristic controls rather than faithful reproductions of published multi-query or IRCoT-style systems. The Multi-query row has the same supporting-title hit metrics as one-step Dense RAG because it retrieves the same top-10 document sets under the selected rule-based query variants, although the ranking order changes. The small guarded canonicalization diagnostic is reported in Supplement Section~\ref{supp:sec:supp_verifier_guard_decomposition} rather than as a primary result row.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{HyDE query-composition diagnostic on the released IRCoT HotpotQA \texttt{test\_subsampled} split.}
+\label{tab:hyde_query_ablation}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r}
+\toprule
+Query used for dense retrieval & Any hit@10 & All hit@10 & Recall@10 & EM & F1 \\
+\midrule
+Question only & 0.9860 & 0.6300 & 0.8080 & 0.5940 & 0.7199 \\
+Single rewritten query & 0.9800 & 0.6180 & 0.7990 & 0.5960 & 0.7130 \\
+Question + rewritten query & 0.9780 & 0.6280 & 0.8030 & 0.5800 & 0.7048 \\
+Hypothetical passage only & \best{0.9880} & 0.8480 & 0.9180 & 0.6780 & 0.7986 \\
+Question + hypothetical passage & \best{0.9880} & \best{0.8680} & \best{0.9280} & \best{0.6840} & \best{0.8105} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows use the same MiniLM dense index, top-$k=10$, evidence-grounded short-answer reader prompt, and Qwen3.7-Max reader. Query serialization and MiniLM tokenization/truncation are shared across the question-only, single rewritten query, question + rewritten query, hypothetical-only, and question + hypothetical rows; the exact dense encoder configuration is reported in Supplement Section~\ref{supp:sec:supp_dense_encoder_truncation}. The question-only row reproduces the one-step dense retrieval baseline. The single rewritten query row uses one additional Qwen3.7-Max call to generate a concise retrieval query, matching the query-side call budget of HyDE without generating a document-like hypothetical passage. The question + rewritten query row additionally tests whether the observed HyDE advantage is explained by retaining the original question in the dense query. The hypothetical-only row uses the generated passage only as the retrieval query; the reader receives only retrieved evidence passages.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

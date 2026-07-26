@@ -1,0 +1,57 @@
+\begin{figure*}[t]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    font=\sffamily\small,
+    box/.style={draw=black!45, fill=white, rounded corners=4pt, align=center,
+                minimum height=13mm, inner sep=3pt},
+    arrow/.style={-{Stealth[length=2.1mm,width=1.6mm]}, draw=black!70, line width=0.65pt,
+                  shorten <=0.6mm, shorten >=0.6mm},
+    flowarrow/.style={-{Stealth[length=2.0mm,width=1.6mm]}, draw=black!75, line width=0.7pt,
+                      shorten <=0.6mm, shorten >=0.6mm},
+    stage/.style={draw=#1!65!black, fill=#1!7, rounded corners=6pt, line width=0.7pt},
+    note/.style={draw=black!30, fill=gray!4, dashed, rounded corners=4pt,
+                 align=center, font=\sffamily\scriptsize, text=black!65, inner sep=4pt}
+]
+
+\node[box, text width=15mm] (q) at (0,0) {Question\\$q$};
+\node[box, text width=18mm] (gen) at (2.15,0) {Generator\\$G$};
+\node[box, text width=23mm] (hyp) at (4.85,0) {Hypothetical\\passage\\$h=G(q)$};
+\node[box, text width=23mm] (query) at (7.65,0) {Retrieval\\query\\$[q;h]$};
+\node[box, text width=22mm] (retr) at (10.35,0) {Dense\\retrieval};
+\node[box, text width=22mm] (evid) at (13.05,0) {Top-$k$\\evidence\\$E_k$};
+\node[box, text width=24mm] (reader) at (16.15,0) {Evidence-grounded\\reader\\$R(q,E_k)$};
+\node[box, text width=20mm] (ans) at (18.95,0) {Initial\\answer\\$a_0$};
+
+\draw[flowarrow] (q.east) -- (gen.west);
+\draw[flowarrow] (gen.east) -- (hyp.west);
+\draw[flowarrow] (hyp.east) -- (query.west);
+\draw[flowarrow] (query.east) -- (retr.west);
+\draw[flowarrow] (retr.east) -- (evid.west);
+\draw[flowarrow] (evid.east) -- (reader.west);
+\draw[flowarrow] (reader.east) -- (ans.west);
+\draw[arrow] ([yshift=-6mm]q.south) -| (query.south);
+
+\node[note, text width=39mm] (boundary) at (15.0,-1.55)
+{Reader input is $q+E_k$\\$h$ is retrieval-side query text only};
+\draw[arrow, draw=black!35] (evid.south) -- (boundary.north west);
+\draw[arrow, draw=black!35] (boundary.north east) -- (reader.south);
+
+\node[note, text width=36mm] (diag) at (18.95,-1.55)
+{Exploratory guarded\\canonicalization diagnostic\\reported in Supplement S5};
+\draw[arrow, dashed, draw=black!35] (ans.south) -- (diag.north);
+
+\begin{scope}[on background layer]
+    \node[stage=teal, fit=(q)(gen)(hyp)(query)(retr)(evid), inner xsep=5mm, inner ysep=8mm] (stageRetrieval) {};
+    \node[stage=orange, fit=(reader)(ans), inner xsep=5mm, inner ysep=8mm] (stageReader) {};
+\end{scope}
+\node[anchor=south west, font=\sffamily\bfseries\small, text=teal!65!black]
+    at (stageRetrieval.north west) {HyDE-style retrieval};
+\node[anchor=south west, font=\sffamily\bfseries\small, text=orange!75!black]
+    at (stageReader.north west) {Evidence-grounded reading};
+
+\end{tikzpicture}%
+}
+\caption{HyDE-style multi-hop RAG pipeline. The generated hypothetical passage is concatenated with the question for dense retrieval only; the reader receives the original question and retrieved corpus evidence. Guarded canonicalization is shown only as a small exploratory post-processing diagnostic and is detailed in the supplement.}
+\label{fig:method_pipeline}
+\end{figure*}

@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{Corpus-scale leakage and BGE hard-negative audit.}
+\label{tab:corpus_scale_audit}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{llrrrrrrr}
+\toprule
+Dataset & Stress corpus & Docs & Gold-title add. & Near-dup gold & Sim p95 & Q All & HyDE All & $\Delta$All \\
+\midrule
+HotpotQA & Random 100k & 100000 & 1 & 1 & 0.6011 & 0.6960 & 0.8340 & 0.1380 \\
+HotpotQA & No-gold-title 100k & 99999 & 0 & 0 & 0.6011 & 0.6960 & 0.8340 & 0.1380 \\
+HotpotQA & BGE-hard 50k & 50000 & 0 & 0 & 0.6204 & 0.6960 & 0.8420 & 0.1460 \\
+2WikiMultihopQA & Random 100k & 100000 & 173 & 173 & 0.5948 & 0.4180 & 0.6500 & 0.2320 \\
+2WikiMultihopQA & No-gold-title 100k & 99827 & 0 & 0 & 0.5948 & 0.4180 & 0.6520 & 0.2340 \\
+2WikiMultihopQA & BGE-hard 50k & 50000 & 0 & 0 & 0.6172 & 0.4180 & 0.6580 & 0.2400 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The random 100k rows audit the existing processed-train distractor expansion. The no-gold-title rows remove only added train records whose normalized title matches any test supporting title, while preserving the released evaluation corpus. The BGE-hard rows keep the released evaluation corpus and select the most question-similar added train distractors from the audited 100k pool after the same gold-title exclusion; they are a harder 50k diagnostic, not a larger index. Sim p95 is the 95th percentile of each added distractor's maximum BGE cosine similarity to any test question. Near-dup gold counts added records whose token-Jaccard similarity to any test gold supporting paragraph is at least 0.85.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

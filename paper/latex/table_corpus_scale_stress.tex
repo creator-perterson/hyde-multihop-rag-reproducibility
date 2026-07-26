@@ -1,0 +1,28 @@
+\begin{table*}[t]
+\centering
+\caption{Corpus-scale retrieval stress test with processed-train distractor expansion. The Local rows reuse the retained-duplicate BGE local-index artifacts from Table~\ref{tab:stronger_encoder_reproduction}; only the 50k and 100k rows use newly expanded stress-test corpora.}
+\label{tab:corpus_scale_stress}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{l r rr rr rr >{\raggedright\arraybackslash}X}
+\toprule
+Dataset & Docs & \multicolumn{2}{c}{Question only} & \multicolumn{2}{c}{Single rewrite} & \multicolumn{2}{c}{Question + hypothetical} & HyDE all-hit delta \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
+ & & All & Recall & All & Recall & All & Recall & vs. question; vs. single rewrite \\
+\midrule
+HotpotQA & Local & 0.8820 & 0.9380 & 0.8340 & 0.9130 & \best{0.9200} & \best{0.9570} & +0.0380 [0.0100, 0.0660]; +0.0860 [0.0560, 0.1160] \\
+HotpotQA & 50k & 0.7480 & 0.8650 & 0.6520 & 0.8120 & \best{0.8560} & \best{0.9210} & +0.1080 [0.0680, 0.1460]; +0.2040 [0.1620, 0.2440] \\
+HotpotQA & 100k & 0.6960 & 0.8380 & 0.5960 & 0.7820 & \best{0.8340} & \best{0.9060} & +0.1380 [0.1000, 0.1780]; +0.2380 [0.1940, 0.2800] \\
+\midrule
+2Wiki & Local & 0.5100 & 0.7655 & 0.4720 & 0.7380 & \best{0.7800} & \best{0.9130} & +0.2700 [0.2300, 0.3100]; +0.3080 [0.2680, 0.3520] \\
+2Wiki & 50k & 0.4460 & 0.7270 & 0.4040 & 0.6900 & \best{0.6900} & \best{0.8655} & +0.2440 [0.2040, 0.2840]; +0.2860 [0.2440, 0.3280] \\
+2Wiki & 100k & 0.4180 & 0.7105 & 0.3600 & 0.6620 & \best{0.6500} & \best{0.8440} & +0.2320 [0.1900, 0.2760]; +0.2900 [0.2460, 0.3340] \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows use \texttt{BAAI/bge-base-en-v1.5}, top-$k=10$, and 500 examples. Single rewrite denotes the Single rewritten query condition from Table~\ref{tab:stronger_encoder_reproduction}, not the question-plus-rewritten-query composition or the equal-budget direct-rewrite diagnostic. Local denotes the original retained-duplicate local index used in Table~\ref{tab:stronger_encoder_reproduction} (4,977 HotpotQA documents and 5,000 2Wiki documents). The rounded 5k stress-test cache is not used as a Table~\ref{tab:stronger_encoder_reproduction} replicate because the stress-construction script exact-deduplicates title--paragraph records before expansion and, for HotpotQA, pads the 4,977-document local corpus to 5,000 with train distractors. The 50k and 100k corpora preserve the released evaluation corpus and add exact-title--paragraph-deduplicated processed-train distractor passages sampled with seed 20260721. This is a retrieval-only stress test, not a full-wiki experiment. Intervals are paired bootstrap 95\% confidence intervals over per-example all-support hit@10 deltas. Full any-hit, recall-delta, artifact-path, and construction details are reported in the supplemental corpus-scale stress-test table.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

@@ -1,0 +1,25 @@
+\begin{table*}[t]
+\centering
+\caption{Compact artifact blocks for the qualitative case studies.}
+\label{tab:qualitative_case_artifacts}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{2pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.15\textwidth}
+                            >{\raggedright\arraybackslash}p{0.28\textwidth}
+                            >{\raggedright\arraybackslash}p{0.28\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Example & Generated / retrieved artifacts & Evidence excerpts & Answer artifacts \\
+\midrule
+HyDE evidence acquisition\newline{\tiny\texttt{5ae68fcb5542992ae0d1635b}} & HyDE passage: "Ew!" is a 2014 comedy song performed by American television host Jimmy Fallon, featuring will.i.am. The track is based on a recurring sketch from The Tonight Show Starring Jimmy Fallon. Jimmy Fallon, the television host and comedian who created and perform...\newline Dense top: Ew!; Richie Kavanagh; Ezequiel Echeverría; supporting-title hits: Ew!; missing: Jimmy Fallon\newline HyDE top: Ew!; Jimmy Fallon; Tom Ewell; supporting-title hits: Ew!; Jimmy Fallon; missing: none & [Ew!] "Ew!" is a song by American television host and comedian Jimmy Fallon, featuring American rapper will.i.am. The song is based on a sketch from "The Tonight Show Starri...; [Jimmy Fallon] James Thomas Fallon (born September 19, 1974) is an American comedian, actor, television host, and musician. He is known for his work in television as a cast member on... & Initial reader answer: Bay Ridge, Brooklyn\newline Verifier boundary: not invoked for this example\newline Final guarded answer: Bay Ridge, Brooklyn \\
+HyDE evidence acquisition\newline{\tiny\texttt{5ab3f6b9554299753aec5a03}} & HyDE passage: The 1979 film Wise Blood was directed by acclaimed American filmmaker John Huston. Over the course of his extensive career in Hollywood, Huston directed a total of 37 feature films, including celebrated classics such as The Maltese Falcon, The Treasure of t...\newline Dense top: Wise Blood (film); Wise Blood; Benedict Fitzgerald; supporting-title hits: Wise Blood (film); missing: John Huston\newline HyDE top: Wise Blood (film); John Huston; Benedict Fitzgerald; supporting-title hits: John Huston; Wise Blood (film); missing: none & [Wise Blood (film)] Wise Blood is an American 1979 drama film directed by John Huston and based on the 1952 novel "Wise Blood" by Flannery O'Connor. It was filmed mostly in and around Mac...; [John Huston] John Marcellus Huston ( ; August 5, 1906 – August 28, 1987) was an American film director, screenwriter and actor. He wrote the screenplays for most of the 37 feature... & Dense answer: I don't know; HyDE answer: 37.\newline Dense has partial support; HyDE has full support.\newline Verifier boundary: raw verifier proposed "37 feature films"; guard kept 37. \\
+Answer-standardization boundary\newline{\tiny\texttt{5a728f015542991f9a20c4e4}} & HyDE passage: Marty Ingels, an American actor and voice artist best known for providing the original voice of the titular character in the 1982 animated television series Pac-Man, also starred in the live-action interactive video game Return to Zork.\newline Dense top: Marty Ingels; Mario Castañeda; David Acord; supporting-title hits: Marty Ingels; missing: Zork: Grand Inquisitor\newline HyDE top: Marty Ingels; Miłogost Reczek; Mario Castañeda; supporting-title hits: Marty Ingels; Zork: Grand Inquisitor; missing: none & [Marty Ingels] Martin Ingerman (March 9, 1936 – October 21, 2015), known professionally as Marty Ingels, was an American actor, comedian, comedy sketch writer and theatrical agent, w...; [Zork: Grand Inquisitor] Zork: Grand Inquisitor is a graphic adventure game developed by Activision and released for Windows in 1997, and for Macintosh in 2001. It builds upon the "Zork" and "... & Initial reader answer: Marty Ingels\newline Verifier boundary: not invoked for this example\newline Final guarded answer: Marty Ingels \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Each block is a compact projection of frozen per-example artifacts. ``Not invoked'' means the verifier was not run for that example under the risk-selected verification protocol.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

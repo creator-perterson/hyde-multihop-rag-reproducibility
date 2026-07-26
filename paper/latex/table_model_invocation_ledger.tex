@@ -1,0 +1,30 @@
+\begin{table*}[t]
+\centering
+\caption{Model invocation ledger for frozen hosted-Qwen artifacts.}
+\label{tab:model_invocation_ledger}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.18\textwidth}
+                            >{\raggedright\arraybackslash}p{0.24\textwidth}
+                            >{\raggedright\arraybackslash}p{0.16\textwidth}
+                            r
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Artifact group & Local freeze window & Stored model field(s) & Calls / rows & Frozen artifact source \\
+\midrule
+HotpotQA retrieval baselines & 2026-07-02 to 2026-07-04 & \texttt{qwen3.7-max} & 5 $\times$ 500 & LLM-only, Dense, BM25, Hybrid, and Multi-query answer JSONL files. \\
+HotpotQA matched-call query reformulation & 2026-07-08 to 2026-07-09 & \texttt{qwen3.7-max} & 3 $\times$ 500 & Single-query reformulation generation, rewritten-query reader, and question + rewritten-query reader JSONL files. \\
+HotpotQA HyDE and iterative runs & 2026-07-04 to 2026-07-06 & \texttt{qwen3.7-max} & 4 $\times$ 500 & HyDE generation, HyDE reader, Rule-based Evidence-Expanded Iterative Retrieval reader, and HyDE hypothetical-only mechanism answer files. \\
+HotpotQA conservative verifier & 2026-07-04 & \texttt{qwen3.7-max} & 120 verifier calls; 500 merged rows & Risk-selected verifier answer JSONL plus numeric-guarded merged evaluation file. \\
+2WikiMultihopQA secondary runs & 2026-07-05 to 2026-07-06 & \texttt{qwen3.7-max} & 5 $\times$ 500 & 2Wiki Dense, BM25, Hybrid, HyDE generation, and HyDE reader answer files. \\
+Equal-budget query-form generation & 2026-07-21 to 2026-07-23 & \texttt{qwen3.7-max} & 8 $\times$ 500 & Post-hoc HotpotQA and 2Wiki keyword/entity, direct-rewrite, question-decomposition, and document-like generation files. \\
+Equal-budget Qwen-Turbo reader check & 2026-07-23 to 2026-07-25 & \texttt{qwen-turbo} & 6 $\times$ 500 & Direct-rewrite, keyword/entity-expansion, and document-like top-10 reader answer files for HotpotQA and 2Wiki. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows use the Alibaba Cloud Bailian/DashScope OpenAI-compatible chat-completions API wrapper with temperature-0 decoding (\texttt{temperature=0.0}). The primary pipeline uses the stored API model string \texttt{qwen3.7-max}; the equal-budget query-form generation reuses \texttt{qwen3.7-max} as a post-hoc diagnostic; the targeted cross-reader check intentionally uses \texttt{qwen-turbo}. The configured \texttt{max\_tokens} budgets are reported separately as 64 for HyDE passage generation, equal-budget query-form generation, rewritten-query generation, reader answers, and verifier JSON output. Temperature 0 does not guarantee byte-identical replay across requests or hosted-model alias updates. Freeze windows are local artifact timestamps, not provider request logs. Table~\ref{tab:qwen_api_reproducibility} records the API-level reproducibility boundary, and the complete artifact-level ledger is recorded in \texttt{docs/model\_invocation\_ledger.md}.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

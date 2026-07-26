@@ -1,0 +1,33 @@
+\begin{table*}[t]
+\centering
+\caption{Full HotpotQA paired statistics on the released IRCoT \texttt{test\_subsampled} split.}
+\label{tab:hotpotqa_paired_statistics}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.15\textwidth}
+                            >{\raggedright\arraybackslash}X
+                            r r c c}
+\toprule
+Endpoint & Baseline $\rightarrow$ target & $\Delta$ metric 1 [95\% CI] & $\Delta$ metric 2 [95\% CI] & W$\rightarrow$C / C$\rightarrow$W & Test $p$ \\
+\midrule
+Answer EM/F1 & One-step Dense RAG $\rightarrow$ HyDE-style RAG & 0.0900 [0.0620, 0.1200] & 0.0906 [0.0634, 0.1192] & 53 / 8 & $<0.0001$ \\
+Answer EM/F1 & Single-query Reformulation RAG $\rightarrow$ HyDE-style RAG & 0.0880 [0.0600, 0.1180] & 0.0976 [0.0690, 0.1266] & 52 / 8 & $<0.0001$ \\
+Answer EM/F1 & Question + rewritten query $\rightarrow$ Question + hypothetical passage & 0.1040 [0.0740, 0.1340] & 0.1057 [0.0791, 0.1364] & 59 / 7 & $2.38{\times}10^{-11}$ \\
+Answer EM/F1 & BM25 + Dense Hybrid $\rightarrow$ HyDE-style RAG & 0.0440 [0.0160, 0.0740] & 0.0529 [0.0264, 0.0803] & 37 / 15 & 0.0032 \\
+Answer EM/F1 & Rule-based Evidence-Expanded Iterative Retrieval $\rightarrow$ HyDE-style RAG & 0.0480 [0.0220, 0.0740] & 0.0540 [0.0296, 0.0788] & 35 / 11 & 0.0005 \\
+Answer EM/F1 & HyDE-style RAG $\rightarrow$ HyDE-style RAG + Conservative Verifier & 0.0040 [0.0000, 0.0100] & 0.0030 [0.0000, 0.0080] & 2 / 0 & 0.5000 \\
+\midrule
+Retrieval All/Recall & Dense RAG $\rightarrow$ HyDE-style RAG & 0.2380 [0.2000, 0.2780] & 0.1200 [0.1010, 0.1410] & 120 / 1 & $<0.0001$ \\
+Retrieval All/Recall & Single-query Reformulation RAG $\rightarrow$ HyDE-style RAG & 0.2500 [0.2140, 0.2860] & 0.1290 [0.1090, 0.1500] & 125 / 0 & $<0.0001$ \\
+Retrieval All/Recall & Question + rewritten query $\rightarrow$ Question + hypothetical passage & 0.2400 [0.2020, 0.2780] & 0.1250 [0.1060, 0.1470] & 123 / 3 & $<0.0001$ \\
+Retrieval All/Recall & Hybrid RAG $\rightarrow$ HyDE-style RAG & 0.1200 [0.0840, 0.1560] & 0.0590 [0.0410, 0.0780] & 76 / 16 & $<0.0001$ \\
+Retrieval All/Recall & Rule-based Evidence-Expanded Iterative Retrieval $\rightarrow$ HyDE-style RAG & 0.1140 [0.0780, 0.1480] & 0.0580 [0.0390, 0.0780] & 72 / 15 & $<0.0001$ \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows use the same 500 paired HotpotQA examples. For answer rows, metric 1 is $\Delta$EM, metric 2 is $\Delta$F1, W$\rightarrow$C/C$\rightarrow$W count exact-match answer transitions, and $p$ is the exact McNemar test over discordant EM outcomes. For retrieval rows, metric 1 is $\Delta$all-support hit@10, metric 2 is $\Delta$supporting-title recall@10, W$\rightarrow$C/C$\rightarrow$W count target-only and baseline-only full-support retrieval, and $p$ is the exact McNemar test over full-support retrieval transitions. Intervals are paired bootstrap 95\% percentile intervals over per-example deltas.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

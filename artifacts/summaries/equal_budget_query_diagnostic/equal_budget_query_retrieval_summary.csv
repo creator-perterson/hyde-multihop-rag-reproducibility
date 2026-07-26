@@ -1,0 +1,9 @@
+dataset,encoder,query_mode,n,mean_generation_words,any_hit@10,all_support_hit@10,supporting_title_recall@10,retrieval_file
+HotpotQA,BAAI/bge-base-en-v1.5,keyword_expansion,500,38.37,0.99,0.924,0.957,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_hotpotqa_test500_equal_budget_bge_base_keyword_expansion_top10_retrieval.jsonl
+HotpotQA,BAAI/bge-base-en-v1.5,direct_rewrite,500,39.392,0.986,0.88,0.933,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_hotpotqa_test500_equal_budget_bge_base_direct_rewrite_top10_retrieval.jsonl
+HotpotQA,BAAI/bge-base-en-v1.5,question_decomposition,500,39.64,0.99,0.874,0.932,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_hotpotqa_test500_equal_budget_bge_base_question_decomposition_top10_retrieval.jsonl
+HotpotQA,BAAI/bge-base-en-v1.5,document_like_passage,500,39.246,0.994,0.926,0.96,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_hotpotqa_test500_equal_budget_bge_base_document_like_passage_top10_retrieval.jsonl
+2WikiMultihopQA,BAAI/bge-base-en-v1.5,keyword_expansion,500,38.17,0.992,0.676,0.841,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_2wiki_test500_equal_budget_bge_base_keyword_expansion_top10_retrieval.jsonl
+2WikiMultihopQA,BAAI/bge-base-en-v1.5,direct_rewrite,500,39.628,0.968,0.476,0.719,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_2wiki_test500_equal_budget_bge_base_direct_rewrite_top10_retrieval.jsonl
+2WikiMultihopQA,BAAI/bge-base-en-v1.5,question_decomposition,500,40.008,0.998,0.454,0.7295,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_2wiki_test500_equal_budget_bge_base_question_decomposition_top10_retrieval.jsonl
+2WikiMultihopQA,BAAI/bge-base-en-v1.5,document_like_passage,500,39.172,1.0,0.752,0.9035,local-artifacts\equal_budget_query_diagnostic\retrieval\ircot_2wiki_test500_equal_budget_bge_base_document_like_passage_top10_retrieval.jsonl

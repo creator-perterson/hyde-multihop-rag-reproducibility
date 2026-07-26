@@ -1,0 +1,43 @@
+\begin{table*}[t]
+\centering
+\caption{Dataset source and converted-artifact provenance for the processed local-corpus protocol.}
+\label{tab:dataset_artifact_provenance}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\newcommand{\shafull}[4]{\begin{tabular}{@{}l@{}}\texttt{#1}\\\texttt{#2}\\\texttt{#3}\\\texttt{#4}\end{tabular}}
+\newcommand{\repocommit}{\begin{tabular}{@{}l@{}}\texttt{github.com/}\\\texttt{StonyBrookNLP/ircot}\\commit:\\\texttt{3c1820f698eea5eed}\\\texttt{db4fba3c56b64c96}\\\texttt{1e063e4}\\\texttt{main}; 2024-06-11\end{tabular}}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.10\textwidth}
+                            >{\raggedright\arraybackslash}p{0.22\textwidth}
+                            >{\raggedright\arraybackslash}p{0.17\textwidth}
+                            >{\raggedright\arraybackslash}p{0.20\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Dataset & Upstream repository and commit & Source file and local download & Raw SHA-256 & Converted JSONL SHA-256 \\
+\midrule
+HotpotQA &
+\repocommit &
+\begin{tabular}{@{}l@{}}\texttt{processed\_data/}\\\texttt{hotpotqa/}\\\texttt{test\_subsampled.jsonl}\\downloaded: 2026-06-30\\21:01:24\end{tabular} &
+\shafull{729D8987560092C8}{476523488069E6FB}{9BD1527157DC0D7B}{FEBF3DDC336C558E} &
+questions:
+\shafull{23F4AD6F82182C1B}{FE34C7F42DA3E852}{125EA71B0B9138CC}{B3E1740B3501E8AA}
+corpus:
+\shafull{8B27434696F9AB47}{9EB7301B7CB51259}{FDFBD9C7CEA96D7A}{2A728B68F761ACB2} \\
+\addlinespace
+2Wiki &
+\repocommit &
+\begin{tabular}{@{}l@{}}\texttt{processed\_data/}\\\texttt{2wikimultihopqa/}\\\texttt{test\_subsampled.jsonl}\\downloaded: 2026-06-30\\21:01:21\end{tabular} &
+\shafull{4948757B90627F40}{B77CD6BF81A62C1A}{7AD525D6A6A0C91B}{17A2E0E2FA88F5BC} &
+questions:
+\shafull{7E1871FE8813606A}{1E4FBE393A8A1C48}{CC67376CBB2E864F}{4F8926A37A3FF1C7}
+corpus:
+\shafull{CF7603B72D3B0BA0}{7F008C6FEEB281E}{2C63579098CF98F2}{C1E47E61F241069C0} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Converted artifacts are \texttt{questions.jsonl} and \texttt{corpus.jsonl} under \texttt{local-artifacts/datasets/ircot\_hotpotqa\_test500} and \texttt{local-artifacts/datasets/ircot\_2wikimultihopqa\_test500}. HotpotQA converted files have local timestamp 2026-06-30 21:17:21; 2WikiMultihopQA converted files have local timestamp 2026-07-04 22:15:50.
+\item The conversion script is \texttt{src/data/prepare\_ircot\_hotpotqa.py}, SHA-256 prefix \texttt{C23D8CC9E6EB}. It reads each processed row's \texttt{contexts}, writes one question record with the first extracted answer and supporting-title list, and writes one paragraph-level corpus record per context with \texttt{doc\_id}, title, paragraph text, source question id, and \texttt{is\_supporting}. The local corpus is then formed as the within-dataset union of these question-level candidate pools.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
