@@ -33,3 +33,11 @@ Corresponding original ZIPs are in `../release/assets/`. Capsule manifests and d
 ## Scope and missing inputs
 
 Numerical reanalysis is distinct from raw-answer rescoring and model reproduction. The two packages omit raw questions, gold answers, generated answers, corpus/news text, prompts, model weights and indexes. Token/timing/serializer diagnostics outside the supplied vectors require additional original inputs. Independent human validation was not performed. See `../docs/jiis_followup_reproduction_guide.md` and `../THIRD_PARTY_NOTICES.md` for result-specific limits and separate upstream terms.
+
+## Article-identified supplementary packages
+
+Current article: **Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval**.
+
+The [Online Resource 2 wrapper](../release/assets/jiis_ESM_2_submission_20261005.zip) and [Online Resource 3 wrapper](../release/assets/jiis_ESM_3_submission_20261005.zip) add article title, authors, affiliation, corresponding contact, usage instructions and manuscript scope outside the frozen numerical capsules. Their README and JSON metadata use the same packaging revision, `jiis-materials-sync-20261005`. The enclosed original files and numeric capsule versions are unchanged; wrapper ZIP hashes differ from the original frozen downloads.
+
+The manuscript uses matched question-only baselines and evaluates retrieval, delivered evidence and answers separately within tested configurations. These supplementary packages support only the numerical reconstruction described above; they do not establish a general predictive or method-selection rule.

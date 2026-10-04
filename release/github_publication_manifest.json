@@ -39,13 +39,13 @@
     },
     {
       "path": "docs/jiis_followup_reproduction_guide.md",
-      "size_bytes": 3683,
-      "sha256": "c75cc61475d8a89849a6e780b1051b62721751db1546436dec3221d6e96147e8"
+      "size_bytes": 5277,
+      "sha256": "cffcd37239503b8a666e7dca88a1416302a34308a51e8408243ce3ecf72eb23e"
     },
     {
       "path": "reproducibility/README.md",
-      "size_bytes": 2182,
-      "sha256": "25146c1920a8cf3d768be69a247ada43379e37fc211e0af9c96afeff6a173015"
+      "size_bytes": 3169,
+      "sha256": "1fbe42c621af860084aeacc03e2cd8e0b2bf083d62fea13656450c63ed2aa56f"
     },
     {
       "path": "paper/jiis/Fig1_Workflow.pdf",
@@ -774,13 +774,13 @@
     },
     {
       "path": "release/assets/jiis_ESM_2_submission_20261005.zip",
-      "size_bytes": 96545,
-      "sha256": "0d51888d89fd8b55a7de20bc1f3e34642de3cec2aba976ce6b23c05bf153b3fb"
+      "size_bytes": 96858,
+      "sha256": "aea0a34eac5e4a891c903b87c96cc497e0c31f75fcdc964c631ea55ee2df716b"
     },
     {
       "path": "release/assets/jiis_ESM_3_submission_20261005.zip",
-      "size_bytes": 164695,
-      "sha256": "98566dedc14cf9e5af7a7234806d5d50636cae8904ebaedf144a815dcadfef33"
+      "size_bytes": 165013,
+      "sha256": "634d8ffbaf599c728f6bcc066a18cd1324ef5bfc1e5875a82eb0c0d16b07caf2"
     }
   ],
   "initial_publication_commit": "a68aaaacdd5093eaaf0d094b34da5f418255317a",
@@ -806,23 +806,26 @@
     {
       "online_resource": 2,
       "path": "release/assets/jiis_ESM_2_submission_20261005.zip",
-      "sha256": "0d51888d89fd8b55a7de20bc1f3e34642de3cec2aba976ce6b23c05bf153b3fb",
+      "sha256": "aea0a34eac5e4a891c903b87c96cc497e0c31f75fcdc964c631ea55ee2df716b",
       "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
       "capsule_version": "0.1.0-local-20261004",
-      "packaging_revision": "jiis-title-scope-20261005",
+      "packaging_revision": "jiis-materials-sync-20261005",
       "original_capsule_sha256": "160aa6c52cc1941240fcbad254d40a6c9f8c2e3d176a7b694625abb17afe4ad4",
-      "all_original_capsule_files_unchanged": true
+      "all_original_capsule_files_unchanged": true,
+      "README_and_metadata_revision_match": true
     },
     {
       "online_resource": 3,
       "path": "release/assets/jiis_ESM_3_submission_20261005.zip",
-      "sha256": "98566dedc14cf9e5af7a7234806d5d50636cae8904ebaedf144a815dcadfef33",
+      "sha256": "634d8ffbaf599c728f6bcc066a18cd1324ef5bfc1e5875a82eb0c0d16b07caf2",
       "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
       "capsule_version": "0.2.0-local-20261004",
-      "packaging_revision": "jiis-title-scope-20261005",
+      "packaging_revision": "jiis-materials-sync-20261005",
       "original_capsule_sha256": "ffac46f7be027474e05d9ba01e650e2f798939ca455f93a21d4306385857d441",
-      "all_original_capsule_files_unchanged": true
+      "all_original_capsule_files_unchanged": true,
+      "README_and_metadata_revision_match": true
     }
   ],
-  "baseline_terminology": "matched question-only baselines"
+  "baseline_terminology": "matched question-only baselines",
+  "supplementary_identification_revision": "jiis-materials-sync-20261005"
 }

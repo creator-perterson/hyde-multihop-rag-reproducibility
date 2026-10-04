@@ -32,3 +32,15 @@ The manifests enumerate approved package files; a folder name containing `public
 ## Packaging and publication provenance
 
 The original ZIPs retain their recorded hashes and packaging-time metadata. Copying the readable files to `reproducibility/legacy/` and `reproducibility/followup/` does not change their statistical inputs or version identity. Use the root publication manifest for the distribution record. Package verification does not establish full scientific model reproduction.
+
+## Current article and supplementary-material synchronization
+
+**Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval** is the current article title in the manuscript, Supplementary Information, source archives and ESM wrapper identification. The final abstract distinguishes generators from readers and the original hosted artifact from separate matched BGE-encoder comparisons. The Introduction and Conclusion use matched question-only baselines and limit claims to tested configurations.
+
+| Material | Current public file | Synchronization and scope |
+|---|---|---|
+| Online Resource 1 | [Supplementary Information](../paper/jiis/supplementary_jiis.pdf) | Current title and identification; 69 pages, six wide-table pages displayed in landscape. |
+| Online Resource 2 | [Article-identified ZIP](../release/assets/jiis_ESM_2_submission_20261005.zip) | Current article metadata and usage instructions around the unchanged legacy numerical capsule. |
+| Online Resource 3 | [Article-identified ZIP](../release/assets/jiis_ESM_3_submission_20261005.zip) | Current article metadata and usage instructions around the unchanged follow-up numerical capsule. |
+
+Both ZIP wrappers use packaging revision `jiis-materials-sync-20261005` in their README and JSON metadata. Original frozen capsule versions, manifests, inputs and archive bytes remain unchanged. Current wrapper and manuscript/source hashes are recorded in [the publication manifest](../release/github_publication_manifest.json). Local submission cover letters and internal revision records are not part of the public package.
