@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Artifact-grounded qualitative case studies.}
+\label{tab:qualitative_cases}
+\footnotesize
+\begin{threeparttable}
+\setlength{\tabcolsep}{2.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.15\textwidth}
+                            >{\raggedright\arraybackslash}p{0.25\textwidth}
+                            >{\raggedright\arraybackslash}p{0.25\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Case type & Question & Prediction and evidence state & Takeaway \\
+\midrule
+HyDE evidence acquisition & "Ew!" is a song by a television host born where? & Dense: United States; HyDE: Bay Ridge, Brooklyn; gold: Bay Ridge, Brooklyn. Dense support partial (1/2); HyDE support full (2/2). & HyDE retrieves the missing supporting title without exact answer-string overlap in the hypothetical passage, converting a partial-evidence Dense failure into a correct answer. \\
+HyDE evidence acquisition & How many films were directed by the director of Wise Blood? & Dense: I don't know; HyDE: 37; gold: 37. Dense support partial (1/2), missing John Huston; HyDE support full (2/2). & HyDE retrieves the director page needed for the second hop and converts a partial-support Dense abstention into a correct count answer. \\
+Answer-standardization boundary & Which star of Zork was also the voice of Pac-Man? & HyDE: Marty Ingels; gold: Martin Ingerman. HyDE support full (2/2). & The prediction uses the professional name, while the benchmark answer uses the birth name; exact-match scoring can therefore mark a semantically valid alias as wrong. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Cases were selected from rule-filtered frozen HotpotQA artifacts: Dense and HyDE reader outputs, supporting-title states, and HyDE answer-overlap audit rows. They are illustrative, not additional evaluation examples.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

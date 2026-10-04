@@ -1,0 +1,29 @@
+\begin{table}[htbp]
+\centering
+\caption{HotpotQA full-wiki retrieval with the official IRCoT code and a pinned local Qwen2.5-7B-Instruct generator. Panel A reports condition-level retrieval and call costs; Panel B reports target-minus-baseline all-support hit@10 contrasts with paired-bootstrap 95\% confidence intervals and Holm-adjusted exact McNemar tests. This is an official-code/open-generator adaptation, not an exact replay of the original generator.}
+\label{tab:ircot_fullwiki}
+\footnotesize
+\setlength{\tabcolsep}{2pt}
+\textbf{Panel A: conditions}\\[2pt]
+\begin{tabular}{lrrrrrrr}
+\toprule
+Condition & $n$ & Any-hit & All-support & Recall & Ret. calls & Gen. calls & Hard cap \\
+\midrule
+OneR/BM25 & 500 & 0.8580 & 0.2980 & 0.5780 & 1.000 & 0.000 & 0 \\
+HyDE-BM25 & 500 & 0.8760 & 0.3480 & 0.6120 & 1.000 & 1.000 & 0 \\
+Official IRCoT + Qwen & 500 & 0.7960 & 0.3540 & 0.5750 & 2.104 & 2.104 & 1 \\
+\bottomrule
+\end{tabular}
+\vspace{5pt}
+\textbf{Panel B: paired all-support contrasts}\\[2pt]
+\begin{tabular}{lrrrrr}
+\toprule
+Contrast & Delta & 95\% CI & Baseline only & Target only & Holm $p$ \\
+\midrule
+IRCoT $-$ OneR & 0.0560 & [0.0120, 0.1000] & 52 & 80 & 0.0369 \\
+IRCoT $-$ HyDE & 0.0060 & [-0.0420, 0.0560] & 77 & 80 & 0.8732 \\
+HyDE $-$ OneR & 0.0500 & [0.0160, 0.0840] & 28 & 53 & 0.0218 \\
+\bottomrule
+\end{tabular}
+\par\vspace{3pt}\noindent\parbox{0.96\linewidth}{\footnotesize Hard-cap rows: 1/500. IRCoT used adaptive retrieval with a prespecified maximum of 10 generation rounds.}
+\end{table}

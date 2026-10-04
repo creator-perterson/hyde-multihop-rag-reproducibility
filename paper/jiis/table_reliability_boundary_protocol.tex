@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Reliability-boundary audit for generative query expansion. A method-level claim is transportable only across the system factors that are explicitly varied and for which the paired conclusion remains stable.}
+\label{tab:reliability_boundary_protocol}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.13\textwidth} >{\raggedright\arraybackslash}p{0.27\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}X}
+\toprule
+Boundary factor & Frozen comparison & Descriptive inspection signal & Required interpretation \\
+\midrule
+Generator provenance & Hold retriever, corpus, serialization, and top-$k$ fixed while changing a revision-pinned generator. & The point estimate changes direction or the declared adjusted decision changes. & Report generator-conditioned estimates and decisions; a sign change alone does not establish an interaction. \\
+Generated content & Stratify exact answer overlap; repeat on answer-absent and gold-aware scrubbed variants. & The gain concentrates in answer- or support-bearing generations. & Report an artifact-level effect; do not claim contamination-free improvement. \\
+Corpus and scale & Compare processed candidate corpora, a question-independent processed pool, and a fixed full-wiki index. & Magnitude or ranking changes with candidate construction or collection scale. & Bound transfer to the evaluated collection and indexing protocol. \\
+Evidence interface & Audit supporting titles, exact paragraphs, and retention after the actual reader serializer. & Retrieved support is removed or truncated before reading. & Separate retrieval failure from evidence-interface loss. \\
+Reader & Freeze evidence and compare readers; test reader-by-method interactions. & Point-estimate rankings differ or a declared adjusted interaction test is significant. & Rankings motivate inspection; formal reader dependence requires the separately specified interaction test. \\
+Operating budget & Record generation/retrieval calls and compare frozen round prefixes. & Gains depend on additional calls, documents, or unequal stopping behavior. & State the operating point and avoid a universal efficiency or stopping claim. \\
+Comparator strength & Audit a fixed candidate pool with a revision-pinned learned cross-encoder and a separately labeled bi-encoder rescore. & Evidence coverage differs, or the adjusted answer decision remains unresolved. & Condition conclusions on the executed candidate generator, reranker, reader, and declared test family. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Inspection signals do not determine formal states. Eligible primary endpoints use declared Holm-adjusted paired tests; confidence intervals describe effect uncertainty. Interval exclusion alone, point-estimate rankings, and non-primary retention diagnostics cannot establish transport. The procedure assigns supported, rejected, or unresolved to observed registered edges without causal attribution when multiple components change.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

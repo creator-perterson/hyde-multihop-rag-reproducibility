@@ -1,0 +1,28 @@
+\begin{table*}[t]
+\centering
+\caption{Corpus-scale leakage and BGE hard-negative audit.}
+\label{tab:corpus_scale_audit}
+\footnotesize
+\begin{threeparttable}
+\setlength{\tabcolsep}{2.3pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}l l r r r r r r r@{}}
+\toprule
+\multicolumn{2}{c}{Corpus} & \multicolumn{4}{c}{Added-distractor audit} & \multicolumn{3}{c}{All-support hit@10} \\
+\cmidrule(lr){1-2}\cmidrule(lr){3-6}\cmidrule(lr){7-9}
+Dataset & Stress corpus & Docs & \shortstack{Added\\gold titles} & \shortstack{Near-dup.\\support} & \shortstack{BGE sim.\\p95} & \shortstack{Question\\only} & HyDE & $\Delta$ \\
+\midrule
+HotpotQA & Random 100k & 100000 & 1 & 1 & 0.6011 & 0.6960 & 0.8340 & 0.1380 \\
+HotpotQA & No-gold-title 100k & 99999 & 0 & 0 & 0.6011 & 0.6960 & 0.8340 & 0.1380 \\
+HotpotQA & BGE-hard 50k & 50000 & 0 & 0 & 0.6204 & 0.6960 & 0.8420 & 0.1460 \\
+2Wiki & Random 100k & 100000 & 173 & 173 & 0.5948 & 0.4180 & 0.6500 & 0.2320 \\
+2Wiki & No-gold-title 100k & 99827 & 0 & 0 & 0.5948 & 0.4180 & 0.6520 & 0.2340 \\
+2Wiki & BGE-hard 50k & 50000 & 0 & 0 & 0.6172 & 0.4180 & 0.6580 & 0.2400 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Random 100k audits the processed-train distractor expansion. No-gold-title removes only added train records whose normalized title matches a test supporting title. BGE-hard selects the most question-similar added train distractors from the audited 100k pool after that exclusion. BGE sim. p95 is the 95th percentile of each added distractor's maximum BGE cosine similarity to any test question; near-dup. support uses token-Jaccard $\ge 0.85$.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

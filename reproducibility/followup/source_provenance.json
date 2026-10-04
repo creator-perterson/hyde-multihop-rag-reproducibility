@@ -1,0 +1,77 @@
+[
+  {
+    "source": "scripts/reanalyze_jiis_followup_metrics.py",
+    "target": "scripts/reanalyze_jiis_followup_metrics.py",
+    "sha256": "51943f8c21fdcec273055930c9b0cdfc60e5b158166f30b209affbd70ba62a01"
+  },
+  {
+    "source": "scripts/analyze_jiis_revision_pairs.py",
+    "target": "scripts/analyze_jiis_revision_pairs.py",
+    "sha256": "afc3f7f8865fdb4e6b1aea1cdd7eedd50309b83cb9d79db97ef80bce8b5eb133"
+  },
+  {
+    "source": "src/evaluation/paired_inference.py",
+    "target": "src/evaluation/paired_inference.py",
+    "sha256": "b31351a0c927c94d08678969c1cd4ac468f6925f5ff2f5bdcae01a84d30a6325"
+  },
+  {
+    "source": "src/ircot_fullwiki/analyze_fullwiki_retrieval.py",
+    "target": "src/ircot_fullwiki/analyze_fullwiki_retrieval.py",
+    "sha256": "c8bd1126a9e718b0bb6e9c4ea0846eec47b38e13b3fe6b7094ee37e3d2ad1e4f"
+  },
+  {
+    "source": "src/ircot_fullwiki/fullwiki_manifest.py",
+    "target": "src/ircot_fullwiki/fullwiki_manifest.py",
+    "sha256": "9f2735940821b7b280003e737b2e5eeb78dd61010a442066b90558b67088662c"
+  },
+  {
+    "source": "tests/test_followup_metric_reanalysis.py",
+    "target": "tests/test_followup_metric_reanalysis.py",
+    "sha256": "8bda161c6db23e90529a4165f9e8e2c6faa7629a589e8d7d8d72cd45ed9e3242"
+  },
+  {
+    "source": "LICENSE",
+    "target": "LICENSE",
+    "sha256": "937fe8dd0b5199a9dccd5f53ee009f4217f5fb3228b3c3a6b50470db905a4f5b"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/serializer/answer_metrics_per_example.csv",
+    "target": "data/serializer/answer_metrics_per_example.csv",
+    "sha256": "5d688d115d4b886269ed86b4ab32f1ff76ca09123150ab3024d214cba6fdd6c1"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/serializer/support_per_example_sanitized.csv",
+    "target": "data/serializer/support_per_example_sanitized.csv",
+    "sha256": "fe9bdd8f76228500775cc548552db7f0ea077a08b9db21b4a872ad8efa38110f"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/serializer/paired_comparisons.csv",
+    "target": "data/serializer/paired_comparisons.csv",
+    "sha256": "99ff067537726393a9d870e95f828c1850cde952817abbdac6a0101172bc14c2"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/serializer/descriptive_summary.csv",
+    "target": "data/serializer/descriptive_summary.csv",
+    "sha256": "096d2ebfae381a5130fd19d506651a3b25593f2ad48a9f3a89b76befabf772ab"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/holdout/per_example_metrics.csv",
+    "target": "data/holdout/per_example_metrics.csv",
+    "sha256": "0989ae79000a385d3182847bf42ec48cce4c14b09d1df5a6d008c21953732431"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/holdout/retrieval_metrics_per_example.csv",
+    "target": "data/holdout/retrieval_metrics_per_example.csv",
+    "sha256": "58ff8436c3a5b7cfb9b4eea07e3b2936be4f0dc09b03021a3218b4ff80d50135"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/holdout/paired_comparisons.csv",
+    "target": "data/holdout/paired_comparisons.csv",
+    "sha256": "c57f730c8af740f3cec6b1c02bd08b35fa0482630438b798959f3fd96ff38de7"
+  },
+  {
+    "source": "artifacts/summaries/jiis_followup_revision/holdout/descriptive_summary.csv",
+    "target": "data/holdout/descriptive_summary.csv",
+    "sha256": "5498448dd4135f85038c801dc59bc396fa01e6024ad50cfa897057b634cb82e1"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "source": "artifacts/per_example/hotpotqa_test500_retrieval_eval.jsonl",
+    "source_sha256": "e6441f21f2f46ee6eb173e70520775d34c873526d05e44bf95c615ff56c775e7",
+    "export": "metrics/hotpotqa.jsonl",
+    "fields": [
+      "schema_version",
+      "dataset",
+      "example_id",
+      "method",
+      "any_support_hit",
+      "all_support_hit",
+      "supporting_title_recall",
+      "worst_support_rank"
+    ],
+    "rows": 2000,
+    "removed": [
+      "retrieved",
+      "retrieval_metadata"
+    ]
+  },
+  {
+    "source": "artifacts/per_example/2wiki_test500_retrieval_eval.jsonl",
+    "source_sha256": "8a82abda86ed6e764d7494e88c41316b09102f9e54ce1845ab47d90a954fe409",
+    "export": "metrics/2wiki.jsonl",
+    "fields": [
+      "schema_version",
+      "dataset",
+      "example_id",
+      "method",
+      "any_support_hit",
+      "all_support_hit",
+      "supporting_title_recall",
+      "worst_support_rank"
+    ],
+    "rows": 2000,
+    "removed": [
+      "retrieved",
+      "retrieval_metadata"
+    ]
+  }
+]

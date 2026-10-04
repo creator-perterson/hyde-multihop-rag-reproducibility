@@ -1,0 +1,885 @@
+\documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
+
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{xurl}
+\usepackage{longtable}
+\usepackage{fvextra}
+\usepackage{placeins}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{6}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\floatpagefraction}{0.75}
+% Permit in-text placement without changing any frozen table file or content.
+\makeatletter
+\let\JIISoriginaltable\table
+\def\table{\@ifnextchar[{\JIIStable}{\JIISoriginaltable[htbp]}}
+\def\JIIStable[#1]{\JIISoriginaltable[htbp]}
+\expandafter\let\expandafter\JIISoriginaltablestar\csname table*\endcsname
+\@namedef{table*}{\@ifnextchar[{\JIIStablestar}{\JIISoriginaltablestar[htbp]}}
+\def\JIIStablestar[#1]{\JIISoriginaltablestar[htbp]}
+\setlength{\@fptop}{0pt}
+\setlength{\@fpsep}{14pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
+\hypersetup{
+  pdftitle={Supplementary Information: When Does HyDE-Style Query Expansion Help? Reliability Boundaries in Multi-Hop Intelligent Information Retrieval},
+  pdfauthor={Shiyong Xiong; Xingyun Chen},
+  pdfkeywords={intelligent information retrieval; retrieval-augmented generation; multi-hop question answering; query expansion; reproducibility}
+}
+
+\newcommand{\best}[1]{\cellcolor{gray!15}\textbf{#1}}
+\newcommand{\SuppRef}[1]{\ref{#1}}
+\newcounter{algorithm}
+\renewcommand{\thealgorithm}{S\arabic{algorithm}}
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thesubsection}{S\arabic{section}.\arabic{subsection}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{tocdepth}{1}
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3em}}
+\makeatother
+
+\begin{document}
+
+\begin{center}
+{\Large Supplementary Information}\\[3pt]
+{\large Online Resource 1}\\[6pt]
+{\large When Does HyDE-Style Query Expansion Help? Reliability Boundaries in Multi-Hop Intelligent Information Retrieval}\\[6pt]
+{\normalsize Journal of Intelligent Information Systems}\\[3pt]
+{\normalsize Authors: Shiyong Xiong and Xingyun Chen}\\[2pt]
+{\normalsize Affiliation: School of Computer Science and Technology,}\\
+{\normalsize Chongqing University of Posts and Telecommunications,}\\
+{\normalsize Chongqing 400065, China}\\[2pt]
+{\normalsize Corresponding author: Shiyong Xiong; e-mail: \href{mailto:1771856981@qq.com}{1771856981@qq.com}}
+\end{center}
+
+\noindent
+This supplement preserves protocols, paired statistics, prompts, provenance and sensitivity results. The navigation below separates research-question evidence from protocol and diagnostic details. Tables and sections have independent S-prefixed counters. Artifact paths are relative to the review repository. Available results do not complete the original external family or supply independent human validation.
+
+\section*{Result and Protocol Navigation}
+\noindent Historical results, post-hoc diagnostics and newly frozen experiments remain separate. Use the labeled sections and tables below to locate a claim and its limits; the contents list provides the full section sequence.
+
+\begin{center}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.21\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.30\textwidth}}
+\toprule
+Question or check & Evidence to inspect & Location \\
+\midrule
+RQ1: expansion & Controlled comparisons, paired effects, query composition and overlap diagnostics & Sections~\ref{sec:supp_hotpotqa_paired_statistics}, \ref{sec:supp_answer_overlap_normalization}, \ref{sec:supp_controlled_corpus_core} \\
+RQ2: generator & Fixed open-generator protocol, content strata and matched encoder sensitivity & Sections~\ref{supp:sec:open_weight_confirmatory_protocol}--\ref{sec:supp_plan_b_sensitivity} \\
+RQ3: corpus/reader & Full-wiki and 2Wiki corpus-scale methods, news matrix and matched Dense comparisons & Sections~\ref{sec:ircot_fullwiki}, \ref{sec:supp_corpus_scale_stress}, \ref{sec:supp_mhrag_external}, \ref{sec:supp_priority_diagnostics} \\
+RQ4: iteration & Cumulative round-prefix effects and call accounting & Section~\ref{sec:ircot_fullwiki}; Table~\ref{tab:ircot_round_budget} \\
+Delivered evidence & Official sentence matching and actual character/token retention & Sections~\ref{sec:supp_sentence_audit}--\ref{sec:supp_priority_diagnostics} \\
+Capability and selection & New question-only/gold controls; 64-question same-choice validation & Sections~\ref{sec:supp_reader_controls_new}--\ref{sec:supp_independent_validation_new} \\
+Protocol and metrics & Source freeze, prompts, adapters and scoring conventions & Sections~\ref{sec:supp_configuration_provenance}, \ref{sec:supp_prompt_api}, \ref{sec:supp_metric_normalization} \\
+Reproduction limits & Tested local capsule, excluded inputs and archive status & Section~\ref{sec:supp_code_artifact_availability} \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\tableofcontents
+
+\clearpage
+
+\section{Configuration Provenance and Freezing Protocol}
+\label{sec:supp_configuration_provenance}
+
+The manuscript uses released IRCoT processed HotpotQA and 2WikiMultihopQA \texttt{test\_subsampled} splits under a processed local-corpus protocol. The following records separate retrieval-reader protocol choices from verifier-specific diagnostic choices by listing the selection source, the data inspected, and the artifact-level freeze evidence for each configuration. They do not claim that every design choice was selected using an independent development split. In particular, the $q+h$ row supports a narrower provenance claim: the final HyDE query composition was fixed before the reported $q$-only, $h$-only, and question-plus-rewrite diagnostic controls were generated and scored. Same-split diagnostic tuning is disclosed for the secondary verifier risk rules and guarded-merge policy.
+
+\subsection{System-Configuration Reliability Boundary}
+\label{supp:system_configuration_boundary}
+
+The methodological contribution is an audit protocol for conditional system claims, not a new retrieval algorithm. We represent an evaluated configuration as
+\[
+\mathcal{S}=(G,F,\mathcal{C},\Sigma,R,B),
+\]
+where $G$ is the query-side generator, $F$ is the retriever and index, $\mathcal{C}$ is the corpus, $\Sigma$ is the evidence serializer, $R$ is the answer reader, and $B$ is the generation/retrieval-call budget. A query-expansion result identifies a contrast between two such configurations, not a component-independent property.
+
+For paired questions $i=1,\ldots,n$ and configurations $A$ and $B$, the conditional effect for endpoint $x$ is
+\[
+\Delta_x(A,B)=\frac{1}{n}\sum_{i=1}^{n}\left[m_{x,i}(A)-m_{x,i}(B)\right],
+\qquad x\in\{\mathrm{ret},\mathrm{ans},\mathrm{cost}\}.
+\]
+Here $\Delta_{\mathrm{ret}}$, $\Delta_{\mathrm{ans}}$, and $\Delta_{\mathrm{cost}}$ use complete-support retrieval, reader EM/F1, and calls, respectively. Reader transport is tested by the interaction $\Delta_{\mathrm{ans}}(A,B\mid R_1)-\Delta_{\mathrm{ans}}(A,B\mid R_2)$. Changes in direction, uncertainty, or interpretation motivate boundary inspection; formal decisions follow the declared adjusted-test rule. The complete audit protocol is given in Table~\ref{tab:reliability_boundary_protocol}.
+
+\input{table_reliability_boundary_protocol.tex}
+\FloatBarrier
+\input{table_configuration_provenance.tex}
+\input{table_dataset_artifact_provenance.tex}
+
+\FloatBarrier
+\section{Open-Weight Confirmatory Protocol}
+\label{supp:sec:open_weight_confirmatory_protocol}
+
+The minimum open-weight enhancement is executed in the \texttt{agentic\_rag} environment with a locally cached or explicitly downloaded model snapshot.
+
+The generator is \texttt{Qwen/Qwen2.5-7B-Instruct}.
+It is pinned to revision:\par\noindent
+{\scriptsize\texttt{fe11104b620d588ccc049ff6631dd3ea002e3d98}};
+decoding is greedy with
+seed 13 and \texttt{max\_new\_tokens=96}. The dense retriever is
+\texttt{BAAI/bge-base-en-v1.5}, pinned to revision
+\texttt{a5beb1e3e68b9ab74eb54cfd186867f64f240e1a}, using CLS pooling, L2
+normalization, a 512-token input limit, and top-$k=10$.
+
+The confirmatory conditions are listed explicitly below. Query2doc-style (4-shot adaptation) is implemented as a faithful adaptation of the published pseudo-document
+idea with two deterministic HotpotQA and two deterministic 2WikiMultihopQA
+training demonstrations per target prompt. The local pool is fixed to the first
+256 eligible released-order training examples per dataset; two examples are
+selected from each dataset by a target-dependent SHA-256 ranking rule. The
+demonstration identifiers, prompt SHA-256, model revision, decoding settings, package versions, and elapsed time
+are stored in the generation JSONL. The open tier is retrieval-stage only; answer
+overlap and gold-content scrubbing are marked diagnostic only and are not used to
+select a final method.
+
+\begin{center}
+\textbf{Open-weight confirmatory condition names.}\par\vspace{3pt}
+\centering
+\small
+\begin{tabular}{ll}
+\toprule
+Condition & Role \\
+\midrule
+\texttt{dense\_bge} & Question-only reference \\
+\texttt{open\_hyde\_standard} & Standard HyDE prompt \\
+\texttt{open\_hyde\_evidence\_only} & Evidence-only HyDE prompt \\
+\texttt{open\_query2doc\_4shot} & Query2doc-style (4-shot adaptation) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The runner writes one JSONL row per question and condition under \path{local-artifacts/expert_systems_minimum}. Retrieval rows expose stable IDs, ranks, document IDs, titles, and scores for internal auditing. The public per-example export removes question text, answer text, prompt text, generated passages, credentials, request identifiers, and other unrestricted benchmark content while preserving the condition, model revision, and retrieved-document metadata. The validation script rejects duplicate IDs, missing ranks, non-finite scores, forbidden content keys, and unpinned generator revisions. Summary CSV files report paired bootstrap intervals with 10,000 resamples and exact paired tests only after all required rows are present.
+
+The aggregate retrieval-stage results are reconstructed directly from the verified summary files in the release package. The main manuscript reports the primary retrieval metrics, registered paired deltas, confidence intervals, exact-answer overlap rates, and generated lengths. Table~\ref{tab:open_generator_leakage} reports the mutually exclusive gold-content strata and the original, answer-scrubbed, and gold-content-scrubbed retrieval diagnostics. The latter are diagnostic only and use gold information unavailable at deployment time.
+
+\subsection{Independent Mistral Generator Check}
+
+Standard HyDE generation is repeated with the following frozen model:
+\begin{center}
+\small\path{mistralai/Mistral-7B-Instruct-v0.3}\par
+{\scriptsize\texttt{c170c708c41dac9275d15a8fff4eca08d52bab71}}
+\end{center}
+The prompt, greedy 96-token decoding limit, question order, BGE revision, serialization, corpus, and top-$k=10$ are held fixed. The 500-row output for each dataset has no missing generations or retrieval failures. Median generated lengths are 63 words on HotpotQA and 59 words on 2WikiMultihopQA. Paired bootstrap intervals use 10,000 resamples; exact McNemar tests for all-support outcomes are Holm-corrected across the four generator-family contrasts. Public per-example outputs and aggregate statistics are reconstructed from \path{artifacts/per_example/second_generator_bge} and \path{artifacts/summaries/second_generator_bge}.
+
+\input{table_open_generator_leakage.tex}
+\input{table_generator_reader_robustness.tex}
+
+\input{query2doc_style_protocol_appendix.tex}
+\input{table_open_generator_query2doc.tex}
+
+\subsection{Shared Question-Independent Corpus Check}
+\label{supp:sec:shared_corpus_check}
+
+The shared-corpus diagnostic removes per-question candidate-pool selection from the evaluated retrieval step. For each dataset, all selected questions and all methods use one audited 100k processed corpus. Added training records whose titles match test supporting titles are excluded. The corpus is still derived from processed benchmark artifacts rather than full Wikipedia.
+
+\input{table_shared_corpus_check.tex}
+
+\subsection{Hosted-Alias Temporal Drift Check}
+\label{supp:sec:hosted_alias_drift}
+
+The hosted-alias drift check replays a deterministic 50-question subset from each dataset against the currently configured hosted model alias, with three replays per question. The replay uses the original query-generation message shape and then reruns BGE-base retrieval from the replayed generated text. This check measures temporal sensitivity under the present alias; it does not reconstruct the historical provider-side snapshot used for the frozen primary artifacts. Because three replay rows share each selected question, the results are reported as descriptive agreement and similarity statistics rather than as independent inferential evidence.
+
+\input{table_hosted_drift.tex}
+
+\section{Post-Hoc and Pre-Output Sensitivity Analyses}
+\label{sec:supp_plan_b_sensitivity}
+
+The settings for these additional analyses were fixed on 16 August 2026 before their respective outputs were inspected, after the initial study. They are not preregistered or confirmatory evidence; retrospective input-evidence diagnostics are identified separately. The protocol fixes the original 500 IDs and order, seed 13, 10,000 question-level bootstrap resamples, exact paired tests for specified binary families, and no result-dependent tuning or row deletion. Aggregate release files are stored under \path{artifacts/summaries/jiis_revision}; private text-bearing rows remain outside the publication package.
+
+\subsection{BGE Instruction Sensitivity}
+
+The exact intervention is whether the query encoder receives \texttt{Represent this sentence for searching relevant passages:}. Document serialization and the cached document embeddings remain unchanged. HotpotQA and 2Wiki each contribute two instruction contrasts: question-only and question plus the frozen Qwen \texttt{open\_hyde\_standard} hypothetical passage. The four all-support McNemar tests form one Holm family. Instruction-minus-no-instruction changes are 0.000 and $-0.010$ on HotpotQA and $-0.008$ and $+0.012$ on 2Wiki; all four 95\% intervals include zero and all adjusted $p$-values are at least 0.7183. The exact generation-file hashes and encoder revision are recorded in the revision protocol and analysis manifest.
+
+\subsection{Serialized Evidence Interface Audit}
+
+The audit reuses the frozen OneR, HyDE, IRCoT, and BGE-base rescore retrieval rows and the aligned HotpotQA support contexts. A paragraph match requires equality of normalized title and complete normalized paragraph text. At top 10, all-support title and paragraph rates coincide at 0.298, 0.348, 0.354, and 0.460. The exact reader serializer retains only the first 450 characters per document; under the deliberately conservative requirement that every complete supporting paragraph remains verbatim, the rates fall to 0.112, 0.102, 0.140, and 0.176. Recomputing the interface at 900 characters yields 0.288, 0.332, 0.340, and 0.434. The aligned artifact lacks official sentence IDs. The separate retrospective audit in Section~\ref{sec:supp_sentence_audit} adds official sentence arrays; the original paragraph-label results above remain unchanged.
+
+\subsection{Reader-by-Method Interaction}
+
+For every method pair, the per-question interaction is $(\Delta_{\mathrm{Qwen}}-\Delta_{\mathrm{Mistral}})$. The headline IRCoT-minus-HyDE interaction is $+0.036$ EM (95\% CI $[-0.004,0.074]$; exact sign-flip $p_{\mathrm{Holm}}=0.2562$) and $+0.0461$ token F1 ($[0.0078,0.0853]$). The other two EM interaction intervals also include zero. F1 intervals were registered without a separate significance decision. Accordingly, the manuscript reports reader-specific point-estimate differences but does not claim a statistically established reader-dependent reversal.
+
+\subsection{Full-Wiki Learned Reranker and Bi-Encoder Sensitivity}
+
+The learned comparator uses question-only BM25 top-100 candidates followed by \texttt{BAAI/bge-reranker-v2-m3} reranking to top 10. The checkpoint is pinned to revision \texttt{953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e}. The original 5,233,329-paragraph Elasticsearch index was restored locally, and all 500 top-100 candidate rows were exported. For every question, the first 10 candidates exactly match the frozen formal BM25 row. The candidate file contains 500 by 100 records and has SHA-256 \texttt{25b27bc9a7084fd29000d2665546b892e3ceda44a41c523df62eb7f5865f9f34}. The cross-encoder scored all 50,000 question--paragraph pairs and wrote 500 top-10 result rows.
+
+The cross-encoder obtains any-hit/all-support/recall of 0.948/0.468/0.708. Its all-support differences versus OneR, HyDE, and IRCoT are $+0.170$ ($[0.136,0.206]$), $+0.120$ ($[0.076,0.162]$), and $+0.114$ ($[0.064,0.164]$); all three exact tests remain significant after Holm correction. With Qwen, its EM/F1 is 0.264/0.3480, and with Mistral it is 0.208/0.3476. Relative to OneR, the EM gains are $+0.044$ ($[0.014,0.074]$) and $+0.060$ ($[0.032,0.090]$), respectively. Relative to IRCoT, Qwen EM is unresolved, whereas Mistral EM is higher by $+0.048$ ($[0.014,0.082]$). The Qwen-minus-Mistral interaction for the gain over OneR crosses zero.
+
+The separately labeled \texttt{BAAI/bge-base-en-v1.5} sensitivity control encodes the question and each candidate paragraph independently. It obtains any-hit/all-support/recall of 0.942/0.460/0.701 and Qwen EM/F1 of 0.270/0.3469. Its all-support difference from the cross-encoder is $-0.008$ ($[-0.020,0.002]$), so the learned comparator's incremental complete-support advantage is unresolved. This bi-encoder rescore remains useful for separating candidate-score strength from cross-encoding, but it is not relabeled as a learned cross-encoder.
+
+\input{table_fullwiki_system_cost.tex}
+
+\subsection{Independent 2Wiki Corpus-Scale Transport}
+
+The independent tier freezes 428,395 unique paragraphs from the official 2Wiki train/dev/test context union in one question-independent Elasticsearch index. BM25, frozen Qwen-HyDE, official-code/open-Qwen IRCoT, and the same learned cross-encoder are evaluated on the same 500 released-order test questions; Qwen and Mistral read every frozen top-10 evidence file. The corpus hash is \texttt{000a99919ea821867ec4a50c2cc40e83da33eb4d5017799d24c51fa02bb283f8}. This split-union corpus is independently frozen but is not a second complete Wikipedia snapshot.
+
+The cross-encoder has a positive retrieval point estimate over BM25, raising all-support hit@10 from 0.346 to 0.400 ($+0.054$; $[0.032,0.078]$), with a supported registered retrieval decision ($p_{\mathrm{Holm}}=2.23\times10^{-5}$). Qwen-HyDE reaches 0.356 ($+0.010$; $[-0.014,0.032]$), and IRCoT reaches 0.342 ($-0.004$; $[-0.052,0.042]$). The cross-encoder's answer gains over BM25 are unresolved with Qwen (EM $+0.014$; $[-0.016,0.044]$) and Mistral (EM $+0.008$; $[-0.012,0.028]$). Thus the observed 2Wiki retrieval increase receives a supported registered decision, whereas the answer edge remains unresolved.
+
+\input{table_2wiki_corpus_scale.tex}
+
+\FloatBarrier
+
+\section{Official IRCoT Full-Wiki Retrieval and Reader Protocol}
+\label{sec:ircot_fullwiki}
+
+This tier vendors the official IRCoT repository at commit \texttt{3c1820f698eea5eeddb4fba3c56b64c961e063e4} and serves the fixed \texttt{Qwen/Qwen2.5-7B-Instruct} revision \texttt{fe11104b620d588ccc049ff6631dd3ea002e3d98} through a localhost-only compatibility endpoint. The HotpotQA full-wiki corpus is indexed once in Elasticsearch 7.10.2 and contains 5,233,329 paragraph documents. OneR/BM25, HyDE-BM25, and IRCoT share the same index and title--paragraph BM25 fields. The aligned evaluation list contains the same 500 HotpotQA IDs in the same order for every condition.
+
+IRCoT uses the official prompt/orchestration boundary with a deterministic local generation adapter, a 2,000-token prompt budget, greedy decoding, and a maximum of 10 rounds. The output contract requests one next reasoning sentence per call. The formal stopping audit found natural terminal answers for 499 of 500 examples; one comparison question reached the 10-round hard cap after the private sentence-boundary adapter repeatedly split a legal-case abbreviation. The row is retained under the no-result-dependent-omission rule. Raw prompts, reasoning, paragraph text, and local request logs remain private, while the public 1,500-row export retains IDs, ranked document metadata, retrieval metrics, model/upstream revisions, and call counts.
+
+\input{table_ircot_deviation_matrix.tex}
+
+Table~\ref{tab:ircot_fullwiki} reports all conditions and all predeclared contrasts. IRCoT improves all-support hit@10 over OneR/BM25, but it has lower any-hit than both baselines and lower supporting-title recall than HyDE-BM25. The tier is therefore evidence for an adaptive completeness/cost trade-off, not universal superiority. It is an official-code/open-generator adaptation and not an exact replay of the original IRCoT generator or its historical model behavior.
+
+\input{table_ircot_fullwiki.tex}
+
+\input{table_ircot_round_budget.tex}
+
+\subsection{Full-Wiki Independent-Reader Protocol}
+
+The three frozen 500-row retrieval files are read independently with two frozen
+models:
+\begin{center}
+\small\path{Qwen/Qwen2.5-7B-Instruct}\par
+{\scriptsize\texttt{fe11104b620d588ccc049ff6631dd3ea002e3d98}}\par\medskip
+\small\path{mistralai/Mistral-7B-Instruct-v0.3}\par
+{\scriptsize\texttt{c170c708c41dac9275d15a8fff4eca08d52bab71}}
+\end{center}
+Each question-condition-reader tuple receives one greedy call with seed 13,
+\texttt{max\_input=2000}, and \texttt{max\_new\_tokens=32}. The shared prompt
+contains the question and at most ten retrieved corpus paragraphs in rank order;
+each paragraph is capped at 450 characters. It excludes gold aliases, support
+flags, evaluation labels, HyDE pseudo-documents, retrieval queries, and IRCoT
+reasoning traces.
+
+A deterministic post-generation adapter maps a leading unknown or
+insufficient-evidence response to \texttt{unknown}, removes an explicit
+\texttt{Answer:} prefix, strips one enclosing quotation pair, and removes only
+predefined trailing evidence or insufficiency explanations. The internal JSONL
+retains the unchanged \texttt{raw\_prediction}; scoring uses the adapted
+\texttt{prediction}. This amendment was frozen before the 500-row Mistral reader
+runs and applied to all six reader conditions. Smoke outputs before the amendment
+are archived separately and do not enter formal statistics.
+
+EM and token F1 take the maximum over released gold aliases. Holm correction is
+performed separately for the within-Qwen, within-Mistral, and cross-reader EM
+families. Qwen EM/F1 is 0.2200/0.2815 for OneR, 0.2360/0.3017 for HyDE, and
+0.2620/0.3366 for IRCoT. Mistral produces 0.1480/0.2674, 0.1700/0.3032, and
+0.1600/0.2920, respectively. The public 3,000-row sensitivity export retains
+stable IDs, condition labels, metrics, provenance, and call counts but omits
+questions, aliases, prompts, raw or adapted predictions, titles, paragraph text,
+URLs, endpoints, and reasoning. Source summaries are in
+\path{artifacts/summaries/fullwiki_reader_sensitivity}.
+
+\subsection{IRCoT Round-Prefix Sensitivity}
+
+The frozen IRCoT trajectory is evaluated after round 1, after round 2, and at
+natural or capped completion. For each prefix, retrieved documents are truncated
+to the evidence available at that stage and the same Qwen reader is rerun. Round
+1 averages 1.000 retrieval call and 1.996 documents; round 2 averages 1.978 calls
+and 2.824 documents; the full trajectory averages 2.104 calls and 2.922 documents.
+These prefixes therefore measure a round-budget frontier and are not strict
+equal-budget conditions.
+
+Paired comparisons are round 1 versus round 2 and round 2 versus full. Bootstrap
+intervals use 10,000 resamples, and exact McNemar tests are Holm-corrected in
+separate retrieval and answer families. All-support/EM/F1 are
+0.158/0.166/0.2308 after round 1, 0.344/0.254/0.3289 after round 2, and
+0.354/0.262/0.3366 at full exit. Sanitized per-example prefixes and summaries are
+stored under \path{artifacts/per_example/ircot_round_budget} and
+\path{artifacts/summaries/ircot_round_budget}.
+
+\subsection{Post-Hoc Stopping Sensitivity}
+
+The legal-abbreviation sensitivity is restricted to the retained hard-cap row
+\texttt{5adcc9f35542990d50227d20}. Protecting \texttt{v.} from sentence-final
+splitting reduces retrieval/generation rounds from 10 to 2 and generated tokens
+from 316 to 50. Both versions retrieve both supporting titles, so any-hit,
+all-support hit, and supporting-title recall remain 1.0. This post-hoc result
+does not replace the frozen primary row and does not enter aggregate statistics.
+The machine-readable comparison and source hashes are released in
+\texttt{artifacts/summaries/ircot\_fullwiki/legal\_abbreviation\_sensitivity.json}.
+
+\FloatBarrier
+
+\section{Full HotpotQA Paired Statistics}
+\label{sec:supp_hotpotqa_paired_statistics}
+
+The HotpotQA paired statistics combine answer-side paired bootstrap/McNemar checks with retrieval-side paired checks over the same 500 examples. This table is the main supplemental lookup for the HotpotQA reliability claims in the manuscript.
+
+\input{table_hotpotqa_paired_statistics.tex}
+
+\section{2Wiki Paired Statistics}
+\label{sec:supp_2wiki_paired_statistics}
+
+The 2WikiMultihopQA split is reported as a secondary cross-dataset no-retuning check under the same processed local-corpus protocol, reader prompt, top-$k=10$ retrieval budget, and local candidate-pool setting. The paired rows reuse frozen answer and retrieval artifacts and are interpreted as secondary diagnostics.
+
+\input{table_2wiki_paired_statistics.tex}
+
+\section{Deduplication Sensitivity}
+\label{sec:supp_deduplication_sensitivity}
+
+The local corpus for each dataset is the union of the released question-level candidate pools, indexed jointly within the dataset. Retrieval representations encode document titles and paragraph texts only. Question identifiers, supporting-evidence flags, gold answers, and evaluation metadata are retained for analysis but are not encoded by dense, BM25, or hybrid retrieval. Exact duplicate title--paragraph records are retained before indexing; if a paragraph appears in multiple question-level pools, each occurrence remains a separate document with a source-question-specific document identifier. Supporting-title metrics collapse duplicate retrieved titles before computing any-hit@10, all-hit@10, and supporting-title recall@10.
+
+\input{table_dedup_retrieval_sensitivity.tex}
+
+The sensitivity table shows that exact title--paragraph deduplication leaves the method ordering unchanged. HotpotQA HyDE metrics remain unchanged, while all three tested methods improve slightly on 2WikiMultihopQA where repeated local-pool records occupy more top-10 slots. Reader answers are not regenerated for the deduplicated indexes, so this analysis should be read as a retrieval-side robustness check rather than an EM/F1 robustness check. We therefore keep the retained-duplicate joint index as the canonical protocol because it mirrors the released local-pool artifacts, and treat deduplication as a robustness check rather than a protocol change.
+
+\FloatBarrier
+\section{Guarded Answer Canonicalization Decomposition}
+\label{sec:supp_verifier_guard_decomposition}
+
+The verifier outputs are analyzed as a HyDE-native guarded answer-canonicalization layer. The decomposition below reuses the same HyDE reader answers and the same 120 risk-selected verifier outputs, then reconstructs raw merging and guarded merging policies without new model calls.
+
+\input{table_hyde_verifier_guard_ablation.tex}
+
+\subsection{Guarded Merge Rule}
+\label{sec:supp_guarded_merge_rule}
+
+\refstepcounter{algorithm}
+\noindent\textbf{Algorithm~\thealgorithm: Guarded canonicalization inference rule.}
+\label{alg:guarded_canonicalization_rule}
+
+\begin{enumerate}
+    \item The reader receives the original question $q$ and retrieved corpus evidence $E$ and returns an initial short answer $a_0$.
+    \item The rule-based selector computes a risk score $s(q,a_0)$. If $s(q,a_0)=0$, set the final answer $a_f=a_0$ and stop.
+    \item If $s(q,a_0)>0$, query the conservative verifier with $(q,E,a_0)$ and parse its JSON output for the proposed final answer $\hat{a}$. If JSON parsing fails or the required answer field is missing, set $a_f=a_0$ and stop.
+    \item Apply the abstention guard: if $a_0$ is not an abstention but $\hat{a}$ is an abstention, set $a_f=a_0$ and stop.
+    \item Apply the numeric-unit guard: if $a_0$ is a bare number and $\hat{a}$ only appends a high-risk unit suffix, set $a_f=a_0$ unless the multi-word unit is explicitly requested by the question.
+    \item Otherwise set $a_f=\hat{a}$.
+\end{enumerate}
+The final answer is therefore either the original reader answer or a selected-and-guarded verifier output for risk cases. The guard-decomposition table above reports the effect of raw merging and each deterministic guard using the same frozen verifier outputs.
+
+\section{Full Call and Prompt-Character Accounting}
+\label{sec:supp_full_accounting}
+
+The main manuscript reports a compact LLM-call profile. The full accounting below separates query-side LLM calls, retrieval query executions, reader calls, verifier calls, total LLM calls, prompt-character proxies, evidence-character averages, and whether any method uses task-specific training. These are artifact-derived prompt-character and call-count statistics, not provider-side token, latency, or billing logs.
+
+\input{table_efficiency_profile_full.tex}
+
+\input{table_baseline_implementation_parameters.tex}
+
+\FloatBarrier
+\section{Prompt and API Configuration}
+\label{sec:supp_prompt_api}
+
+This section gives the complete prompt templates used by the canonical query-side generation, matched-call query reformulation, equal-budget query-form diagnostic, evidence-grounded short-answer reader, and conservative verifier. The reader prompt uses generic short-answer formatting instructions for common multi-hop QA answer types and is applied unchanged to HotpotQA and 2WikiMultihopQA. The reader and verifier evidence blocks serialize the top-10 retrieved passages with title and paragraph text, truncated to at most 900 characters per document.
+
+\subsection{HyDE Hypothetical-Passage Generation Prompt}
+\begingroup\footnotesize
+\begin{verbatim}
+You are generating a hypothetical supporting passage for retrieval.
+Given the question below, write a concise factual-sounding supporting passage
+that would likely contain the answer.
+The passage may be imperfect, but it should include key entities, relations,
+and context useful for retrieving evidence.
+Do not explain the task. Do not include bullet points. Write one short paragraph.
+
+Question:
+{question}
+
+Hypothetical supporting passage:
+\end{verbatim}
+\endgroup
+
+\subsection{Matched-Call Single-Query Reformulation Prompt}
+\begingroup\footnotesize
+\begin{verbatim}
+You are rewriting a multi-hop question into a single retrieval query.
+Given the question below, produce one concise search query for dense retrieval.
+Use only entities, relations, and constraints already present in the question.
+Do not answer the question. Do not add facts that are not stated in the question.
+Do not write a paragraph or explanation. Output only the single retrieval query.
+
+Question:
+{question}
+
+Single retrieval query:
+\end{verbatim}
+\endgroup
+
+\subsection{Equal-Budget Query-Form Prompts and Serialization}
+\label{sec:supp_equal_budget_prompts}
+
+The equal-budget diagnostic reported in Tables~\ref{tab:equal_budget_retrieval_diagnostic} and~\ref{tab:equal_budget_reader_check} uses four separate query-form prompts with a shared wrapper. Each prompt asks for retrieval text, not an answer, uses one query-side generation call, targets 35--45 English words around a 40-word target, and sets the generation budget to \texttt{max\_tokens=64} with temperature 0. The prompt rows store gold answers and supporting-fact metadata only for later scoring; these fields are not inserted into the user prompt. We did not discard, truncate, or regenerate outputs solely because they fell outside the requested word window; the realized word counts are reported with the retrieval summary. Failed API requests are retried by the generation wrapper and, under \texttt{--resume}, rerun only as missing rows rather than replaced by hand-written text.
+
+The generated text is used for retrieval only. For all four equal-budget rows, the BGE-base encoder input is the original question plus the generated retrieval text:
+\begingroup\footnotesize
+\begin{verbatim}
+{question}
+
+Generated retrieval text:
+{generated_text}
+\end{verbatim}
+\endgroup
+Thus, the document-like condition is encoded as $[q;G_{\mathrm{doc}}(q)]$, not as $G_{\mathrm{doc}}(q)$ alone. The exact separator is two newline characters, the label ``Generated retrieval text:'', and one newline before the model output. The BGE-base tokenizer then encodes this single serialized string with a 512-token query limit and right truncation. Lists, semicolons, bullets, and sentences are controlled only by the prompt text below: the keyword mode requests comma-separated phrases rather than sentences, the direct-rewrite mode requests one sentence, the decomposition mode requests numbered subquestions, and the document-like mode requests prose rather than bullets. The prompts do not include retrieved evidence or corpus text. They also do not impose a global ban on adding likely bridge concepts: the keyword/entity and document-like variants explicitly invite likely bridge concepts or plausible supporting context, while the direct-rewrite variant asks only to preserve the original intent and make implicit relations explicit.
+
+\subsubsection*{Keyword/Entity Expansion}
+\begingroup\footnotesize
+\begin{Verbatim}[breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={}]
+You are generating retrieval text for a controlled multi-hop QA query-composition diagnostic.
+Write a compact keyword/entity list for dense retrieval. Include entities, relations, constraints, and likely bridge concepts. Use comma-separated phrases, not sentences.
+
+Use only one generation call. Do not answer the question. Do not explain the task.
+Aim for 35-45 English words. Prefer concrete entities and relations over filler.
+Output only the retrieval text.
+
+Question:
+{question}
+
+Retrieval text:
+\end{Verbatim}
+\endgroup
+
+\subsubsection*{Direct Rewrite}
+\begingroup\footnotesize
+\begin{Verbatim}[breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={}]
+You are generating retrieval text for a controlled multi-hop QA query-composition diagnostic.
+Write one single dense-retrieval rewrite of the question. Preserve the original intent, make implicit relations explicit, and keep it as one sentence.
+
+Use only one generation call. Do not answer the question. Do not explain the task.
+Aim for 35-45 English words. Prefer concrete entities and relations over filler.
+Output only the retrieval text.
+
+Question:
+{question}
+
+Retrieval text:
+\end{Verbatim}
+\endgroup
+
+\subsubsection*{Question Decomposition}
+\begingroup\footnotesize
+\begin{Verbatim}[breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={}]
+You are generating retrieval text for a controlled multi-hop QA query-composition diagnostic.
+Write numbered subquestions that decompose the multi-hop question into retrieval steps. Keep the total output within the same length budget.
+
+Use only one generation call. Do not answer the question. Do not explain the task.
+Aim for 35-45 English words. Prefer concrete entities and relations over filler.
+Output only the retrieval text.
+
+Question:
+{question}
+
+Retrieval text:
+\end{Verbatim}
+\endgroup
+
+\subsubsection*{Document-Like Passage}
+\begingroup\footnotesize
+\begin{Verbatim}[breaklines=true,breakanywhere=false,breaksymbolleft={},breaksymbolright={}]
+You are generating retrieval text for a controlled multi-hop QA query-composition diagnostic.
+Write one short encyclopedia-style passage that could plausibly support answering the question. Use prose rather than bullets.
+
+Use only one generation call. Do not answer the question. Do not explain the task.
+Aim for 35-45 English words. Prefer concrete entities and relations over filler.
+Output only the retrieval text.
+
+Question:
+{question}
+
+Retrieval text:
+\end{Verbatim}
+\endgroup
+
+\subsection{Evidence-Grounded Short-Answer Reader Prompt}
+The frozen prompt text below uses the historical word ``extractive'' in its system role. In this manuscript, this denotes evidence-constrained short-answer reading rather than standard span-extractive QA: the answer is not required to be a contiguous span copied from one evidence passage.
+\begingroup\footnotesize
+\begin{verbatim}
+You are an extractive multi-hop question answering system.
+Use only the evidence below. Combine facts across evidence items when needed.
+Return the exact short answer phrase requested by the question.
+
+Important rules:
+- Return only the answer, with no explanation.
+- Prefer the most specific answer phrase in the evidence.
+- For yes/no questions, answer only "yes" or "no".
+- For location questions, include the full location if the evidence gives it.
+- For date/age comparison questions, the earlier birth date means the person is older.
+- For role/position questions, return the exact position title, not a broader category.
+- Do not answer "I don't know" if the evidence contains enough information to infer the answer.
+
+Question:
+{question}
+
+Evidence:
+{evidence}
+
+Exact short answer:
+\end{verbatim}
+\endgroup
+
+\subsection{Conservative Verification Prompt}
+\begingroup\footnotesize
+\begin{verbatim}
+You are a conservative evidence-grounded answer verification agent.
+
+Your default behavior is to KEEP the initial answer. Rewrite it only when there
+is a clear benchmark-style formatting issue and the evidence directly supports
+the corrected phrase.
+
+Allowed corrections:
+1. Nationality questions: prefer adjectival nationality when the evidence supports it.
+   Example: "American" instead of "United States citizen".
+2. Count questions: if the initial answer is only a number but the question asks
+   for a counted object, include the unit from the evidence. Example:
+   "12 member universities" instead of "12".
+3. Date questions: if the question asks for an event time and the evidence gives
+   a more complete month/year phrase, include the complete phrase.
+4. Yes/no questions: if the question asks a yes/no comparison and the evidence
+   directly supports it, normalize the answer to "Yes" or "No".
+5. Abstained answers: if the initial answer is "I don't know" but the evidence
+   directly contains the exact requested short answer, provide that answer.
+   Otherwise keep "I don't know".
+6. Location, role, title, or type questions: only add a missing qualifier when
+   the question asks for that qualifier and the exact phrase appears in evidence.
+
+Do not make these changes:
+1. Do not abstain if the initial answer is directly supported by any evidence.
+2. Do not expand a familiar short person name to a full legal name unless the
+   question explicitly asks for the full name.
+3. Do not remove location qualifiers such as state/country names.
+4. Do not remove parenthetical title explanations.
+5. Do not rewrite a correct answer merely because another phrase is also present.
+6. Do not add units to a numeric answer when the question only asks for a number.
+7. Do not replace a precise answer with a longer phrase unless the longer phrase
+   is explicitly requested by the question.
+
+Return only valid JSON with this exact schema:
+{"verdict":"keep|correct|abstain","final_answer":"...","reason":"short reason"}
+
+Question:
+{question}
+
+Initial answer:
+{prediction}
+
+Evidence:
+{evidence}
+
+JSON:
+\end{verbatim}
+\endgroup
+
+\subsection{API, Model Invocation, and Result Ledger}
+
+The hosted model is recorded at the artifact level because a third-party OpenAI-compatible relay exposes a mutable alias rather than a public immutable checkpoint. Code paths, ledger rows, and JSONL model fields retain the stored API alias \texttt{qwen3.7-max}; we do not infer a provider-side model identity from that alias. Reported reader, query-generation, and verifier artifacts use this stored API model string. The following tables freeze the local invocation windows, stored model fields, prompt hashes, retry policy, parsing policy, and raw-output boundaries.
+
+\input{table_model_invocation_ledger.tex}
+\input{table_qwen_api_reproducibility.tex}
+
+For the structured verifier output, we audited the canonical HotpotQA HyDE verifier artifact
+listed in Table~\ref{tab:model_invocation_ledger}.
+All 120 verifier outputs were successfully parsed as direct JSON under the reported 64-token
+budget. No substring JSON-recovery fallback was needed, no empty verifier output was observed,
+and no final JSON parse failure remained in the frozen verifier artifact. The generation wrapper
+does not store provider-side \texttt{finish\_reason} or per-request retry counters, so truncation
+is bounded here by artifact-level parse success rather than by provider response metadata.
+
+\subsection{Dense Encoder and Truncation Configuration}
+\label{sec:supp_dense_encoder_truncation}
+
+All canonical MiniLM-based dense retrieval variants use \path{sentence-transformers/all-MiniLM-L6-v2} through the \path{SentenceTransformer.encode} interface with normalized embeddings and FAISS inner-product search. The local audit environment reports \path{sentence-transformers==5.6.0}; the local MiniLM model cache records a \path{sentence_bert_config.json} value of \path{max_seq_length=256}. The underlying uncased BERT tokenizer uses WordPiece tokenization and the default Transformers truncation side is right truncation. Thus, MiniLM dense inputs are encoded as a single sequence with a shared 256-WordPiece-token budget, including the tokenizer's special tokens, and excess content is dropped from the right after serialization. The retained HotpotQA and 2Wiki MiniLM indexes are FAISS \path{IndexFlatIP} indexes over normalized 384-dimensional embeddings, so inner-product search is cosine-style nearest-neighbour retrieval.
+
+The same tokenizer, 256-token budget, and right-truncation rule are applied to all dense query-composition diagnostic rows on HotpotQA: question only ($q$), single rewritten query ($r$), question plus rewritten query ($q+r$), hypothetical passage only ($h$), and question plus hypothetical passage ($q+h$). The generated text is character-capped before this tokenizer step: reformulated queries use at most 300 characters, and HyDE hypothetical passages use at most 900 characters with an ellipsis appended if capped. The combined rows share one encoder input sequence rather than separate per-field budgets for the question and generated text.
+
+Dense query serialization is fixed by the retrieval scripts. The $q+h$ row serializes the original question, two newline characters, the label ``Hypothetical supporting passage:'', one newline, and the generated passage. The $q+r$ row uses the same layout with the label ``Rewritten retrieval query:''. The $q$, $r$, and $h$ rows encode only their corresponding serialized text. Corpus documents are serialized for dense indexing as \path{{title}. {paragraph}} and use the same 256-token right-truncation rule; there is no separate title or paragraph token budget. Question identifiers, support flags, answers, and evaluation metadata are not encoded.
+
+All post-hoc BGE-base diagnostics use one frozen encoder configuration across the rows being compared:
+\begin{itemize}
+\item model identifier: \path{BAAI/bge-base-en-v1.5};
+\item local Hugging Face \path{main} revision: \path{a5beb1e3e68b9ab74eb54cfd186867f64f240e1a};
+\item local \path{model.safetensors} SHA-256 prefix: \path{C7C1988AAE20};
+\item local \path{config.json} SHA-256 prefix: \path{BC00AF31A4A3};
+\item local \path{tokenizer_config.json} SHA-256 prefix: \path{9261E7D79B44};
+\item implementation: \path{transformers.AutoTokenizer} and \path{AutoModel}, not \path{SentenceTransformer.encode}; the local audit environment reports \path{transformers==4.57.6} and \path{torch==2.8.0}.
+\end{itemize}
+
+The BGE diagnostics use CLS pooling, taking \path{last_hidden_state[:, 0]} as the sequence embedding. Corpus-scale scripts expose a mean-pooling option for sensitivity work, but the reported BGE rows use the default \path{pooling=cls}. Both document and query inputs use \path{max_length=512}, tokenizer-side right truncation, and identical L2 normalization with \path{F.normalize(..., p=2, dim=1)}; this is equivalent to using normalized embeddings. The original BGE diagnostic rows encode plain serialized queries without the recommended instruction prefix. The additional instruction-prefix sensitivity in Section~\ref{sec:supp_plan_b_sensitivity} adds that exact prefix while holding document embeddings and all other encoder settings fixed.
+
+BGE document serialization is \path{{title}. {paragraph_text}} with no separate title budget. The stronger-encoder query-composition diagnostic serializes question-only as $q$, single rewrite as $r$, hypothetical-only as $h$, and uses the following combined-query strings:
+\begingroup\footnotesize
+\begin{verbatim}
+{question}\n\nRewritten retrieval query:\n{rewrite}
+
+{question}\n\nHypothetical supporting passage:\n{hypothetical passage}
+\end{verbatim}
+\endgroup
+The equal-budget diagnostic serializes each generated form identically as:
+\begingroup\footnotesize
+\begin{verbatim}
+{question}\n\nGenerated retrieval text:\n{generated_text}
+\end{verbatim}
+\endgroup
+Thus the document-like condition encodes $[q;G_{\mathrm{doc}}(q)]$ rather than $G_{\mathrm{doc}}(q)$ alone. BGE corpus-scale and hard-negative diagnostics use the same question-only, single-rewrite, and question-plus-hypothetical serializations as the stronger-encoder diagnostic. BGE diagnostics do not build a FAISS index: they compute dense score matrices as the dot product between L2-normalized query and document embeddings and select top-$k$ with \path{torch.topk}, making the score equivalent to cosine similarity.
+
+\section{Corpus-Scale Retrieval Stress Test}
+\label{sec:supp_corpus_scale_stress}
+
+The main experiments use processed local candidate pools. To test sensitivity to a substantially noisier index without claiming full-wiki retrieval, we compare the original retained-duplicate local index with expanded 50k and 100k stress-test indexes. The expanded corpora preserve the released evaluation corpus and then add exact-title--paragraph-deduplicated distractor passages sampled from the corresponding IRCoT processed training split using seed 20260721. The expansion is gold-preserving by construction because the original evaluation support passages remain in the index; it is therefore a diagnostic retrieval stress test rather than a deployable retrieval protocol.
+
+All rows use \texttt{BAAI/bge-base-en-v1.5}, CLS pooling, 512-token dense inputs, top-$k=10$, and the frozen question-only, single-query reformulation, and HyDE hypothetical-passage artifacts. No reader calls are rerun for this stress test. The script is \texttt{src/evaluation/analyze\_corpus\_scale\_retrieval\_stress.py}; the summary CSV, expanded corpora, retrieval JSONL files, and embedding caches are stored under \texttt{local-artifacts/corpus\_scale\_stress}. Paired bootstrap intervals are computed over per-example retrieval deltas.
+
+\input{table_corpus_scale_stress_full.tex}
+
+\FloatBarrier
+\section{Detailed Retrieval and Reader Sensitivity Tables}
+\label{sec:supp_detailed_sensitivity}
+
+The following tables were moved from the main manuscript to keep the central argument within the journal page limit. They retain the frozen values and labels used by the earlier audit package. The stronger-encoder, equal-budget, corpus-scale, and top-$k$ rows are sensitivity analyses; they do not replace the predeclared primary conditions.
+
+\input{table_stronger_encoder_reproduction.tex}
+\input{table_equal_budget_retrieval_diagnostic.tex}
+\input{followup_layout_equal_budget_reader_check.tex}
+\FloatBarrier
+Table~\ref{tab:corpus_scale_stress_full} supplies the complete corpus-scale statistics, with construction details in Section~\ref{sec:supp_corpus_scale_stress}.
+\input{table_corpus_scale_audit.tex}
+\input{table_topk_sensitivity.tex}
+
+\FloatBarrier
+\section{Answer and Evidence Metric Normalization}
+\label{sec:supp_metric_normalization}
+
+Table~\ref{tab:answer_metric_definition} defines the local scorer for the processed-corpus hosted HotpotQA and 2Wiki experiments, including their BGE/equal-budget diagnostics. It is not a universal scoring definition for every pipeline. The common local full-wiki and 2Wiki readers import these normalization/F1 functions but maximize over each row's released \texttt{gold\_answers} list after the fixed prediction adapter. MultiHop-RAG uses its separate news scorer and canonical null endpoint. These answer metrics are distinct from the generated-query overlap diagnostics in Section~\ref{sec:supp_answer_overlap_normalization}.
+
+The local normalization removes articles before ASCII punctuation. Official HotpotQA and 2Wiki scripts remove punctuation first and apply categorical guards for yes/no/noanswer F1; the local scorer has no such guard and assigns F1 1 to two empty normalized answers. Consequently, ``HotpotQA-style'' does not imply numerical equivalence to the official evaluator. The official IRCoT retrieval/generation code and its separate SQuAD-style scorer are also distinct from this common-reader scorer. Retrospective comparisons to pinned official scripts are reported in Section~\ref{sec:supp_priority_diagnostics}; historical scores and test families remain unchanged.
+
+\begin{table*}[t]
+\centering
+\caption{Local answer EM/F1 rules for processed-corpus hosted experiments.}
+\label{tab:answer_metric_definition}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Item & Rule used for reported answer metrics \\
+\midrule
+Evaluator & Local scorer in \texttt{src/evaluation/evaluate\_answers.py}; SHA-256 prefix \texttt{55A65166A2FB}. The official HotpotQA script is not imported at runtime. Order of normalization, categorical F1 guards and empty-answer treatment differ. \\
+Shared processed-corpus scope & The same \texttt{exact\_match} and \texttt{f1\_score} functions score the hosted HotpotQA and 2Wiki rows. This statement does not describe the official-code IRCoT scorer or news-corpus pipeline. \\
+Lowercasing & Convert prediction and gold answer to Python strings and lowercase them before comparison. \\
+Article removal & Remove standalone English articles \texttt{a}, \texttt{an}, and \texttt{the} using the regular expression \texttt{\textbackslash b(a|an|the)\textbackslash b}. \\
+Punctuation & Delete ASCII punctuation characters from Python \texttt{string.punctuation}. Unicode punctuation is not separately canonicalized. \\
+Whitespace & Split on whitespace and rejoin with a single ASCII space; leading, trailing, and repeated whitespace therefore collapse after lowercasing, article removal, and punctuation deletion. \\
+Exact match & EM is 1 if the normalized prediction string is exactly equal to the normalized gold string, and 0 otherwise. \\
+Token F1 & Tokenize the normalized strings by whitespace. Let $c$ be the multiset intersection count between predicted and gold tokens. If either side is empty and the other is nonempty, F1 is 0; if both are empty, F1 is 1. Otherwise precision is $c/|\mathrm{pred}|$, recall is $c/|\mathrm{gold}|$, and F1 is $2PR/(P+R)$. \\
+Multiple gold answers & Processed-corpus hosted rows store one \texttt{gold\_answer}; their evaluator does not maximize over aliases. The separate common-reader analysis instead maximizes over released \texttt{gold\_answers}. \\
+Empty predictions & Empty predictions are normalized to the empty string. They receive EM 1 and F1 1 only against an empty normalized gold answer; otherwise EM and F1 are 0. \\
+Yes/no, numbers, dates & No special handling is applied beyond the same lowercasing, article removal, ASCII punctuation deletion, and whitespace collapse. Number words are not converted to digits, dates are not normalized, and yes/no answers are ordinary strings. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The same functions are imported by the answer-summary and paired-comparison scripts, including the BGE query-composition and equal-budget reader diagnostics.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Supporting-title and supporting-paragraph metric normalization rules.}
+\label{tab:supporting_evidence_metric_definition}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.25\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Item & Rule used for reported evidence metrics \\
+\midrule
+Main supporting-title scoring & The reported any-hit@10, all-support hit@10, and supporting-title recall@10 use exact title strings from the retrieval artifact: \texttt{set(row["supporting\_facts"]["title"])} for gold titles and \texttt{\{doc["title"] for doc in row["retrieved"]\}} for retrieved titles. \\
+Title lowercasing and trimming & Main title metrics do not lowercase titles, strip titles, or delete ASCII/Unicode punctuation at scoring time. They rely on the released processed-data title strings and retrieved document title strings matching exactly. \\
+Duplicate titles & Gold and retrieved titles are converted to Python sets before scoring, so repeated retrieved records with the same title count once. A row is all-support hit@10 when the nonempty gold-title set is a subset of the retrieved-title set; recall is the intersection size divided by the gold-title set size. \\
+Evaluator paths and hashes & The canonical title evaluator is \texttt{src/evaluation/evaluate\_retrieval.py}, SHA-256 prefix \texttt{CDBB6B75E260}. Equal-budget title contrasts use the same set rule in \texttt{src/evaluation/analyze\_equal\_budget\_pairwise.py}, SHA-256 prefix \texttt{46AD7C79BC18}; BGE retrieval-generation scripts store the same metrics during retrieval. \\
+Paragraph-audit normalization & The supporting-paragraph audit uses \texttt{normalize\_text(value) = " ".join(str(value or "").split()).casefold()} for both titles and paragraph texts, then forms exact keys as \texttt{(normalized\_title, normalized\_paragraph\_text)}. It collapses whitespace and casefolds Unicode case, but it does not remove ASCII or Unicode punctuation. \\
+Paragraph-audit gold keys & Gold paragraph keys are derived from corpus records with \texttt{is\_supporting=true} and the matching \texttt{source\_question\_id}. Retrieved paragraph keys are built from the top-10 retrieved documents using the same normalized title--paragraph-text function. \\
+Paragraph-audit duplicates & Paragraph keys, record ids, and titles are stored as sets. Duplicate title--paragraph records therefore collapse for paragraph-key scoring, while the optional record-id metric remains stricter because it requires the source-question-specific \texttt{doc\_id}. \\
+Paragraph-audit script & The audit script is \texttt{src/evaluation/analyze\_supporting\_paragraph\_metrics.py}, SHA-256 prefix \texttt{F8200E6D0911}. Its generated table is Table~\ref{tab:supporting_paragraph_audit}. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Title-level metrics are the primary retrieval metrics in the main manuscript because the benchmark annotations are supporting-title based in the released processed rows. Paragraph-level metrics are a stricter artifact audit over the local corpus records, not a new sentence-level supporting-fact metric.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+\FloatBarrier
+\section{Answer-Overlap Normalization}
+\label{sec:supp_answer_overlap_normalization}
+
+The following tables support the answer-string-overlap boundary and the secondary 2Wiki cross-dataset analysis. The overlap diagnostics are query-side diagnostics: the hypothetical passage is used for retrieval, while the reader receives only the original question and retrieved corpus evidence.
+
+\begin{table*}[t]
+\centering
+\caption{Reproducibility rules for answer-string-overlap diagnostics.}
+\label{tab:answer_overlap_definition}
+\scriptsize
+\begin{threeparttable}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.24\textwidth}
+                            >{\raggedright\arraybackslash}X}
+\toprule
+Item & Rule used in the released audit scripts \\
+\midrule
+Normalization & Convert to lowercase; remove standalone English articles \texttt{a}, \texttt{an}, and \texttt{the}; remove ASCII punctuation using Python \texttt{string.punctuation}; collapse consecutive whitespace. Punctuation is deleted rather than replaced, so hyphens, slashes, apostrophes, periods, and commas are removed under the same rule. \\
+Overlap test & Let $g$ be the normalized gold answer and $z$ be the normalized generated query text: the HyDE hypothetical passage for HyDE rows or the rewritten query for the matched-call rewrite row. An overlap is counted when $g$ is nonempty, $z$ is nonempty, and $g$ occurs as an exact substring of $z$. \\
+Alias handling & No alias dictionary, entity linking, date parser, stemming, or paraphrase matching is used. Aliases count only if the normalized benchmark gold string itself appears in the generated query text. \\
+Numbers and dates & No special numeric or date canonicalization is applied beyond punctuation removal and whitespace normalization. Number words are not mapped to digits, dates are not reordered, hyphenated dates lose their hyphens, and partial date aliases are not counted unless they satisfy the exact normalized substring rule. \\
+Stop-answer or short-answer rule & A gold answer is flagged as short/ambiguous if its normalized form is \texttt{yes}, \texttt{no}, a pure numeric string, or a single token with at most three characters. This is the only stop-answer/minimum-length filter used for the non-trivial overlap count. \\
+Non-trivial answer overlap & A non-trivial overlap is an overlap where the gold answer is not flagged as short/ambiguous. Thus the HotpotQA count of 252 is the subset of the 292 overlap cases after removing short/ambiguous answers. \\
+Answer-absent subset & The answer-absent subset contains examples with no exact normalized overlap between the gold answer and the generated HyDE hypothetical passage. For HotpotQA, this gives $500-292=208$ examples; for 2WikiMultihopQA, this gives $500-347=153$ examples. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The scripts implementing these rules are \texttt{analyze\_hyde\_leakage.py}, \texttt{analyze\_query\_answer\_overlap.py}, and \texttt{analyze\_answer\_absent\_subset.py}. The rule is intentionally lexical: it is reproducible, but it does not rule out paraphrased answer content, aliases, model memory, or benchmark contamination.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
+
+The exact lexical implementation used by the released audit scripts is:
+\begingroup\footnotesize
+\begin{verbatim}
+def norm(s):
+    s = lower(str(s))
+    s = remove_regex_word_articles(s, articles={"a", "an", "the"})
+    s = delete_ascii_punctuation(s, chars=string.punctuation)
+    return collapse_whitespace(s)
+
+def is_short_or_ambiguous(gold):
+    g = norm(gold)
+    return (
+        g in {"yes", "no"}
+        or regex_fullmatch(r"\d+(?:\.\d+)?", g)
+        or (len(split(g)) == 1 and len(g) <= 3)
+    )
+
+def has_answer_string_overlap(gold, generated_query):
+    g = norm(gold)
+    z = norm(generated_query)
+    return bool(g) and bool(z) and g in z
+
+def is_non_trivial_overlap(gold, generated_query):
+    return has_answer_string_overlap(gold, generated_query) \
+        and not is_short_or_ambiguous(gold)
+\end{verbatim}
+\endgroup
+No alias table, entity linker, date parser, stemming, paraphrase matcher, or
+numeric word-to-digit converter is applied before these functions.
+
+\input{table_hyde_overlap_diagnostic.tex}
+\input{table_hyde_overlap_robustness.tex}
+\input{followup_layout_answer_absent_subset.tex}
+
+\input{followup_layout_hyde_gold_content_diagnostics.tex}
+\input{table_2wiki_hyde_query_mechanism.tex}
+
+\FloatBarrier
+\section{Query-Length Matched HyDE Sensitivity}
+\label{sec:supp_query_length_matched_hyde}
+
+The matched-call query-reformulation control equalizes query-side LLM invocation count but not generated-text length or information budget. The following no-new-LLM audit reports MiniLM tokenizer lengths for the main query-composition variants. For the hypothetical-only control, the HyDE hypothetical passage is truncated to the corresponding rewritten-query token count. For the question-plus-hypothetical control, only the hypothetical passage is truncated, and the serialized query is matched to the corresponding question-plus-rewrite token length. The paired deltas use the comparator shown in Table~\ref{tab:query_length_matched_hyde}: the hypothetical-only row is compared with the single rewritten query, whereas the question-plus-hypothetical row is compared with the question-plus-rewritten-query control. This analysis is a query-composition sensitivity check: it does not replace the main HyDE result, but it shows that matched-length rewriting alone does not recover the full HyDE result.
+
+\input{table_query_length_matched_hyde.tex}
+
+\FloatBarrier
+\section{Error Taxonomy Rules}
+\label{sec:supp_error_taxonomy_rules}
+
+The annotation unit for the error taxonomy is one exact-match mismatch from the final HyDE-style RAG plus guarded verifier HotpotQA run. Each mismatch is assigned to one primary diagnostic category using frozen retrieval and answer artifacts: retrieval failure if no required supporting title is retrieved; partial evidence or missing hop if at least one but not all supporting titles are retrieved; reader reasoning failure if all supporting titles are retrieved but the annotator judged the answer semantically wrong; and surface-form, alias, or granularity mismatch if the annotator judged the retrieved evidence to support an acceptable answer that benchmark normalization still rejects by surface form or granularity.
+
+When multiple explanations are plausible, the precedence order is retrieval availability, then reader reasoning, then format or alias. Ambiguous cases are resolved conservatively as not verifier-fixable. The annotations are used only for interpretation and case selection, not for training, prompting, or model selection. The manual inspection stage was performed by a single annotator, with no independent second-pass adjudication or inter-annotator agreement estimate, so the taxonomy should be treated as a descriptive diagnostic rather than a formally validated annotation benchmark.
+
+\begin{table}[t]
+\centering
+\caption{Single-annotator EM-mismatch diagnostic on HotpotQA.}
+\label{tab:single_annotator_error_taxonomy}
+\small
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r}
+\toprule
+Diagnostic category & Count & Share of 156 EM mismatches \\
+\midrule
+Retrieval failure & 6 & 3.8\% \\
+Partial evidence / missing hop & 39 & 25.0\% \\
+Reader reasoning failure despite complete evidence & 20 & 12.8\% \\
+Annotator-judged surface-form, alias, or granularity mismatch & 91 & 58.3\% \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item These counts describe residual exact-match mismatches in the final HyDE-style RAG + guarded verifier run. They come from a single-annotator diagnostic and are not a validated human-annotation benchmark.
+\end{tablenotes}
+\end{table}
+
+\FloatBarrier
+\section{Corpus, Supporting-Title Completeness, and Case Artifacts}
+\label{sec:supp_evidence_case_artifacts}
+
+The pooled supporting-title completeness rows are descriptive method-example observations and are not treated as statistically independent samples. The qualitative cases were selected from rule-filtered candidates using frozen per-example artifacts and are intended to make the retrieval-centered evidence changes and downstream answer-format boundaries inspectable. Table~\ref{tab:qualitative_cases} gives the compact reader-facing summary, and Table~\ref{tab:qualitative_case_artifacts} exposes the corresponding generated passage, retrieved titles, evidence excerpts, reader answer, verifier boundary when invoked, and guarded final answer. The supporting-paragraph audit at the end of this section rescores the same retrieval files with exact normalized title--paragraph-text keys derived from \texttt{is\_supporting=true} corpus records.
+
+\input{table_corpus_statistics.tex}
+\input{table_evidence_completeness_buckets_supp.tex}
+\FloatBarrier
+\input{table_reproducibility_checklist.tex}
+\input{table_qualitative_case_study.tex}
+\FloatBarrier
+\input{table_qualitative_case_artifacts.tex}
+\input{table_supporting_paragraph_audit.tex}
+
+\FloatBarrier
+\section{Code and Artifact Availability}
+\label{sec:supp_code_artifact_availability}
+
+Online Resource 2 contains the reproducibility capsule, version 0.1.0-local-20261004, which reconstructs frozen summary tables and recomputes eight historical open-generator paired retrieval contrasts from sanitized metrics. Online Resource 3 contains the numerical capsule, version 0.2.0-local-20261004, which recomputes all 31 new serializer/holdout contrasts and 615 reported values from per-example score/support vectors, after extraction into a fresh directory with isolated Python and NumPy. Its seven rejection tests cover missing, reordered, duplicate, private or nonfinite fields and altered summaries. Both include manifests, acquisition limits and the MIT license for project-authored code. Current news reader families are supplied as aggregate summaries and require excluded per-question inputs for full reanalysis. Historical hosted raw answers are unavailable. These checks establish table and metric reconstruction, not raw-prediction rescoring or model rerun reproducibility. The project page is \url{https://github.com/creator-perterson/hyde-multihop-rag-reproducibility}; the current experimental code is not publicly archived there. The capsule was executed after extraction into a fresh directory without site packages or model caches. Its explicit allowlist, commands, input gaps and third-party license register are documented in \path{docs/jiis_followup_reproduction_guide.md}. No archival DOI has been assigned. Hashes certify file identity rather than replace missing inputs.
+
+The artifact-audit package includes the paper sources and compiled PDFs, final figure assets, table-generation scripts, aggregate analysis outputs, artifact hash tables, data-provenance notes, model-invocation ledger, submission manifest, and lightweight CSV/MD summaries. API credentials, private endpoint URLs, provider-side request identifiers, billing exports, latency logs, provider raw request/response envelopes, full processed corpora, large embedding or retrieval caches, FAISS indexes, and unrestricted generated-output dumps are not included because they are private, were not retained by the local wrapper, or are unnecessary for table-level audit and reconstruction.
+
+\section{Controlled-Corpus Mechanism Figure and Core Tables}
+\label{sec:supp_controlled_corpus_core}
+
+For completeness, this section preserves the mechanism diagram and compact core-result tables moved out of the length-constrained main article. The corresponding numerical evidence is reported in greater detail in Sections~\ref{sec:supp_hotpotqa_paired_statistics} and~\ref{sec:supp_2wiki_paired_statistics}.
+
+\FloatBarrier
+
+\input{figure2_jiis.tex}
+\input{tables_main_compact.tex}
+
+\input{mhrag_supplement_jiis.tex}
+
+
+\section{Reporting-rule Stress Test and Framework Positioning}
+\label{sec:supp_claim_stress}
+The S4 registry comprises the 12 unique primary effects in the canonical S1 boundary matrix and all 20 observed S2 retrieval/EM contrasts. Repeated source effects are counted once; secondary serializer, F1, raw-output and prompt/seed measures are excluded. The existing family-specific adjusted values are reused, including the reserved IRCoT slots. Five unobserved IRCoT primary comparisons are reported as missing, not fabricated measurements. The stress test is descriptive and cannot establish the accuracy of a reporting strategy. Local effect decisions are distinct from the source-and-required-target transfer rule. The full ten-dimension source-backed comparison is in \texttt{docs/literature/rag\_evaluation\_framework\_comparison.tsv}; the comparison is interpretive positioning, not an empirical execution of the three tools. ARES (Saad-Falcon et al., 2024) supplies PPI uncertainty, RAGAS (Es et al., 2024) quality metrics, and RAGChecker (Ru et al., 2024) claim-level diagnostics.
+\input{table_claim_stress_ablation.tex}
+\input{table_framework_comparison.tex}
+The write-once task8 contract, 32-row registry, summaries and output hashes are in \texttt{artifacts/summaries/jiis\_acceptance\_v3/task8\_task9\_v1/}. No generation settings or underlying scores were changed. The verified S1 corpus-scale contrast has adjusted $p=2.22825910896\times10^{-5}$, while both 2Wiki answer contrasts remain unresolved.
+
+
+\section{Official Supporting-sentence Audit}
+\label{sec:supp_sentence_audit}
+This S5 diagnostic freezes the existing 500 HotpotQA IDs and the four original retrieval files (OneR, HyDE, IRCoT, BGE-base rescore). It does not rerun retrieval or add the learned cross-encoder to this registered audit. After the original CMU download failed, the dev-distractor sentence arrays and facts were acquired from the HotpotQA-hosted Hugging Face conversion at revision \texttt{1908d6afbbead072334abe2965f91bd2709910ab}. The parquet source, structure-only JSON conversion and acquisition manifest are separately hashed. This is retrospective source acquisition, not a byte-identical download of the original CMU JSON or an original pre-experiment source freeze.
+
+All 500 question strings and all previously annotated supporting paragraphs match after the existing whitespace normalization. One question (\texttt{5a79c7ac5542994bb9457097}) uses \emph{Counting On} in official facts and \emph{List of Counting On episodes} in the frozen paragraph labels. Official-sentence metrics and the original frozen-label metrics are therefore recorded separately without changing any primary retrieval score or dropping a question. The original eight method/budget paragraph summaries are independently reproduced. The complete source contains one invalid fact index outside the frozen sample; none of the 500 selected fact indices is invalid. Two selected unannotated empty sentence positions are preserved, without renumbering official facts.
+
+The 4,000-row audit maps official indexed sentence ends onto the actual retrieved paragraph's character offsets after an exact whitespace-normalized paragraph match. The serializer is \texttt{str(text).strip()[:budget]} at 450 or 900 characters, before any separate model input-token budget. These are per-document character-interface diagnostics, not full chat-token retention measurements. Supporting-title completeness, exact paragraph matching, complete-paragraph retention and all-annotated-sentence retention are computed independently. Answer-string presence is only a normalized substring diagnostic, including yes/no strings; it is never substituted for annotated support. The question set is never reduced based on outcomes. No supervision is added to retrieval or generation inputs.
+\input{table_supporting_sentence_audit.tex}
+At 450 characters, sentence retention exceeds complete-paragraph retention for every tested method; at 900 characters, all retrieved official annotated support survives in this sample. This bounds the earlier conservative paragraph-loss interpretation, without proving that retained sentences suffice to answer a question. The sentence-v3 contract, eight summary cells and hashes are in \texttt{artifacts/summaries/jiis\_acceptance\_v3/task8\_task9\_v1/sentence\_v3/}. The earlier sentence-v2 contract and failed checks remain diagnostic evidence. The planned Task 10 human component was withdrawn under the disclosed scope amendment; human evidence-sufficiency labels and inter-annotator agreement are still absent.
+
+\FloatBarrier
+\input{priority_revision_diagnostics_jiis.tex}
+\input{reader_controls_supp_jiis.tex}
+\input{independent_validation_supp_jiis.tex}
+\input{followup_experiments_supp_jiis.tex}
+
+\end{document}

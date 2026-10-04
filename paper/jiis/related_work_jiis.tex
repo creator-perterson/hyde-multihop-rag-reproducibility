@@ -1,0 +1,25 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\subsection{Intelligent Query Formulation and Retrieval}
+\label{sec:rw_query_retrieval}
+
+Dense Passage Retrieval~\cite{karpukhin2020dpr} and ColBERT~\cite{khattab2020colbert} learn representations for semantic matching; RAG~\cite{lewis2020rag} couples retrieved evidence with a reader. Case-based and concept-based retrieval~\cite{nasar2024retrieval} also depends on how cases, concepts and similarity functions are represented. We fix the retriever and index within each query-formulation comparison.
+
+Generation-augmented retrieval~\cite{mao2020gar} expands questions with generated text; Query2doc~\cite{wang2023query2doc} generates pseudo-documents from demonstrations; Rewrite-Retrieve-Read~\cite{ma2023rewrite} rewrites queries; and HyDE~\cite{gao2022hyde} retrieves using hypothetical-document embeddings. Our question-only, rewrite, document-like, evidence-only and Query2doc-style conditions share frozen retrieval settings. The four-shot Query2doc-style condition is an adaptation, not an official reproduction or a new expansion algorithm.
+
+\subsection{Multi-Hop and Iterative RAG Systems}
+\label{sec:rw_multihop_iterative}
+
+Multi-hop benchmarks make evidence completeness observable because answers depend on linked sources. HotpotQA~\cite{yang2018hotpotqa} supplies supporting facts, 2WikiMultihopQA~\cite{ho2020twowiki} exposes explicit reasoning chains, and MuSiQue~\cite{trivedi2021musique} composes questions from connected single-hop relations. Multi-hop dense retrieval~\cite{xiong2021multihopdense} learns sequential evidence acquisition; IRCoT~\cite{trivedi2022ircot} alternates reasoning and retrieval. ReAct~\cite{yao2022react}, FLARE~\cite{jiang2023flare}, Self-RAG~\cite{asai2023selfrag} and Adaptive-RAG~\cite{jeong2024adaptiverag} add action, confidence, reflection or complexity-based control, respectively. These approaches change both evidence acquisition and operating cost, so iteration must be distinguished from query representation.
+
+BPLLM~\cite{bernardi2024bpllm} evaluates retrieval, chunking, prompts, embeddings and open-model choices within a modular information system. Following this component-wise view, our controlled tier isolates query representation; the full-wiki tier compares OneR/BM25, HyDE-BM25 and the official IRCoT state machine on one index. IRCoT retains official orchestration but replaces the historical generator with a pinned local model. Its round-prefix results are unequal-cost sensitivity, not an equal-budget stopping-policy trial.
+
+\subsection{Reliability, Leakage, and Reproducibility of Generative Retrieval}
+\label{sec:rw_reliability}
+
+FRAMES~\cite{krishna-etal-2025-fact} evaluates factual retrieval, SetR~\cite{lee-etal-2025-shifting} studies evidence-set selection, and \emph{Stronger Baselines}~\cite{laitenberger-etal-2025-stronger} examines implementation-sensitive comparisons. RAGAS~\cite{es2023ragas} scores faithfulness, answer relevance and context relevance using automated judges. ARES~\cite{saadfalcon2023ares} trains component judges and uses human-labeled calibration with prediction-powered inference to estimate system quality. RAGChecker~\cite{ru2024ragchecker} decomposes responses and reference answers into claims, evaluating their entailment against responses and retrieved chunks. These approaches address semantic quality and component diagnostics; they already extend evaluation beyond a single answer score.
+
+Our short-answer study measures a different object: same-question changes between specified configurations, including annotated support remaining in effective reader tokens. Exact retention complements semantic diagnostics but cannot replace entailment assessment or human evidence-sufficiency judgments. We neither run nor establish superior accuracy over these evaluation tools. RCT-MARS~\cite{srivastava2026rctmars} studies retrieval routing and soft fusion under quality--cost trade-offs. Our audit tests expansion references, delivered evidence and answer effects without learning a router. Its new-sample rules can select the same method, yielding no decision increment.
+
+Yoon et al.~\cite{yoon2025knowledgeleakage} connect hypothetical-document gains to gold-evidence entailment in fact verification, using both retrieval and verdict-prediction outcomes. We build on this concern with multi-hop complete-support acquisition, character/token delivery and short-answer comparisons under matched retrievers. Our lexical content strata are narrower measurements than their entailment matching and cannot certify absence of paraphrased knowledge. FactualRAG~\cite{chang2026factualrag} documents retrieval-coverage limits and cross-model variation, and data-centric AI~\cite{malerba2024datacentric} emphasizes robustness, drift and reuse. Hosted-alias replay additionally limits our evidence to preserved outputs without identifying a causal contamination mechanism.

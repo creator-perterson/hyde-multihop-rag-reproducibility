@@ -1,0 +1,37 @@
+\begin{sidewaystable}[p]
+\centering
+\caption{Generator-content diagnostics. Panel A fixes the hosted hypothetical passages and BGE-base retriever, then reports the pre-existing mutually exclusive content strata. Panel B reports open-generator strata and gold-aware retrieval diagnostics.}
+\label{tab:open_generator_leakage}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\textbf{Panel A: frozen hosted passages, paired BGE-base retrieval}\\[2pt]
+\begin{tabular}{lrrrrrl}
+\toprule
+Gold-content stratum & $N$ & Question only & Hosted HyDE & $\Delta$ all-hit@10 & 95\% CI & Warning \\
+\midrule
+Exact-answer present & 292 & 0.8973 & 0.9760 & +0.0788 & [0.0445, 0.1130] & -- \\
+Alias/paraphrase proxy present & 22 & 0.9091 & 0.9545 & +0.0455 & [0.0000, 0.1364] & $N<30$ \\
+Supporting entity/title present & 154 & 0.8961 & 0.8896 & -0.0065 & [-0.0584, 0.0455] & -- \\
+No identifiable gold content & 32 & 0.6562 & 0.5312 & -0.1250 & [-0.2813, 0.0000] & -- \\
+\bottomrule
+\end{tabular}
+
+\vspace{5pt}
+\textbf{Panel B: pinned open-generator diagnostics}\\[2pt]
+\begin{tabular}{lllrrrrrrrrr}
+\toprule
+Dataset & Condition & Ref. & Exact & Alias & Title-only & None & Original & Ans.-scrub. & Gold-scrub. & McNemar $p$ & Holm $p$ \\
+\midrule
+HotpotQA & Open HyDE & Dense & 117 & 7 & 276 & 100 & 0.8460 & 0.8420 & 0.8140 & 0.0114 & 0.0908 \\
+HotpotQA & Evidence-only HyDE & Open HyDE & 126 & 8 & 257 & 109 & 0.8160 & 0.8120 & 0.7940 & 0.0167 & 0.1167 \\
+HotpotQA & Query2doc-style (4-shot adaptation) & Dense & 117 & 7 & 279 & 97 & 0.8700 & 0.8680 & 0.8520 & 0.4177 & 1.0000 \\
+\midrule
+2Wiki & Open HyDE & Dense & 226 & 6 & 261 & 7 & 0.4920 & 0.4880 & 0.4660 & 0.2892 & 1.0000 \\
+2Wiki & Evidence-only HyDE & Open HyDE & 216 & 11 & 271 & 2 & 0.4880 & 0.4820 & 0.4420 & 0.8679 & 1.0000 \\
+2Wiki & Query2doc-style (4-shot adaptation) & Dense & 200 & 5 & 285 & 10 & 0.4880 & 0.4860 & 0.4660 & 0.1524 & 0.7620 \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\parbox{0.95\textheight}{\footnotesize\emph{Note.} Panel A uses 10,000 paired question-level bootstrap resamples with fixed four-group classification; groups were not merged after inspecting outcomes. The alias/proxy group is flagged because $N<30$. These overlap strata are diagnostic and do not prove or disprove parametric memory, paraphrase leakage, or provider-side contamination. Panel B's answer- and gold-content-scrubbed rows are offline diagnostics only; McNemar and Holm-adjusted $p$-values use each condition's registered reference.}
+\end{sidewaystable}

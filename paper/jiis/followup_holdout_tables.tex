@@ -1,0 +1,154 @@
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{Random 300-question method matrix. All three methods are run under both readers; scores are local adapted answers. Retrieval is all-support-title hit@10. Complete support in input is strict annotated-sentence retention, identical across readers.}
+\label{tab:followup_holdout_summary}
+\begin{tabularx}{\textwidth}{l r r r r r}
+\toprule
+Method & Retrieval & Input support & Qwen EM/F1 & Mistral EM/F1 & $N$ \\
+\midrule
+BM25 & 0.3500 & 86/300 & \shortstack{0.1800\\0.2564} & \shortstack{0.1733\\0.3088} & 300 \\
+HyDE & 0.4400 & 103/300 & \shortstack{0.2400\\0.3110} & \shortstack{0.1900\\0.3270} & 300 \\
+CE & 0.5367 & 121/300 & \shortstack{0.2700\\0.3604} & \shortstack{0.2433\\0.3876} & 300 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}\footnotesize
+\item Each stacked score lists EM above F1. Support matches do not certify semantic sufficiency. No input suffers additional token truncation; maximum actual inputs are 1,399/1,523 tokens for Qwen/Mistral.
+\end{tablenotes}
+\end{table}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{Primary local EM contrasts on the new 300-question sample: exact McNemar, six-test Holm family.}
+\label{tab:followup_holdout_em}
+\begin{tabularx}{\textwidth}{l l >{\centering\arraybackslash}X r r r r}
+\toprule
+Reader & Target $-$ baseline & $\Delta$ [95\% CI] & Loss & Win & $p_{\mathrm{raw}}$ & $p_{\mathrm{Holm}}$ \\
+\midrule
+Qwen & HyDE $-$ BM25 & \shortstack{0.0600\\\mbox{[0.0233, 0.0967]}} & 8 & 26 & 0.0029 & 0.0117 \\
+Qwen & CE $-$ BM25 & \shortstack{0.0900\\\mbox{[0.0500, 0.1300]}} & 7 & 34 & $<0.0001$ & 0.0002 \\
+Qwen & CE $-$ HyDE & \shortstack{0.0300\\\mbox{[-0.0067, 0.0700]}} & 13 & 22 & 0.1755 & 0.3509 \\
+Mistral & HyDE $-$ BM25 & \shortstack{0.0167\\\mbox{[-0.0233, 0.0567]}} & 15 & 20 & 0.4996 & 0.4996 \\
+Mistral & CE $-$ BM25 & \shortstack{0.0700\\\mbox{[0.0300, 0.1100]}} & 8 & 29 & 0.0008 & 0.0038 \\
+Mistral & CE $-$ HyDE & \shortstack{0.0533\\\mbox{[0.0167, 0.0933]}} & 10 & 26 & 0.0113 & 0.0340 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}\footnotesize
+\item All contrasts use $N=300$, target minus named baseline. Confidence intervals are unadjusted paired-bootstrap intervals. Binary losses/wins refer to the target; they are not defined for continuous F1. Corrections do not combine families.
+\end{tablenotes}
+\end{table}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{All-support-title retrieval contrasts: exact McNemar, separate three-test Holm family.}
+\label{tab:followup_holdout_retrieval}
+\begin{tabularx}{\textwidth}{l l >{\centering\arraybackslash}X r r r r}
+\toprule
+Reader & Target $-$ baseline & $\Delta$ [95\% CI] & Loss & Win & $p_{\mathrm{raw}}$ & $p_{\mathrm{Holm}}$ \\
+\midrule
+-- & HyDE $-$ BM25 & \shortstack{0.0900\\\mbox{[0.0433, 0.1400]}} & 15 & 42 & 0.0005 & 0.0005 \\
+-- & CE $-$ BM25 & \shortstack{0.1867\\\mbox{[0.1433, 0.2300]}} & 0 & 56 & $<0.0001$ & $<0.0001$ \\
+-- & CE $-$ HyDE & \shortstack{0.0967\\\mbox{[0.0500, 0.1467]}} & 14 & 43 & 0.0002 & 0.0003 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}\footnotesize
+\item All contrasts use $N=300$, target minus named baseline. Confidence intervals are unadjusted paired-bootstrap intervals. Binary losses/wins refer to the target; they are not defined for continuous F1. Corrections do not combine families.
+\end{tablenotes}
+\end{table}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{Secondary local F1 contrasts: paired Monte Carlo sign-flip, separate six-test Holm family.}
+\label{tab:followup_holdout_f1}
+\begin{tabularx}{\textwidth}{l l >{\centering\arraybackslash}X r r r r}
+\toprule
+Reader & Target $-$ baseline & $\Delta$ [95\% CI] & Loss & Win & $p_{\mathrm{raw}}$ & $p_{\mathrm{Holm}}$ \\
+\midrule
+Qwen & HyDE $-$ BM25 & \shortstack{0.0546\\\mbox{[0.0173, 0.0927]}} & -- & -- & 0.0061 & 0.0183 \\
+Qwen & CE $-$ BM25 & \shortstack{0.1039\\\mbox{[0.0649, 0.1442]}} & -- & -- & $<0.0001$ & 0.0006 \\
+Qwen & CE $-$ HyDE & \shortstack{0.0494\\\mbox{[0.0115, 0.0887]}} & -- & -- & 0.0152 & 0.0304 \\
+Mistral & HyDE $-$ BM25 & \shortstack{0.0182\\\mbox{[-0.0174, 0.0542]}} & -- & -- & 0.3219 & 0.3219 \\
+Mistral & CE $-$ BM25 & \shortstack{0.0788\\\mbox{[0.0432, 0.1153]}} & -- & -- & $<0.0001$ & 0.0006 \\
+Mistral & CE $-$ HyDE & \shortstack{0.0606\\\mbox{[0.0259, 0.0955]}} & -- & -- & 0.0011 & 0.0044 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}\footnotesize
+\item All contrasts use $N=300$, target minus named baseline. Confidence intervals are unadjusted paired-bootstrap intervals. Binary losses/wins refer to the target; they are not defined for continuous F1. Corrections do not combine families.
+\end{tablenotes}
+\end{table}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{Official single-answer EM sensitivity: exact McNemar, separate six-test Holm family.}
+\label{tab:followup_holdout_official_em}
+\begin{tabularx}{\textwidth}{l l >{\centering\arraybackslash}X r r r r}
+\toprule
+Reader & Target $-$ baseline & $\Delta$ [95\% CI] & Loss & Win & $p_{\mathrm{raw}}$ & $p_{\mathrm{Holm}}$ \\
+\midrule
+Qwen & HyDE $-$ BM25 & \shortstack{0.0600\\\mbox{[0.0233, 0.0967]}} & 8 & 26 & 0.0029 & 0.0117 \\
+Qwen & CE $-$ BM25 & \shortstack{0.0900\\\mbox{[0.0500, 0.1300]}} & 7 & 34 & $<0.0001$ & 0.0002 \\
+Qwen & CE $-$ HyDE & \shortstack{0.0300\\\mbox{[-0.0067, 0.0700]}} & 13 & 22 & 0.1755 & 0.3509 \\
+Mistral & HyDE $-$ BM25 & \shortstack{0.0167\\\mbox{[-0.0233, 0.0567]}} & 15 & 20 & 0.4996 & 0.4996 \\
+Mistral & CE $-$ BM25 & \shortstack{0.0700\\\mbox{[0.0300, 0.1100]}} & 8 & 29 & 0.0008 & 0.0038 \\
+Mistral & CE $-$ HyDE & \shortstack{0.0533\\\mbox{[0.0167, 0.0933]}} & 10 & 26 & 0.0113 & 0.0340 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}\footnotesize
+\item All contrasts use $N=300$, target minus named baseline. Confidence intervals are unadjusted paired-bootstrap intervals. Binary losses/wins refer to the target; they are not defined for continuous F1. Corrections do not combine families.
+\end{tablenotes}
+\end{table}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{Official single-answer F1 sensitivity: paired Monte Carlo sign-flip, separate six-test Holm family.}
+\label{tab:followup_holdout_official_f1}
+\begin{tabularx}{\textwidth}{l l >{\centering\arraybackslash}X r r r r}
+\toprule
+Reader & Target $-$ baseline & $\Delta$ [95\% CI] & Loss & Win & $p_{\mathrm{raw}}$ & $p_{\mathrm{Holm}}$ \\
+\midrule
+Qwen & HyDE $-$ BM25 & \shortstack{0.0546\\\mbox{[0.0173, 0.0927]}} & -- & -- & 0.0061 & 0.0183 \\
+Qwen & CE $-$ BM25 & \shortstack{0.1039\\\mbox{[0.0649, 0.1442]}} & -- & -- & $<0.0001$ & 0.0006 \\
+Qwen & CE $-$ HyDE & \shortstack{0.0494\\\mbox{[0.0115, 0.0887]}} & -- & -- & 0.0152 & 0.0304 \\
+Mistral & HyDE $-$ BM25 & \shortstack{0.0175\\\mbox{[-0.0183, 0.0539]}} & -- & -- & 0.3445 & 0.3445 \\
+Mistral & CE $-$ BM25 & \shortstack{0.0796\\\mbox{[0.0433, 0.1168]}} & -- & -- & $<0.0001$ & 0.0006 \\
+Mistral & CE $-$ HyDE & \shortstack{0.0622\\\mbox{[0.0270, 0.0979]}} & -- & -- & 0.0011 & 0.0044 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}\footnotesize
+\item All contrasts use $N=300$, target minus named baseline. Confidence intervals are unadjusted paired-bootstrap intervals. Binary losses/wins refer to the target; they are not defined for continuous F1. Corrections do not combine families.
+\end{tablenotes}
+\end{table}
+
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\caption{Raw local and adapted official scorer diagnostics on the random 300-question matrix. These descriptive conventions do not replace primary adapted local scores.}
+\label{tab:followup_holdout_score_sensitivity}
+\begin{tabularx}{\textwidth}{l l r r r r}
+\toprule
+Reader & Method & Raw local EM & Raw local F1 & Official EM & Official F1 \\
+\midrule
+Qwen & BM25 & 0.1800 & 0.2564 & 0.1800 & 0.2564 \\
+Qwen & HyDE & 0.2400 & 0.3110 & 0.2400 & 0.3110 \\
+Qwen & CE & 0.2700 & 0.3604 & 0.2700 & 0.3604 \\
+Mistral & BM25 & 0.1667 & 0.3059 & 0.1733 & 0.3011 \\
+Mistral & HyDE & 0.1900 & 0.3295 & 0.1900 & 0.3186 \\
+Mistral & CE & 0.2400 & 0.3865 & 0.2433 & 0.3807 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}\footnotesize
+\item The official and local scorers use the same single source answer, with no invented alias dictionary. Raw official vectors and token/termination diagnostics remain available in the metric-only export and provenance.
+\end{tablenotes}
+\end{table}

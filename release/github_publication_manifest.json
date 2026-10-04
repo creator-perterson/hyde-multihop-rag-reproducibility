@@ -1,0 +1,776 @@
+{
+  "schema_version": 1,
+  "package_date": "2026-10-05",
+  "status": "prepared_for_publication",
+  "repository": "https://github.com/creator-perterson/hyde-multihop-rag-reproducibility",
+  "archival_doi": null,
+  "scope": "Current JIIS manuscript and bounded numerical reproduction; no full model rerun claim",
+  "capsule_versions": [
+    "0.1.0-local-20261004",
+    "0.2.0-local-20261004"
+  ],
+  "frozen_capsule_metadata": "Packaging-time local_only fields retained unchanged",
+  "publication_commit": null,
+  "files": [
+    {
+      "path": "README.md",
+      "size_bytes": 3213,
+      "sha256": "df9e604924c9039469456110cb46756293d10816897d0eacc1f5eb1cb9efb5bd"
+    },
+    {
+      "path": ".gitignore",
+      "size_bytes": 869,
+      "sha256": "0ab9240810c9373dd2ed9aa607484a5a870c12da88103b714ab4ca2b24caf88b"
+    },
+    {
+      "path": "LICENSE",
+      "size_bytes": 1471,
+      "sha256": "937fe8dd0b5199a9dccd5f53ee009f4217f5fb3228b3c3a6b50470db905a4f5b"
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "size_bytes": 11214,
+      "sha256": "e9b784cb53bb54f492e38568331cdf550499327b7bb02d01d2045638d52ff987"
+    },
+    {
+      "path": "docs/upload_steps.md",
+      "size_bytes": 1512,
+      "sha256": "c62ae9d125015ce26f1b07b89a2c10fb0a67445fac347d0bdd99bea7310bec4b"
+    },
+    {
+      "path": "docs/jiis_followup_reproduction_guide.md",
+      "size_bytes": 3683,
+      "sha256": "c75cc61475d8a89849a6e780b1051b62721751db1546436dec3221d6e96147e8"
+    },
+    {
+      "path": "reproducibility/README.md",
+      "size_bytes": 2182,
+      "sha256": "25146c1920a8cf3d768be69a247ada43379e37fc211e0af9c96afeff6a173015"
+    },
+    {
+      "path": "paper/jiis/Fig1_Workflow.pdf",
+      "size_bytes": 51814,
+      "sha256": "4d6d69ec322e56bc9ed1403b275fae1d7f881b1d349c6ea3a7b0cf7e8f1c3301"
+    },
+    {
+      "path": "paper/jiis/Fig2.pdf",
+      "size_bytes": 61450,
+      "sha256": "1500e46f6ad7e218ae663db1f558f1313ec1896a2f6811100f609c439066c7cc"
+    },
+    {
+      "path": "paper/jiis/Fig2_GeneratorContrasts.pdf",
+      "size_bytes": 50482,
+      "sha256": "6baf83be1de5efb731a992ad406dcb0a75ca2ff24315e7e0d0e625085f60c16c"
+    },
+    {
+      "path": "paper/jiis/Fig3_RetrievalAnswer.pdf",
+      "size_bytes": 53306,
+      "sha256": "5bb73b2e4fd61f5896cfbee256c8829c00d4da853426b6297caad05ffe59da0e"
+    },
+    {
+      "path": "paper/jiis/Fig4_EvidenceRetention.pdf",
+      "size_bytes": 60456,
+      "sha256": "ec49d17772ee3d3d81efcf2d4bae0008f7a060f8379fe31606c489cb0b9ce7ca"
+    },
+    {
+      "path": "paper/jiis/conclusion_jiis.tex",
+      "size_bytes": 1840,
+      "sha256": "338d760b5e98fa2b83d4d269e9326990213d6596befb7989ff624ba8a05def67"
+    },
+    {
+      "path": "paper/jiis/discussion_jiis.tex",
+      "size_bytes": 9095,
+      "sha256": "cf0cae37cdcae30f80f1ca58fc5a7dbfe08b4b601e8e81201dca7897caa72e7d"
+    },
+    {
+      "path": "paper/jiis/figure1_jiis.tex",
+      "size_bytes": 663,
+      "sha256": "a4417fbd9458ab6a78e605a2ff1b827f2878edd0ea43efe2ea624f8d978add0a"
+    },
+    {
+      "path": "paper/jiis/figure2_jiis.tex",
+      "size_bytes": 730,
+      "sha256": "7f1c1b16246040fcba785b10b2fc8dd6d1a806c60d567dee7ef3bf159be2d51d"
+    },
+    {
+      "path": "paper/jiis/figure_evidence_retention_jiis.tex",
+      "size_bytes": 827,
+      "sha256": "977ab74e57d03cabf1e60d78cbda5ba0797a0aa0050f4e13dce9c8ce986a245c"
+    },
+    {
+      "path": "paper/jiis/figure_generator_contrasts_jiis.tex",
+      "size_bytes": 728,
+      "sha256": "027b996570224670f6b8c7420f0c61a8aae2a83c615a3b5756b377c2d2272c5c"
+    },
+    {
+      "path": "paper/jiis/figure_retrieval_answer_jiis.tex",
+      "size_bytes": 776,
+      "sha256": "7c95666679fa87ee8aef4bd9fd412ba9cce7e7f02b68b423323bcf4e047e34e8"
+    },
+    {
+      "path": "paper/jiis/followup_experiments_supp_jiis.tex",
+      "size_bytes": 8536,
+      "sha256": "1be2837a6186f436ecb23995afc35475c8fb3263f74fff969da5dbd06ee45cfd"
+    },
+    {
+      "path": "paper/jiis/followup_holdout_tables.tex",
+      "size_bytes": 8913,
+      "sha256": "106ec46f8e5a9eba17bdaa4936cb1def4ddb4801bfe58be1a955c9c56c40779e"
+    },
+    {
+      "path": "paper/jiis/followup_layout_answer_absent_subset.tex",
+      "size_bytes": 1801,
+      "sha256": "787287c54cbbb6373027f1515d6e5f5b6563a54b522088fd7dbd16cebfdbbcbe"
+    },
+    {
+      "path": "paper/jiis/followup_layout_equal_budget_reader_check.tex",
+      "size_bytes": 2206,
+      "sha256": "979a35f19798ab524e20c5520583c48a35eb9e92a4d512b9ef5d6a9ac9fd716d"
+    },
+    {
+      "path": "paper/jiis/followup_layout_hyde_gold_content_diagnostics.tex",
+      "size_bytes": 5852,
+      "sha256": "e3161256efc660104fdc23087f903bdfd5584db4457ce9df65d148f7c7f4ce1a"
+    },
+    {
+      "path": "paper/jiis/front_matter_jiis.tex",
+      "size_bytes": 2214,
+      "sha256": "1fb49ef87c85c8f62eaa1cd5ce35dd5b0cce3685fc066a7458850d4ad4016d4a"
+    },
+    {
+      "path": "paper/jiis/independent_validation_supp_jiis.tex",
+      "size_bytes": 3861,
+      "sha256": "6f793288f279fc7a57f1207b8f6c6874b70840f76d5de485bd9343f5bf9a5b45"
+    },
+    {
+      "path": "paper/jiis/introduction_jiis.tex",
+      "size_bytes": 5131,
+      "sha256": "7bb8a0d8bc3f07647c4070b8ee9c632c7cc3862404bbbdec0405bd66090bfce9"
+    },
+    {
+      "path": "paper/jiis/jiis_supp_refs.tex",
+      "size_bytes": 1697,
+      "sha256": "c08d3a8417c3212c091762fe949b07a46fbf8cccf39779d4a9e0322449e8975b"
+    },
+    {
+      "path": "paper/jiis/manuscript_jiis.tex",
+      "size_bytes": 3451,
+      "sha256": "d6bc6717178a296bc3a93c8dd96cddf646998262dbad05429a23f9b6a17147a3"
+    },
+    {
+      "path": "paper/jiis/methods_jiis.tex",
+      "size_bytes": 14221,
+      "sha256": "68fe1743b29a942277ebf48000541cc0f0c92d09ade66418401ecaa32584a1e3"
+    },
+    {
+      "path": "paper/jiis/mhrag_available_macros_v2.tex",
+      "size_bytes": 229,
+      "sha256": "402f358a3e3fd6c4114927b1a9e290578e92d2bebad0f4532da5af5b04bee1a0"
+    },
+    {
+      "path": "paper/jiis/mhrag_results_jiis.tex",
+      "size_bytes": 4390,
+      "sha256": "daf499c7c0dc35a4a9f07ae4dc7b21c3435448d19fc0be61dc4a959bc6e225a2"
+    },
+    {
+      "path": "paper/jiis/mhrag_supplement_jiis.tex",
+      "size_bytes": 4816,
+      "sha256": "7e54f78097421aed3d26b1e965c65783e251b612ddcce2c4ff550e47def41e69"
+    },
+    {
+      "path": "paper/jiis/priority_revision_diagnostics_jiis.tex",
+      "size_bytes": 8637,
+      "sha256": "a8cde6ee4bbbb021775011592b8dda1a5d3efaf56abf9b3a1e6c0d70370525fd"
+    },
+    {
+      "path": "paper/jiis/query2doc_style_protocol_appendix.tex",
+      "size_bytes": 2163,
+      "sha256": "2b1efab5b20a047305813ef4e8081ac22a871da024bea88c0938a75e5b17f75f"
+    },
+    {
+      "path": "paper/jiis/reader_controls_supp_jiis.tex",
+      "size_bytes": 3703,
+      "sha256": "8db696eba028b1aa076f2ec6e7dbf708982a194b9fb7e26c885467ed715fbb31"
+    },
+    {
+      "path": "paper/jiis/references_jiis.bib",
+      "size_bytes": 13582,
+      "sha256": "2e75f348add1513318033ba41dec2cdd3b0fa02f5b9efc100894fe4c65884609"
+    },
+    {
+      "path": "paper/jiis/related_work_jiis.tex",
+      "size_bytes": 4923,
+      "sha256": "bc81db000e24f44f6c0d81c7c7b349c1b3a3ff13336b12b1f8276268361f3619"
+    },
+    {
+      "path": "paper/jiis/results_jiis.tex",
+      "size_bytes": 21366,
+      "sha256": "43381bdc479e488556641969ec4c8ae43a300492e13bf2f7e4f4192179fe0886"
+    },
+    {
+      "path": "paper/jiis/sn-basic.bst",
+      "size_bytes": 35515,
+      "sha256": "4b368414cc5593169907933b417aacfdb0ce905866a39bdf55d21aad65e9d46c"
+    },
+    {
+      "path": "paper/jiis/sn-jnl.cls",
+      "size_bytes": 55857,
+      "sha256": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc"
+    },
+    {
+      "path": "paper/jiis/supplementary_jiis.tex",
+      "size_bytes": 73762,
+      "sha256": "d501c72546d4e6f8cd5a76404a390151a7092cb8d6a12aa0e6304cb0e3313056"
+    },
+    {
+      "path": "paper/jiis/table_2wiki_corpus_scale.tex",
+      "size_bytes": 728,
+      "sha256": "3239c84c444a216e950805ba017001c1bc4df8835703b391de714d37cb3d6e22"
+    },
+    {
+      "path": "paper/jiis/table_2wiki_hyde_query_mechanism.tex",
+      "size_bytes": 1016,
+      "sha256": "b8d7308878692d3e527e43bd2c5703a36c7d288f595ffa8f0be512b0d40a310a"
+    },
+    {
+      "path": "paper/jiis/table_2wiki_paired_statistics.tex",
+      "size_bytes": 2288,
+      "sha256": "7608a9f858e37f560cf9b473a1f4373ba7bcbc8f71884780777a6f036cf506f7"
+    },
+    {
+      "path": "paper/jiis/table_baseline_implementation_parameters.tex",
+      "size_bytes": 5036,
+      "sha256": "09150c340668b0bbf1b084c7b2c81378884afca26a40965593d3cbf66497c466"
+    },
+    {
+      "path": "paper/jiis/table_boundary_stability_matrix.tex",
+      "size_bytes": 2875,
+      "sha256": "0eceba35c545eac6d58321a498eaa403fff8fbb6f5166b89f6085a32f220d440"
+    },
+    {
+      "path": "paper/jiis/table_claim_stress_ablation.tex",
+      "size_bytes": 929,
+      "sha256": "867184cdb14e56ce4ac527346b9a10478c80d67ff0d528287ef29443cac35eb9"
+    },
+    {
+      "path": "paper/jiis/table_configuration_provenance.tex",
+      "size_bytes": 9586,
+      "sha256": "43d5927d4f4071611f2215ea13b911bcc7547ee4ee690d0c615c2a498835eb20"
+    },
+    {
+      "path": "paper/jiis/table_corpus_scale_audit.tex",
+      "size_bytes": 1691,
+      "sha256": "47418866878de665e19c6b818844fe51a6f8f4e118fe524dbde40781a21fdf03"
+    },
+    {
+      "path": "paper/jiis/table_corpus_scale_stress_full.tex",
+      "size_bytes": 4387,
+      "sha256": "fc43c7b52630c4dc1a725002a4ce1dd933e879859bbb72d9d40eb276fe0a5870"
+    },
+    {
+      "path": "paper/jiis/table_corpus_statistics.tex",
+      "size_bytes": 2091,
+      "sha256": "4217d9f9f7dfbbbf0eb396808c9b2093223ca7b82f1d476a604f157c3e454360"
+    },
+    {
+      "path": "paper/jiis/table_dataset_artifact_provenance.tex",
+      "size_bytes": 2941,
+      "sha256": "0f4971eec1d310ad8e54362b7aa808ae0c6a9f7bdbd846edcf04a15067c615dd"
+    },
+    {
+      "path": "paper/jiis/table_dedup_retrieval_sensitivity.tex",
+      "size_bytes": 1611,
+      "sha256": "56d287b3292d56638c19009f62c6d28e8197bd82317c0b451275dcbd54e900ec"
+    },
+    {
+      "path": "paper/jiis/table_efficiency_profile_full.tex",
+      "size_bytes": 2127,
+      "sha256": "a13971f0779bb8052ea0340517a74c58f6a7567c35b6b60a90ec6845039a39d4"
+    },
+    {
+      "path": "paper/jiis/table_equal_budget_retrieval_diagnostic.tex",
+      "size_bytes": 2623,
+      "sha256": "d69da69049b2cb9b80ac6163805d8450c9d2da7f9d51bea086f347e196508aaf"
+    },
+    {
+      "path": "paper/jiis/table_evidence_completeness_buckets_supp.tex",
+      "size_bytes": 1425,
+      "sha256": "dd5b34c5917b4975b35b3612b130f29dc8aa18d6cafc16d6bfeb093782bbddc7"
+    },
+    {
+      "path": "paper/jiis/table_framework_comparison.tex",
+      "size_bytes": 1183,
+      "sha256": "5173c419d2fb5286454f9656875285340df1d0d96be03f813f9a2ea889706d3c"
+    },
+    {
+      "path": "paper/jiis/table_fullwiki_system_cost.tex",
+      "size_bytes": 2531,
+      "sha256": "60b5013e4bd794dd1ee50214c1d4306dcff14e1773649473f94c5bb5c2ceb852"
+    },
+    {
+      "path": "paper/jiis/table_generator_reader_robustness.tex",
+      "size_bytes": 2590,
+      "sha256": "19a3d42bb164c9238f95e845580ce30a4125ee7e831879c01103abc2e276c471"
+    },
+    {
+      "path": "paper/jiis/table_hosted_drift.tex",
+      "size_bytes": 814,
+      "sha256": "c4663efd72a072416f427cf05c9956772823a1cc59f014c3b794dbf45d178910"
+    },
+    {
+      "path": "paper/jiis/table_hotpotqa_paired_statistics.tex",
+      "size_bytes": 2995,
+      "sha256": "93e6c68c7d3bacf084cf90ebbf7f9a65893b6009c0a6df8151e3caaca06f9326"
+    },
+    {
+      "path": "paper/jiis/table_hyde_overlap_diagnostic.tex",
+      "size_bytes": 861,
+      "sha256": "212e62ea6e6f6dcf53a06c51914495fe1c82c262dfbc65ffaca5c296e5fb88c8"
+    },
+    {
+      "path": "paper/jiis/table_hyde_overlap_robustness.tex",
+      "size_bytes": 1192,
+      "sha256": "6b8ceee180518d2ca8f691bc56cc2cf4e22c16232b731454ce4a7dc9eca55454"
+    },
+    {
+      "path": "paper/jiis/table_hyde_verifier_guard_ablation.tex",
+      "size_bytes": 1284,
+      "sha256": "16c72ff257bf587acffe9767406d721d87bb23891a45690dbc5feb3e5f48ba22"
+    },
+    {
+      "path": "paper/jiis/table_ircot_deviation_matrix.tex",
+      "size_bytes": 2792,
+      "sha256": "673ab49a140a29aa6727e0c9eb224dee76bec3759518e141485b05f9f3969853"
+    },
+    {
+      "path": "paper/jiis/table_ircot_fullwiki.tex",
+      "size_bytes": 1540,
+      "sha256": "8451d6405321edba543f860210b9f776c9c068d9499fca9156ec6b2fbaf33a4c"
+    },
+    {
+      "path": "paper/jiis/table_ircot_fullwiki_main.tex",
+      "size_bytes": 1916,
+      "sha256": "4721c9c8f1b30037cd838108c0b5a067513aa2a88441f0e638c09377728367de"
+    },
+    {
+      "path": "paper/jiis/table_ircot_round_budget.tex",
+      "size_bytes": 1159,
+      "sha256": "dab14f5ffbd22534e9dee0ec01b5cf08a6b2041ae90ec1511c7442a01db0d8ad"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_answers_v2.tex",
+      "size_bytes": 1520,
+      "sha256": "4f5c713acd6a6bd1da5006a02e1fd552b53f2e74a7d6412d5ac1f4af5ca9db0e"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_cost_v2.tex",
+      "size_bytes": 2369,
+      "sha256": "84aa6bd1475f5644e15fef6b344aee6298f9f1c6d03960f3e917df25117acf3a"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_em_v2.tex",
+      "size_bytes": 2226,
+      "sha256": "69ac67acef74350af7e3dcbe338905228688b3117bfb6b4e3894ed9b106b8d87"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_interactions_v2.tex",
+      "size_bytes": 1178,
+      "sha256": "c0ab8c26818f78deb6367f7401d0447b16bd5c5ebdcb6082833ebef5f95f56b9"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_prompts_v2.tex",
+      "size_bytes": 1156,
+      "sha256": "e48f3abf21a2b2914cef02b9d1a72f7ed51af0b9ba7eecaf51ef66f529308a7b"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_raw_null_v2.tex",
+      "size_bytes": 2245,
+      "sha256": "0c7231787b1b5e1821c85c4b16bc118f6413d9baeac6886a82e230b0ed3214d5"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_retrieval_v2.tex",
+      "size_bytes": 1385,
+      "sha256": "46d81018f997247b78979876eb3b33bb36a4db94172b3aaece7b2578fa7168cd"
+    },
+    {
+      "path": "paper/jiis/table_mhrag_available_seeds_v2.tex",
+      "size_bytes": 894,
+      "sha256": "8f0d8ce36f40b47060c6d1ada5860132ac45473a653de9510be6895e9be94db8"
+    },
+    {
+      "path": "paper/jiis/table_model_invocation_ledger.tex",
+      "size_bytes": 3494,
+      "sha256": "ec813f6e225cfae358857d15ca41b571d14129c88a6412f448775324f8e280dd"
+    },
+    {
+      "path": "paper/jiis/table_open_generator_leakage.tex",
+      "size_bytes": 2509,
+      "sha256": "76911c71d81f9d4937ac3f13b000cb6164d1083ed2333c638657947f922a2bf7"
+    },
+    {
+      "path": "paper/jiis/table_open_generator_query2doc.tex",
+      "size_bytes": 1788,
+      "sha256": "856751a696073001755b1a0f96c380a6230d6760a6a1005ba0a877b2246f1c86"
+    },
+    {
+      "path": "paper/jiis/table_qualitative_case_artifacts.tex",
+      "size_bytes": 4505,
+      "sha256": "1e5ec70bcd92994bd0d694ea098393f2b21942db33ac1f3e16d73519e7b3a1fe"
+    },
+    {
+      "path": "paper/jiis/table_qualitative_case_study.tex",
+      "size_bytes": 1992,
+      "sha256": "06e2adc6386374939604636e4785656859fc9d04701011008e3dcdb2d10ba2e9"
+    },
+    {
+      "path": "paper/jiis/table_query_length_matched_hyde.tex",
+      "size_bytes": 2340,
+      "sha256": "522f31706f7550b11e87b12c3a2f149892c400cfc7ed1ec585fb85afb1317448"
+    },
+    {
+      "path": "paper/jiis/table_qwen_api_reproducibility.tex",
+      "size_bytes": 6874,
+      "sha256": "20966257c1d7270aee7f8db46770531cb3aea72d986a813881e1d310f3bfddf3"
+    },
+    {
+      "path": "paper/jiis/table_reliability_boundary_protocol.tex",
+      "size_bytes": 3172,
+      "sha256": "9ffc864b8bd5c20f0f351ca662f085379d680ee594a6e0e33045656b5ea6a3a9"
+    },
+    {
+      "path": "paper/jiis/table_reproducibility_checklist.tex",
+      "size_bytes": 6135,
+      "sha256": "530ce6d7bb9b5395d510d1f05f646054e8a8c3f994188d32b814299176c9ae2f"
+    },
+    {
+      "path": "paper/jiis/table_shared_corpus_check.tex",
+      "size_bytes": 1382,
+      "sha256": "b8379953ebc8505571d9da18cbeec2200db930a3d38e91f8075bf9a074d86d3f"
+    },
+    {
+      "path": "paper/jiis/table_stronger_encoder_reproduction.tex",
+      "size_bytes": 1827,
+      "sha256": "bceb9a8172dc95b8eb6dcd45ad1fb040eb3833fd9538a55bcbdea333c7efb632"
+    },
+    {
+      "path": "paper/jiis/table_supporting_paragraph_audit.tex",
+      "size_bytes": 3421,
+      "sha256": "48530d5a697cc28eda6fac140325a6936c8a5f955769f5c221916498ad26eab7"
+    },
+    {
+      "path": "paper/jiis/table_supporting_sentence_audit.tex",
+      "size_bytes": 1363,
+      "sha256": "6829bc85cd0b99874e88d4c72fbfc3e16e10d7dae6cbe3e812718058addada17"
+    },
+    {
+      "path": "paper/jiis/table_topk_sensitivity.tex",
+      "size_bytes": 2163,
+      "sha256": "e006be4eea877d55bb8eb71cb119546b1531a066251357cf5c918a37c303aa93"
+    },
+    {
+      "path": "paper/jiis/tables_main_compact.tex",
+      "size_bytes": 3264,
+      "sha256": "443b54312617a7d3e0c67e5d037a1926c50a81921cf865d03d0b551c32dfac27"
+    },
+    {
+      "path": "paper/jiis/manuscript_jiis.pdf",
+      "size_bytes": 589091,
+      "sha256": "3dffb2b8c28204b8726a6d1d1aee67d316476cbbdecebe63ad51d1f634ecc1ca"
+    },
+    {
+      "path": "paper/jiis/supplementary_jiis.pdf",
+      "size_bytes": 662736,
+      "sha256": "18b9c5f1c02b44c2036f3abf77557884f9226f89fdc7e263acebbe20cd4de548"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/equal_budget_query_diagnostic/equal_budget_query_pairwise_bootstrap.csv",
+      "size_bytes": 795,
+      "sha256": "c4c45bd190ee924d84bdf006ec184139122fd68a9f0465c0857d56ed208102f7"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/equal_budget_query_diagnostic/equal_budget_query_retrieval_summary.csv",
+      "size_bytes": 1916,
+      "sha256": "ab4f5ed0c397fea81772b3588eadbc446b82b795bc0aee8eae00842be1778b01"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/expert_systems_minimum/leakage_summary.csv",
+      "size_bytes": 631,
+      "sha256": "4f4dfbd9cb7758edc952bea7963d5d991db03caed554dfb142ea97fc227fb283"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/expert_systems_minimum/paired_contrasts.csv",
+      "size_bytes": 1274,
+      "sha256": "b29c86e095dca230e96da550cf844959ab92de96649bfe59991902ccbd6baf11"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/expert_systems_minimum/retrieval_summary.csv",
+      "size_bytes": 1759,
+      "sha256": "7ad520efa441f3eaa01e1638f3cf31b89a3528e37df1c79927e58ce3b25bfba1"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/hyde_mechanism_ablation_hotpotqa_test500.csv",
+      "size_bytes": 1490,
+      "sha256": "3cd3f257e2ea2e302a14c1b9d7c50a306a76d3e8c15659cf5281fdc0d0fd81ef"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/ircot_test500_qwen_results.csv",
+      "size_bytes": 2911,
+      "sha256": "5532d685c613fd7c87fd2cc4669e18256a8beca9da50d64eeedc7c1d2f905ab4"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/independent_validation/descriptive_metrics.csv",
+      "size_bytes": 1179,
+      "sha256": "468bb0ea6cb41c640ccb4c27e6f20bcd461698eb454c5701e7d53ede99911d76"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/independent_validation/independent_results.csv",
+      "size_bytes": 674,
+      "sha256": "14f850f75a2ea75c12fe0f5e01663828fd1128193df04ede8d27950a923c892b"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/independent_validation/stage_costs.csv",
+      "size_bytes": 503,
+      "sha256": "712e209c0e1bf1735ca5014d5ed4653c3f40a65e903c32a24744b9fc3fb057bb"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/independent_validation/support_per_example_sanitized.csv",
+      "size_bytes": 19812,
+      "sha256": "728eb90babe3579b51a7ecbd02ca5a873b6e5c1ea0abdc196dec75fc24d6d281"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/paired/paired_comparisons.csv",
+      "size_bytes": 18603,
+      "sha256": "b4119802a56fec6f0045765c05cd51287dd8b4ac66f59d5bae59eec7d88acb51"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/paired/prompt_subset_descriptive.csv",
+      "size_bytes": 2600,
+      "sha256": "be278c66f1d76bed101d3493cf543e0695e99f9eb28fdbe1d1c2c4f46889cd1d"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/reader_controls/descriptive_summary.csv",
+      "size_bytes": 4429,
+      "sha256": "8d69caddd2fdefe37ca28e35e0bd747c0ace49bd81a64c8a583052612ab94469"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/jiis_priority_revision_20261003/reader_controls/paired_comparisons.csv",
+      "size_bytes": 12681,
+      "sha256": "cfc46fbb32ed8b570baf234a5e830a6f0492fc5d0a8439269141c42cb162ae91"
+    },
+    {
+      "path": "reproducibility/legacy/artifacts/summaries/supporting_paragraph_audit/supporting_paragraph_metrics.csv",
+      "size_bytes": 5274,
+      "sha256": "5bfb2b6f52480f0fccb8782e172a3136d878a3b658fd551374423597c90ce491"
+    },
+    {
+      "path": "reproducibility/legacy/docs/jiis_followup_reproduction_guide.md",
+      "size_bytes": 7679,
+      "sha256": "1a3d985fabf612773e447596a2b74cd63664f391907fe3d91495181b9dcd14e1"
+    },
+    {
+      "path": "reproducibility/legacy/expected/table_open_generator_leakage.tex",
+      "size_bytes": 1241,
+      "sha256": "5b44782c2cb3e396fcf25dcb5a5274b318946c5ad5b0520124cac88c34fd4655"
+    },
+    {
+      "path": "reproducibility/legacy/expected/table_open_generator_query2doc.tex",
+      "size_bytes": 1360,
+      "sha256": "076f282e3f119a1622eac2e049f3db529bf06f4bbbf824461e3bc3fa9ab6501c"
+    },
+    {
+      "path": "reproducibility/legacy/export_provenance.json",
+      "size_bytes": 1061,
+      "sha256": "ce342b85522a83f29970b15006ca4d35d4f1a0a18b43761fd83c01a63f306dbe"
+    },
+    {
+      "path": "reproducibility/legacy/LICENSE",
+      "size_bytes": 1471,
+      "sha256": "937fe8dd0b5199a9dccd5f53ee009f4217f5fb3228b3c3a6b50470db905a4f5b"
+    },
+    {
+      "path": "reproducibility/legacy/manifest.json",
+      "size_bytes": 6299,
+      "sha256": "981aeac973e5f95223a2dcbba50e9e3889b877f578423cb706c3d2cc47cd60e1"
+    },
+    {
+      "path": "reproducibility/legacy/metrics/2wiki.jsonl",
+      "size_bytes": 476141,
+      "sha256": "241a0710206eb513051eca988c7e3a6f2a487e2c899d1c200da5c68d9ce14e44"
+    },
+    {
+      "path": "reproducibility/legacy/metrics/hotpotqa.jsonl",
+      "size_bytes": 465326,
+      "sha256": "d827262cea2013df6f4fb2108cec7bc5909c76344bba7a5400f4c679244bf010"
+    },
+    {
+      "path": "reproducibility/legacy/README.md",
+      "size_bytes": 267,
+      "sha256": "fdd1bf2d7d48a4d0a807da6a82ab73a1ba0beffab0f9399d639f717b1bc485a6"
+    },
+    {
+      "path": "reproducibility/legacy/requirements.txt",
+      "size_bytes": 60,
+      "sha256": "1693a4d2912e36ae19f5d48f8c1c05e0ade68317a01232c3c336e7462936ab99"
+    },
+    {
+      "path": "reproducibility/legacy/run.py",
+      "size_bytes": 3490,
+      "sha256": "763024e1e1112cdd2ad04dd93b4458178d39f57c84489a9b40c60c8223fcd497"
+    },
+    {
+      "path": "reproducibility/legacy/scripts/build_expert_systems_latex_tables.py",
+      "size_bytes": 8578,
+      "sha256": "0bd16d6aa124d6ae26d0090448b4eca5bee2333f639c66365b91eb3ddb6623bd"
+    },
+    {
+      "path": "reproducibility/legacy/scripts/rebuild_main_tables_from_summaries.py",
+      "size_bytes": 7774,
+      "sha256": "2b0e6566bd0a8d46b0cb501e8f11baf9e3eab5463577514279f4c1e91eb1ac02"
+    },
+    {
+      "path": "reproducibility/legacy/src/evaluation/analyze_expert_systems_minimum.py",
+      "size_bytes": 14061,
+      "sha256": "f47243ebe611e7f72724d5a3abf80cdfab8d82264679f3ab7143d6f02450bd91"
+    },
+    {
+      "path": "reproducibility/legacy/src/utils.py",
+      "size_bytes": 475,
+      "sha256": "59770e422ec19aff2050c44677059763569605c201d5c5f0e5c1084f86890464"
+    },
+    {
+      "path": "reproducibility/legacy/THIRD_PARTY_NOTICES.md",
+      "size_bytes": 10493,
+      "sha256": "3806bc5c9f9c79451e72952da2a3775e7004e4f2bb5dbc68d1d4b3049fd3fa63"
+    },
+    {
+      "path": "reproducibility/legacy/VERSION",
+      "size_bytes": 22,
+      "sha256": "2ed525ba41f40630176d5cbc8bb1f320f3cafd2950b918aeb89ff75407106ba8"
+    },
+    {
+      "path": "reproducibility/followup/data/holdout/descriptive_summary.csv",
+      "size_bytes": 3177,
+      "sha256": "5498448dd4135f85038c801dc59bc396fa01e6024ad50cfa897057b634cb82e1"
+    },
+    {
+      "path": "reproducibility/followup/data/holdout/paired_comparisons.csv",
+      "size_bytes": 8484,
+      "sha256": "c57f730c8af740f3cec6b1c02bd08b35fa0482630438b798959f3fd96ff38de7"
+    },
+    {
+      "path": "reproducibility/followup/data/holdout/per_example_metrics.csv",
+      "size_bytes": 270731,
+      "sha256": "0989ae79000a385d3182847bf42ec48cce4c14b09d1df5a6d008c21953732431"
+    },
+    {
+      "path": "reproducibility/followup/data/holdout/retrieval_metrics_per_example.csv",
+      "size_bytes": 30930,
+      "sha256": "58ff8436c3a5b7cfb9b4eea07e3b2936be4f0dc09b03021a3218b4ff80d50135"
+    },
+    {
+      "path": "reproducibility/followup/data/serializer/answer_metrics_per_example.csv",
+      "size_bytes": 46892,
+      "sha256": "5d688d115d4b886269ed86b4ab32f1ff76ca09123150ab3024d214cba6fdd6c1"
+    },
+    {
+      "path": "reproducibility/followup/data/serializer/descriptive_summary.csv",
+      "size_bytes": 791,
+      "sha256": "096d2ebfae381a5130fd19d506651a3b25593f2ad48a9f3a89b76befabf772ab"
+    },
+    {
+      "path": "reproducibility/followup/data/serializer/paired_comparisons.csv",
+      "size_bytes": 964,
+      "sha256": "99ff067537726393a9d870e95f828c1850cde952817abbdac6a0101172bc14c2"
+    },
+    {
+      "path": "reproducibility/followup/data/serializer/support_per_example_sanitized.csv",
+      "size_bytes": 67012,
+      "sha256": "fe9bdd8f76228500775cc548552db7f0ea077a08b9db21b4a872ad8efa38110f"
+    },
+    {
+      "path": "reproducibility/followup/LICENSE",
+      "size_bytes": 1471,
+      "sha256": "937fe8dd0b5199a9dccd5f53ee009f4217f5fb3228b3c3a6b50470db905a4f5b"
+    },
+    {
+      "path": "reproducibility/followup/manifest.json",
+      "size_bytes": 3391,
+      "sha256": "65da525d29f1dce8d6cf395daa4f349e4c3189206dec2fa87762dbf2f79dba1a"
+    },
+    {
+      "path": "reproducibility/followup/README.md",
+      "size_bytes": 1965,
+      "sha256": "6f760fdde954837758ad537924e44e4d0a691133ea9d3b80b8232ae7ae4030e5"
+    },
+    {
+      "path": "reproducibility/followup/requirements.txt",
+      "size_bytes": 14,
+      "sha256": "5e6d55d17a3de59f3187483e217af4f7968325ffc490ab74ad6f806b0c314d6d"
+    },
+    {
+      "path": "reproducibility/followup/scripts/analyze_jiis_revision_pairs.py",
+      "size_bytes": 14056,
+      "sha256": "afc3f7f8865fdb4e6b1aea1cdd7eedd50309b83cb9d79db97ef80bce8b5eb133"
+    },
+    {
+      "path": "reproducibility/followup/scripts/reanalyze_jiis_followup_metrics.py",
+      "size_bytes": 11397,
+      "sha256": "51943f8c21fdcec273055930c9b0cdfc60e5b158166f30b209affbd70ba62a01"
+    },
+    {
+      "path": "reproducibility/followup/source_provenance.json",
+      "size_bytes": 3418,
+      "sha256": "36ad53af4026645b99301d9a9d23a4c6790e65dac6f688feab5c2fb2fa34a8b3"
+    },
+    {
+      "path": "reproducibility/followup/src/evaluation/paired_inference.py",
+      "size_bytes": 2997,
+      "sha256": "b31351a0c927c94d08678969c1cd4ac468f6925f5ff2f5bdcae01a84d30a6325"
+    },
+    {
+      "path": "reproducibility/followup/src/ircot_fullwiki/analyze_fullwiki_retrieval.py",
+      "size_bytes": 8807,
+      "sha256": "c8bd1126a9e718b0bb6e9c4ea0846eec47b38e13b3fe6b7094ee37e3d2ad1e4f"
+    },
+    {
+      "path": "reproducibility/followup/src/ircot_fullwiki/fullwiki_manifest.py",
+      "size_bytes": 6577,
+      "sha256": "9f2735940821b7b280003e737b2e5eeb78dd61010a442066b90558b67088662c"
+    },
+    {
+      "path": "reproducibility/followup/tests/test_followup_metric_reanalysis.py",
+      "size_bytes": 2689,
+      "sha256": "8bda161c6db23e90529a4165f9e8e2c6faa7629a589e8d7d8d72cd45ed9e3242"
+    },
+    {
+      "path": "reproducibility/followup/VERSION",
+      "size_bytes": 22,
+      "sha256": "e40bebb62733fb83796c79b2e8a40e75efa3a02c50bbba6bf9420db59fc102f3"
+    },
+    {
+      "path": "release/assets/jiis_reproduction_followup_0.1.0-local-20261004.zip",
+      "size_bytes": 98914,
+      "sha256": "160aa6c52cc1941240fcbad254d40a6c9f8c2e3d176a7b694625abb17afe4ad4"
+    },
+    {
+      "path": "release/assets/jiis_followup_metrics_0.2.0-local-20261004.zip",
+      "size_bytes": 164163,
+      "sha256": "ffac46f7be027474e05d9ba01e650e2f798939ca455f93a21d4306385857d441"
+    },
+    {
+      "path": "release/assets/jiis_main_source_20261005.zip",
+      "size_bytes": 269621,
+      "sha256": "59fa0235f55b1edf03ea98c756723e174b3aec0e05801c1b2a87bb997826a09e"
+    },
+    {
+      "path": "release/assets/jiis_supplement_source_20261005.zip",
+      "size_bytes": 183070,
+      "sha256": "0cb8734037c3a6e9a23ec2ef0f4d76f7d49c77d84f36b44050e622dad594353a"
+    },
+    {
+      "path": ".gitattributes",
+      "size_bytes": 157,
+      "sha256": "499c556bcf8ea69d9cf886252430471f6e420009d873e3585dba7bd73c164aa4"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+\section{Post-hoc Matched Comparisons, Final-input and Scorer Audits}
+\label{sec:supp_priority_diagnostics}
+
+These diagnostics were added after the original results were observed. They do not replace historical scores, frozen families or the withdrawn human audit. New source hashes, contracts and sanitized summaries are recorded under \path{artifacts/summaries/jiis_priority_revision_20261003/}. Private working inputs remain under a separate local directory. No generated answer was used to select the diagnostic subsets.
+
+\subsection{Matched Dense and Prompt-subset Comparisons}
+The analysis preserves exact ID order before separating 2,255 non-null news questions. It freezes three additional families containing six retrieval, 16 answer and 36 prompt-versus-baseline contrasts. Binary endpoints use two-sided exact McNemar tests; continuous F1/recall endpoints use Monte Carlo sign flips with the plus-one correction. Paired percentile intervals use 10,000 resamples and seed 13. The existing BM25 family, including its unavailable IRCoT slot, is unchanged. These additional comparisons are post hoc rather than retrospectively registered primary tests.
+
+\begin{table*}[htbp]
+\centering\footnotesize
+\caption{Selected post-hoc news comparisons with the matched Dense baseline. Delta is target minus Dense. All rows use 2,255 non-null questions; adjusted tests belong to the new six-retrieval or 16-answer family.}
+\label{tab:priority_dense_pairs}
+\begin{tabularx}{\textwidth}{X l r r l r}
+\toprule
+Target & Endpoint & Reader & Chars & $\Delta$ [95\% CI] & $p_{\mathrm{Holm}}$ \\
+\midrule
+Qwen-HyDE & all-support & -- & -- & $-0.0550$ [$-0.0710,-0.0395$] & $2.29\times10^{-11}$ \\
+Mistral-HyDE & all-support & -- & -- & $-0.0692$ [$-0.0851,-0.0537$] & $3.24\times10^{-17}$ \\
+Qwen-HyDE & EM & Qwen & 450 & $-0.0244$ [$-0.0337,-0.0151$] & $2.42\times10^{-6}$ \\
+Mistral-HyDE & EM & Qwen & 450 & $-0.0333$ [$-0.0430,-0.0239$] & $1.87\times10^{-10}$ \\
+Qwen-HyDE & EM & Qwen & 900 & $-0.0337$ [$-0.0439,-0.0235$] & $5.34\times10^{-10}$ \\
+Mistral-HyDE & EM & Qwen & 900 & $-0.0364$ [$-0.0470,-0.0266$] & $2.66\times10^{-11}$ \\
+Qwen-HyDE & EM & Mistral & 450 & $-0.0239$ [$-0.0355,-0.0124$] & 0.0008 \\
+Mistral-HyDE & EM & Mistral & 450 & $-0.0200$ [$-0.0310,-0.0089$] & 0.0009 \\
+Qwen-HyDE & EM & Mistral & 900 & $-0.0341$ [$-0.0457,-0.0226$] & $1.04\times10^{-7}$ \\
+Mistral-HyDE & EM & Mistral & 900 & $-0.0355$ [$-0.0479,-0.0231$] & $1.05\times10^{-7}$ \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+The frozen 500-question prompt subset is sliced from the same Dense/BM25 files using its original IDs, rather than compared to full-release averages. Dense all-support is 0.502 and BM25 is 0.590. Query2doc-style Qwen/Mistral scores are 0.516/0.512. Their Dense deltas are $+0.014$ [$-0.014,0.044$] and $+0.010$ [$-0.020,0.040$], both adjusted $p=1$. Their BM25 deltas are $-0.074$ [$-0.116,-0.032$] and $-0.078$ [$-0.122,-0.034$], adjusted $p=0.0192/0.0139$. Superiority to standard prompting therefore does not establish superiority to either matched baseline. The 58-row CSV includes all secondary endpoints, discordant counts and raw/adjusted tests.
+
+\FloatBarrier
+\subsection{Actual Final-input Evidence}
+The HotpotQA audit reconstructs pinned chat templates and token offsets for five retrieval methods and both readers on all 500 IDs. Actual 450-character prompts match all 5,000 stored prompt hashes; none exceeds 2,000 input tokens. The historical artifacts do not retain effective-token hashes, so reconstructed token sequences are not described as historically hash-verified. The four original methods retain all official support sentences for 0.254/0.284/0.298/0.388 of questions. Adding the cross-encoder gives 0.470 retrieval completeness and 0.390 after character and token serialization for each reader. Official sentence labels remain separate from the original paragraph-label metrics. The 900-character inputs are counterfactual interface diagnostics, not previously executed HotpotQA answers.
+
+The news audit verifies all 51,120 historical effective-token hashes across 20 corrected cells. Parent-document identity survives independently of whether a complete gold fact span remains in the supplied chunk. Each of 6,084 gold fact strings maps to one original parent after whitespace normalization. Only 583 are extractively present in the cross-encoder's retrieved chunk texts. All matching spans, rather than only a first occurrence, are checked through character offsets and final token offsets. Unmatched spans remain losses in the denominator. This exact-span diagnostic does not measure semantic equivalence, distributed evidence or human evidence sufficiency.
+
+\begin{table*}[htbp]
+\centering\footnotesize
+\caption{News cross-encoder evidence reaching the actual reader input. Question rates use 2,255 non-null questions; counts use 6,084 gold fact entries. Parent survival means every required parent identity retains some body text, not its complete article. Matched facts require at least one complete exact span. Both budgets are actual executed news conditions.}
+\label{tab:priority_news_token_retention}
+\begin{tabularx}{\textwidth}{l r r r r r r}
+\toprule
+Reader & Chars & All-parent IDs & Final IDs & Chunk facts & Final facts & All-fact questions \\
+\midrule
+Qwen & 450 & 0.7286 & 0.7286 & 583 & 155 & 1/2255 \\
+Mistral & 450 & 0.7286 & 0.7286 & 583 & 155 & 1/2255 \\
+Qwen & 900 & 0.7286 & 0.6958 & 583 & 417 & 9/2255 \\
+Mistral & 900 & 0.7286 & 0.6661 & 583 & 414 & 9/2255 \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+At 900 characters, 423 fact spans survive character serialization before the final token budget removes six (Qwen) or nine (Mistral). Additional token-stage parent losses affect 74 and 141 non-null questions, respectively. Complete exact-span retention is 0.0004 at 450 characters and 0.0040 at 900 characters. These measurements explain why parent completeness cannot be interpreted as complete delivery of annotated facts. Descriptive associations with answer scores cannot identify a causal mediation effect.
+
+\FloatBarrier
+\subsection{Official Score-function Sensitivity}
+The comparison uses official HotpotQA code at commit \texttt{3635853403a8735609ee997664e1528f4480762a} and 2Wiki v1.1 at \texttt{6bdd033bd51aae2d36ba939688c651b5c54ec28a}. Tests isolate punctuation/article order, categorical F1 and empty-answer behavior. Re-evaluation covers 20 available formal 500-row prediction files, retaining their existing adapted predictions and repository gold aliases. It excludes smoke files and pre-cost archive duplicates. This is a scalar score-function sensitivity check, not full official evaluation with a newly recovered 2Wiki alias/demonym dictionary or joint supporting-fact metrics.
+
+EM remains unchanged in all audited files. Mean F1 decreases by 0.0033/0.0050/0.0045 for Mistral HotpotQA BM25/HyDE/IRCoT and 0.0054/0.0039 for BGE rescore/cross-encoder. Qwen HotpotQA HyDE and IRCoT decrease by 0.0005 each. Mistral 2Wiki BM25/HyDE/IRCoT/cross-encoder decrease by 0.0045/0.0040/0.0066/0.0032; other audited Qwen files are unchanged. Historical F1 contrasts and Holm families are preserved rather than silently relabeled as official metrics. Processed hosted raw answers were unavailable at their recorded local paths, preventing the same raw-prediction check for that tier.
+
+\subsection{Canonical Abstention and Output Termination}
+All 51,120 news rows reproduce their stored raw/adapted ordinary EM/F1 with zero mismatches. Null abstention is a separate endpoint over 301 questions, accepting only the registered canonical forms. A frozen lexical diagnostic additionally counts phrases expressing unknown or insufficient information, without awarding extra official credit. Raw/adapted predictions and 2,255 non-null questions are analyzed separately. Lexical matches can occur in mixed or explanatory responses and are not adjudicated semantic refusals.
+
+For Mistral/900, BM25/cross-encoder canonical null accuracy is 0.0299/0.0299, while adapted lexical matches occur in 170/301 and 153/301 outputs. Qwen/900 canonical accuracy is 0.6611/0.6213. Newly generated rows expose exact emitted IDs and EOS/length termination; reused Qwen/450 rows lack those stop anchors. A token count of 32 is only a cap candidate when termination metadata is absent. No empty predictions were found. Mistral non-null length termination is approximately 17--19\% at 450 characters and 29--32\% at 900 characters. Strict canonical failures therefore combine possible answer errors, wording and formatting; they cannot be reported as a human-confirmed hallucination rate.
+
+\FloatBarrier

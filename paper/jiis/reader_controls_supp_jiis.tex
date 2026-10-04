@@ -1,0 +1,32 @@
+\section{New Question-only and Gold-selected Reader Controls}
+\label{sec:supp_reader_controls_new}
+This diagnostic was frozen after historical outcomes were available but before its new answers. It uses the first 100 questions in the original 500-ID HotpotQA order, with no outcome-based selection. Qwen and Mistral each generate 100 question-only and 100 gold-support answers, following a separate two-question/two-condition smoke check. Protocols, model shard hashes, input-token hashes and receipts are preserved under \path{artifacts/summaries/jiis_priority_revision_20261003/reader_controls/} and its corresponding private local directory.
+
+Gold-selected inputs contain every official supporting sentence and title, without inserting the answer field. All complete rendered inputs match their frozen tokens at inference, with no character clipping or token truncation. The prospectively allowed 8,192-token ceiling was unnecessary: maximum actual inputs are 298/314 tokens for Qwen/Mistral. Both readers use their pinned NF4 checkpoints, greedy seed 13 and at most 32 emitted tokens. Oracle evidence selection, instructions and evidence amount differ from retrieved-input conditions. This capability reference is neither a strict mathematical upper bound nor a causal retrieval-only ablation.
+
+\begin{table*}[htbp]
+\centering\footnotesize
+\caption{Reader capability references and historical same-ID comparators on 100 HotpotQA questions. Means use adapted predictions. Official EM equals local EM here; F1 conventions remain separate. BM25 and cross-encoder answers are historical and are not regenerated.}
+\label{tab:priority_reader_controls}
+\begin{tabularx}{\textwidth}{l X r r r r}
+\toprule
+Reader & Evidence condition & $n$ & EM & Local F1 & Official F1 \\
+\midrule
+Qwen & Question only & 100 & 0.090 & 0.1407 & 0.1407 \\
+Qwen & Gold-selected support & 100 & 0.570 & 0.6760 & 0.6760 \\
+Qwen & BM25 & 100 & 0.180 & 0.2462 & 0.2462 \\
+Qwen & Cross-encoder & 100 & 0.290 & 0.3752 & 0.3752 \\
+\midrule
+Mistral & Question only & 100 & 0.050 & 0.1950 & 0.1825 \\
+Mistral & Gold-selected support & 100 & 0.350 & 0.5357 & 0.5267 \\
+Mistral & BM25 & 100 & 0.150 & 0.2680 & 0.2643 \\
+Mistral & Cross-encoder & 100 & 0.220 & 0.3685 & 0.3633 \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+Four additional families (local/official EM/F1) each contain ten fixed contrasts, five per reader. EM uses exact two-sided McNemar; F1 uses explicitly Monte Carlo paired sign flips. Intervals use 10,000 paired bootstrap resamples and seed 13. Gold-minus-question-only EM is $+0.48$ [$0.38,0.58$] for Qwen and $+0.30$ [$0.21,0.39$] for Mistral, adjusted $p=9.06\times10^{-13}/1.23\times10^{-7}$. Gold-minus-cross-encoder EM is $+0.28$ [$0.18,0.38$] for Qwen, adjusted $p=1.36\times10^{-5}$. Mistral's $+0.13$ [$0.02,0.24$] remains unresolved ($p_{\mathrm{Holm}}=0.0702$), despite the interval excluding zero. Local and official EM families coincide for these data. Neither gold-selected condition yields perfect benchmark EM; that residual cannot be assigned uniquely to reasoning or formatting.
+
+All 400 new raw/adapted predictions are re-evaluated against both scorers. Local metrics maximize over stored aliases; official metrics use the pinned HotpotQA scorer and its official single answer. Historical Qwen/BM25 lacks raw predictions, so its raw mean remains missing rather than substituted. Qwen emits EOS for all 200 answers with no cap hits. Mistral emits EOS for 174, with 27 cap hits (20 question-only, seven gold-support); one cap hit also ends with EOS. Actual cap and EOS indicators are therefore separate. Input/source hashes, score reconstruction and complete analysis rerun are verified.
+
+\FloatBarrier

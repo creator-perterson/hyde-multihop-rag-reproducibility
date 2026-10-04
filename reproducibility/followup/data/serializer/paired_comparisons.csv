@@ -1,0 +1,5 @@
+reader,baseline,target,endpoint,n,baseline_mean,target_mean,delta,ci_low,ci_high,baseline_only,target_only,baseline_higher,target_higher,ties,p_exact,p_raw,test,seed,n_resamples,family,family_size,p_holm,status
+qwen,450,900,local_em,100,0.29,0.29,0.0,-0.05,0.05,3,3,3,3,94,1.0,1.0,two_sided_exact_mcnemar,13,10000,serializer_local_em,2,1.0,unresolved
+qwen,450,900,local_f1,100,0.37516666666666665,0.38897186147186147,0.013805194805194806,-0.03385714285714285,0.06475757575757575,,,5,5,90,,0.6288371162883711,paired_sign_flip_monte_carlo,13,10000,serializer_local_f1,2,1.0,unresolved
+mistral,450,900,local_em,100,0.22,0.21,-0.01,-0.06,0.03,3,2,3,2,95,1.0,1.0,two_sided_exact_mcnemar,13,10000,serializer_local_em,2,1.0,unresolved
+mistral,450,900,local_f1,100,0.3645963369537538,0.378033062135364,0.01343672518161009,-0.0337257002233345,0.06104795515652294,,,8,12,80,,0.5808419158084192,paired_sign_flip_monte_carlo,13,10000,serializer_local_f1,2,1.0,unresolved

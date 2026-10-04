@@ -1,0 +1,22 @@
+\subsection{External News-Corpus Validation: MultiHop-RAG}
+\label{sec:mhrag_external}
+
+MultiHop-RAG~\cite{tang2024multihoprag} supplies a news-document benchmark outside the Wikipedia-oriented tiers. The complete frozen release has 2,556 questions: retrieval and answer EM/F1 use 2,255 non-null questions; 301 null queries define separate canonical abstention. Support is matched by parent-document evidence IDs, rather than Wikipedia titles. Five available retrieval methods, two pinned readers and both 450/900-character evidence settings yield 20 sealed cells with 51,120 answers.
+
+This is an available-condition analysis, not a complete six-condition transfer test. IRCoT is technically unavailable because the frozen local adapter assumes the HotpotQA corpus/index and lacks registered external parser, prompt, stopping and smoke anchors. This limits the implementation, not the IRCoT algorithm. Four observed contrasts versus BM25 use Holm correction with a fifth slot reserved conservatively at 1.0; no observed IRCoT $p$-value is imputed. The full registered family and transport decision are not complete.
+
+\input{table_mhrag_available_retrieval_v2.tex}
+
+Complete-support retrieval is \MHRBMAll{} for BM25, \MHRDenseAll{} for Dense, \MHRQAll{} for Qwen-HyDE and \MHRMAll{} for Mistral-HyDE. All three adjusted contrasts with BM25 are negative. The cross-encoder reaches \MHRCEAll{}, with a positive adjusted gain of \MHRCEGain{} (Table~\ref{tab:mhrag_retrieval}). Standard open-generator expansion therefore supplies no observed gain over the lexical baseline here, while reranking the frozen BM25 top-100 pool does.
+
+New post-hoc comparisons also match each expansion directly to the same Dense baseline on all 2,255 non-null IDs. All-support deltas are $-0.0550$ for Qwen-HyDE and $-0.0692$ for Mistral-HyDE, with Holm-adjusted $p=2.29\times10^{-11}$ and $3.24\times10^{-17}$. All eight reader/length EM comparisons favor Dense after adjustment. These additional families leave the historical BM25 family unchanged (Online Resource 1, Section~\SuppRef{sec:supp_priority_diagnostics}).
+
+Retrieval improvement only partly carries through to answers. Cross-encoder EM gains over BM25 are positive after adjustment with both readers at 450 characters and Qwen at 900 characters; Mistral/900 remains unresolved. Both HyDE variants have negative adjusted EM contrasts with Qwen at both lengths; their Mistral contrasts are unresolved. Dense improves Mistral/900 EM, with the other EM contrasts unresolved. The exploratory EM interaction is significant only for Mistral-HyDE versus BM25 at 450 characters. Non-significant interactions do not establish reader invariance. Both lengths, secondary F1, raw/adapted scores and null abstention are retained in supplementary Section~\SuppRef{sec:supp_mhrag_external} in Online Resource 1.
+
+Figure~\ref{fig:retrieval_answer_contrasts} summarizes the cross-encoder contrasts with BM25 across the three corpus-scale evaluations. Retrieval gains are supported in each, whereas the answer decisions depend on corpus, reader and, for news, character budget. The distinct support definitions and endpoints preclude a pooled gain or retrieval-to-answer conversion rate.
+
+\input{figure_retrieval_answer_jiis.tex}
+
+Null queries expose a separate reader limitation. Mistral/900 canonical abstention is 0.0299 for both BM25 and the cross-encoder, compared with Qwen at 0.6611/0.6213. However, lexical refusal expressions occur in 170/301 and 153/301 Mistral outputs, respectively. This gap and frequent output-cap termination indicate a format-sensitive endpoint, rather than a human-confirmed hallucination rate. The registered adapter and canonical-null scores remain unchanged.
+
+On the frozen 500-question prompt subset, query2doc-style improves all-support retrieval over standard for both generators after adjustment; evidence-only does not. Same-subset Dense and BM25 scores are 0.502 and 0.590, versus 0.516/0.512 for Qwen/Mistral Query2doc-style. The new 36-contrast post-hoc family leaves both Query2doc-versus-Dense comparisons unresolved and both contrasts with BM25 negative. Seed dispersion on the disjoint 300-question subset remains descriptive; alternative-prompt answer gains are unmeasured. Missing end-to-end costs prevent efficiency claims, and withdrawn independent human validation leaves evidence sufficiency unmeasured.

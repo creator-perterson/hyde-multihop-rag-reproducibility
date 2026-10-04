@@ -1,0 +1,45 @@
+\begin{table*}[t]
+\centering
+\caption{End-to-end work profile for the registered 500-question HotpotQA Full-Wiki conditions. Panel A reports mean structural work per question; Panel B reports total observed seconds and mean reader output tokens for each 500-question local-system stage. Missing historical reranker timing is reported as unavailable and is not imputed.}
+\label{tab:fullwiki_system_cost}
+\scriptsize
+\textbf{Panel A: structural work per question}\\[2pt]
+\setlength{\tabcolsep}{2.8pt}
+\begin{tabular}{llrrrrrrr}
+\toprule
+Reader & Retrieval condition & $n$ & BM25 & Gen. & Gen. tok. & Rescore & Read calls & Fail \\
+\midrule
+Qwen & OneR/BM25 & 500 & 1.000 & 0.000 & 0.0 & 0.0 & 1.000 & 0 \\
+Qwen & HyDE-BM25 & 500 & 1.000 & 1.000 & 73.4 & 0.0 & 1.000 & 0 \\
+Qwen & IRCoT & 500 & 2.104 & 2.104 & 56.3 & 0.0 & 1.000 & 0 \\
+Qwen & BGE-base & 500 & 1.000 & 0.000 & 0.0 & 100.0 & 1.000 & 0 \\
+Qwen & BGE v2-m3 & 500 & 1.000 & 0.000 & 0.0 & 100.0 & 1.000 & 0 \\
+\midrule
+Mistral & OneR/BM25 & 500 & 1.000 & 0.000 & 0.0 & 0.0 & 1.000 & 0 \\
+Mistral & HyDE-BM25 & 500 & 1.000 & 1.000 & 73.4 & 0.0 & 1.000 & 0 \\
+Mistral & IRCoT & 500 & 2.104 & 2.104 & 56.3 & 0.0 & 1.000 & 0 \\
+Mistral & BGE-base & 500 & 1.000 & 0.000 & 0.0 & 100.0 & 1.000 & 0 \\
+Mistral & BGE v2-m3 & 500 & 1.000 & 0.000 & 0.0 & 100.0 & 1.000 & 0 \\
+\bottomrule
+\end{tabular}
+\\[6pt]
+\textbf{Panel B: observed runtime and reader output}\\[2pt]
+\begin{tabular}{llrrr}
+\toprule
+Reader & Retrieval condition & Rerank s & Read tok. & Read s \\
+\midrule
+Qwen & OneR/BM25 & -- & 3.4 & 665.7 \\
+Qwen & HyDE-BM25 & -- & 3.6 & 726.5 \\
+Qwen & IRCoT & -- & 3.5 & 209.8 \\
+Qwen & BGE-base & unavailable & 3.7 & 482.6 \\
+Qwen & BGE v2-m3 & 972.5 & 3.8 & 1108.7 \\
+\midrule
+Mistral & OneR/BM25 & -- & 11.5 & 629.3 \\
+Mistral & HyDE-BM25 & -- & 12.2 & 750.1 \\
+Mistral & IRCoT & -- & 12.0 & 402.1 \\
+Mistral & BGE-base & unavailable & 11.0 & 1550.0 \\
+Mistral & BGE v2-m3 & 972.5 & 11.0 & 888.3 \\
+\bottomrule
+\end{tabular}
+\\[3pt]\parbox{0.98\linewidth}{\footnotesize Qwen denotes Qwen2.5-7B-Instruct and Mistral denotes Mistral-7B-Instruct-v0.3. Gen. denotes retrieval-side generation; Read denotes the final answer reader. Rescore is the mean candidate count. Recorded reranker hardware: NVIDIA GeForce RTX 4060 Laptop GPU. Reader seconds are server-reported generation time; the historical row artifacts do not record an exact reader GPU. Times are therefore configuration-specific measurements, not hardware-independent efficiency or monetary cost.}
+\end{table*}

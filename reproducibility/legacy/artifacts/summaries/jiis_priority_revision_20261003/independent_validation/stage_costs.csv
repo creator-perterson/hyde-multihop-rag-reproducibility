@@ -1,0 +1,5 @@
+stage,units,unit_type,successful_seconds,model_load_seconds,mean_unit_seconds
+cpu_bm25_preparation,128,ES_read_search_calls; two queries per new ID,42.884805299690925,,0.33503754140383535
+cross_encoder,6400,pair_classification_forward_calls_batch1,490.99061480001546,9.994272300042212,0.07671728356250242
+qwen_reader,64,generative_reader_calls,58.92480909975711,19.940333600039594,0.9207001421837049
+mistral_reader,64,generative_reader_calls,88.94730240001809,13.759228800074197,1.3898016000002826

@@ -1,0 +1,61 @@
+\section{Matched Character-budget Intervention}
+\label{sec:supp_followup_serializer}
+
+This same-question diagnostic was frozen after historical outcomes but before its new answers. It fixes the first 100 original HotpotQA IDs, saved cross-encoder top-10 paragraphs and both pinned NF4 readers. Each reader generates fresh 450- and 900-character conditions, with 2,000 input tokens, 32 output tokens, greedy decoding and seed 13: 400 formal answers after eight separate smoke answers. Historical 450-character predictions lack runtime token anchors and are not reused. Both new conditions use the same original full-wiki prompt and answer adapter, with the corrected evidence-tail policy preserving the complete answer/chat suffix. This is a matched interface-budget intervention, not independent validation, equal actual tokens or equal cost.
+
+All 400 actual inputs match their frozen token IDs and contain the full suffix. No input reaches the token ceiling; maxima are 1,568 tokens for Qwen and 1,709 for Mistral. Strict whole-paragraph alignment and official sentence indices identify complete retrieved support in 55/100 questions. Increasing the character budget raises complete annotated-sentence retention from 46/100 to 55/100 for both readers, with no extra token-stage loss. These matches do not certify semantic sufficiency.
+
+\begin{table*}[htbp]
+\centering\footnotesize
+\caption{Fresh matched serializer conditions on the same 100 questions. Scores use local adapted predictions; support is complete annotated-sentence retention in actual input. EOS and output-cap counts are measured separately from generated token IDs.}
+\label{tab:followup_serializer_summary}
+\begin{tabularx}{\textwidth}{l r r r r r r r}
+\toprule
+Reader & Chars & EM & F1 & Support & Mean input & EOS & Cap \\
+\midrule
+Qwen & 450 & 0.290 & 0.3752 & 46/100 & 965.92 & 100 & 0 \\
+Qwen & 900 & 0.290 & 0.3890 & 55/100 & 1090.13 & 100 & 0 \\
+Mistral & 450 & 0.220 & 0.3646 & 46/100 & 1054.94 & 93 & 7 \\
+Mistral & 900 & 0.210 & 0.3780 & 55/100 & 1194.60 & 94 & 6 \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\begin{table*}[htbp]
+\centering\footnotesize
+\caption{Prospectively specified 900-minus-450 answer contrasts. Primary EM has a two-test exact McNemar/Holm family; secondary F1 has a separate two-test Monte Carlo sign-flip/Holm family. Intervals use 10,000 paired bootstrap resamples, seed 13, and are unadjusted. All four adjusted decisions are unresolved.}
+\label{tab:followup_serializer_pairs}
+\begin{tabularx}{\textwidth}{l l r l r r r}
+\toprule
+Reader & Endpoint & $\Delta$ & 95\% CI & Losses & Wins & $p_{\mathrm{Holm}}$ \\
+\midrule
+Qwen & EM & 0.0000 & $[-0.0500,0.0500]$ & 3 & 3 & 1.000 \\
+Mistral & EM & $-0.0100$ & $[-0.0600,0.0300]$ & 3 & 2 & 1.000 \\
+Qwen & F1 & 0.0138 & $[-0.0339,0.0648]$ & -- & -- & 1.000 \\
+Mistral & F1 & 0.0134 & $[-0.0337,0.0610]$ & -- & -- & 1.000 \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+The extra nine questions with retained complete support do not establish an EM or F1 gain. This result does not establish equivalence, nor identify the causal effect of semantic evidence sufficiency: evidence length and actual input tokens change together. Official single-answer EM agrees with local EM; Mistral official F1 is 0.3594/0.3719 at 450/900 characters, kept as descriptive scorer sensitivity. All 408 formal/smoke rows pass independent prompt reconstruction, effective-token, support, raw/adapted scoring, decoding and termination checks. A separate numeric-only reanalysis reproduces all four contrasts. Summaries, numeric provenance and sanitized score/support vectors are in \path{artifacts/summaries/jiis_followup_revision/serializer/}; private text remains excluded.
+
+\FloatBarrier
+\section{Complete Method Matrix on Random New Questions}
+\label{sec:supp_followup_holdout}
+
+This follow-up fixes a simple random sample of 300 questions from the same official HotpotQA development source. An inventory of 1,601 prior JSONL files identifies 564 previously observed IDs, including the original 500 and subsequent 64. One other question has an invalid official supporting-sentence index. The 6,840 eligible IDs are sorted, then sampled without replacement with Python Random(13), preserving draw order. No outcome-based exclusion, replacement or extension is permitted. New IDs do not establish a new dataset or absence of training contamination.
+
+The scientific contract is frozen before new retrieval or model output. At question 136, a 200-hit raw window supplies only 86 unique CE candidates. An engineering amendment, frozen after 273 known CPU requests and before all model outputs, expands the raw window to 400 while retaining 100 unique candidates. Re-querying preserves all 135 completed top-100 lists byte-for-byte and in order. The amendment also enforces cumulative attempt accounting and exact ordered input/hash verification; it changes neither sample nor endpoints. Failed attempts and the earlier contract remain retained.
+
+The three methods share the existing 5,233,329-paragraph index: question-only BM25, standard Qwen-HyDE/BM25 using question plus one hypothetical passage capped at 100 output tokens, and the pinned cross-encoder reranking BM25 top-100 to ten. Cross-encoder pairs use 512 tokens and float16; a synthetic throughput/memory benchmark fixes batch four before formal scores. Neither queries nor model inputs contain gold answers or support annotations. Both pinned readers use NF4, greedy seed 13, 450 characters per document, 2,000 input tokens and 32 output tokens. All six 300-row input cells are frozen before any reader answer, with the full answer/chat suffix preserved.
+
+Primary local EM uses the single official answer and the existing answer adapter. Three method pairs under two readers form a six-test family; all-support-title retrieval has a separate three-test family. Secondary local F1 and official EM/F1 sensitivities each have separately labeled six-test families. Binary contrasts use exact McNemar; F1 uses 10,000 Monte Carlo paired sign flips with plus-one correction. Intervals use 10,000 paired bootstrap draws, seed 13, and are unadjusted. Holm correction is within each frozen family. At n=300, assumed five-percentage-point effects have only 20.4/8.6/5.6\% conservative power under discordance .2/.4/.6 and $\alpha=.05/6$; these pre-output assumptions are not measured power. The four-hour cumulative GPU ceiling includes loading, benchmarks, failures and resumed attempts. All results remain separate from historical 500-question means.
+
+All 300 hypothetical passages, 30,000 formal CE pairs and 1,800 reader answers are complete. Independent reconstruction validates ordered IDs, the 135-row earlier CPU lineage, all six prompts/effective-token files, stable finite CE rankings, HyDE query composition, raw/adapted local and official scoring, and decoding/EOS/cap records. Strict complete annotated support is retrieved in 105/132/161 questions under BM25/HyDE/CE; character serialization retains 86/103/121, identical under both readers. There is no additional token-stage loss, with input maxima 1,399/1,523 tokens. These are exact-match support diagnostics, not human sufficiency labels.
+
+\input{followup_holdout_tables.tex}
+
+CE-minus-BM25 retrieval and EM gains are supported, including EM differences $+0.090$ for Qwen and $+0.070$ for Mistral. HyDE-minus-BM25 retrieval is supported; its EM gain is supported for Qwen and unresolved for Mistral. CE-minus-HyDE EM is unresolved for Qwen and supported for Mistral, while both secondary F1 gains are supported. Official sensitivity retains these decision directions. Different within-reader significance decisions do not establish an interaction or general method ordering. All 27 contrasts, including unresolved cases, are retained. No historical mean is pooled with the new sample.
+
+The cumulative technical GPU-phase wall budget used is 3,146.10 seconds, including loading and synthetic benchmarking; this is not matched end-to-end request cost or deployment latency. The known search-request total is 1,038 including earlier CPU attempts and the structural repair, rather than the 600 conceptual preparation requests in one phase receipt. The run service is stopped using its exact recorded PID/create-time ownership tree; the index is preserved. Metric-only vectors, summaries and provenance are in \path{artifacts/summaries/jiis_followup_revision/holdout/}. Raw questions, paragraphs, prompts and predictions remain excluded.
+

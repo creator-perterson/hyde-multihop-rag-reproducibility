@@ -1,0 +1,15 @@
+\begin{table}[htbp]
+\centering
+\caption{Temporal sensitivity of the frozen hosted generations under a current-alias replay. Each dataset contributes 50 deterministic questions with three replays per question. Exact and text/embedding similarities compare replayed generations with the frozen originals; retrieval columns compare BGE-base top-10 outputs. This is not provider snapshot reconstruction.}
+\label{tab:hosted_drift}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Dataset & $n$ & Exact & Token J. & BGE cos. & Top-10 J. & Orig. all & Replay all & Agree \\
+\midrule
+HotpotQA & 150 & 0.0067 & 0.5811 & 0.9602 & 0.8104 & 0.9600 & 0.9600 & 1.0000 \\
+2Wiki & 150 & 0.0000 & 0.5112 & 0.9307 & 0.6524 & 0.8000 & 0.7667 & 0.9667 \\
+\bottomrule
+\end{tabular}
+\end{table}

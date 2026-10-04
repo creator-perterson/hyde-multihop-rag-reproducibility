@@ -1,0 +1,21 @@
+\subsection{Query2doc-Style Transfer Protocol}
+\label{supp:sec:query2doc_style_protocol}
+
+The reader-facing name \emph{Query2doc-style (4-shot adaptation)} is used throughout this submission. The internal artifact key remains \texttt{open\_query2doc\_4shot} so that already frozen files and hashes remain stable. This condition is a faithful transfer of the published pseudo-document recipe for controlled comparison, but it is not an official reproduction. The original method and the present condition differ in task, benchmark corpus, demonstration pool, generator checkpoint, and dense retriever.
+
+Each prompt contains four fixed query--passage demonstrations: two HotpotQA and two 2WikiMultihopQA training examples. For each dataset, the candidate demonstration pool is the first 256 eligible examples in released order. Target-specific demonstration IDs are selected deterministically by ranking SHA-256 hashes of the target ID, candidate ID, and seed 13. Test questions, test answers, test supporting-title labels, and test corpus passages are never used as demonstrations. The selected IDs and prompt SHA-256 are stored with every local generation row.
+
+\begingroup\sloppy
+The generator is \path{Qwen/Qwen2.5-7B-Instruct} at revision
+\texttt{fe11104b620d588ccc049ff6631dd3ea002e3d98}. Greedy decoding uses
+\texttt{do\_sample=false}, seed 13, and \texttt{max\_new\_tokens=96}. The
+generated pseudo-document is serialized for retrieval as
+\path{question [SEP] pseudo-document}. It is encoded with
+\path{BAAI/bge-base-en-v1.5} at revision
+\texttt{a5beb1e3e68b9ab74eb54cfd186867f64f240e1a}, CLS pooling, L2
+normalization, a 512-token limit, and top-$k=10$. The pseudo-document is used
+only to form the retrieval query and is never supplied to the downstream reader
+as evidence.\par
+\endgroup
+
+No prompt, checkpoint, demonstration, or retrieval parameter is tuned on the 500-example test outputs. Because the transfer changes several components relative to the published Query2doc setting, results from this row support only a controlled neighboring-baseline comparison. They must not be interpreted as reproducing the original paper's absolute effectiveness.

@@ -1,0 +1,62 @@
+\documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage{placeins}
+\usepackage{xurl}
+\usepackage{multicol}
+
+\setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
+\setlength{\floatsep}{10pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+
+\hypersetup{
+  bookmarksdepth=3,
+  pdftitle={When Does HyDE-Style Query Expansion Help? Reliability Boundaries in Multi-Hop Intelligent Information Retrieval},
+  pdfauthor={Shiyong Xiong; Xingyun Chen},
+  pdfkeywords={intelligent information retrieval; retrieval-augmented generation; multi-hop question answering; query expansion; reproducibility}
+}
+
+\newcommand{\best}[1]{\textbf{#1}}
+\input{mhrag_available_macros_v2.tex}
+\input{jiis_supp_refs.tex}
+
+\begin{document}
+
+\input{front_matter_jiis.tex}
+\input{introduction_jiis.tex}
+\input{related_work_jiis.tex}
+\input{methods_jiis.tex}
+\input{table_boundary_stability_matrix.tex}
+\input{results_jiis.tex}
+\FloatBarrier
+\input{discussion_jiis.tex}
+\input{conclusion_jiis.tex}
+
+\section*{Statements and Declarations}
+\begingroup
+\footnotesize
+
+\noindent\textbf{Funding.} This research received no project funding.\par
+\noindent\textbf{Competing interests.} The authors declare no competing interests.\par
+\noindent\textbf{Author contributions.} Shiyong Xiong: supervision. Xingyun Chen: conceptualization, methodology, software, investigation, formal analysis, writing---original draft, and writing---review and editing.\par
+\noindent\textbf{Ethics approval.} Not applicable. This study used public benchmark materials and model experiments; no human participants were recruited and no personal data were collected. Authors' case checks were limited to public materials.\par
+\noindent\textbf{Consent to participate.} Not applicable; no human participants were recruited.\par
+\noindent\textbf{Consent for publication.} Not applicable; this article reports no identifiable participant information.\par
+\noindent\textbf{Data availability.} HotpotQA, 2WikiMultihopQA and MultiHop-RAG are available from their original providers under their terms. Sanitized numeric inputs for eight historical retrieval contrasts and 31 new paired contrasts accompany the article in Online Resources 2 and 3. These exclude benchmark text, raw predictions and indexes. Full news-reader reanalysis, prediction rescoring and model reruns require additional per-question inputs, upstream data and model weights; the supplied vectors do not replace these inputs.\par
+\noindent\textbf{Code availability.} Online Resources 2 and 3 contain versioned reconstruction/reanalysis code (0.1.0-local-20261004 and 0.2.0-local-20261004), manifests and instructions. Project-authored software is covered by the included MIT license; third-party data and models retain their own terms. These packages reproduce the specified tables and numeric contrasts, not full model runs. The project page is \url{https://github.com/creator-perterson/hyde-multihop-rag-reproducibility}; the current experimental code is not publicly archived there. No archival DOI has been assigned.
+\endgroup
+
+\setlength{\bibsep}{0pt}
+\renewcommand{\bibfont}{\fontsize{8}{9}\selectfont}
+\begin{multicols}{2}
+\bibliography{references_jiis}
+\end{multicols}
+
+\end{document}

@@ -1,0 +1,5 @@
+# Preserve frozen manifest-bound bytes on every platform.
+/reproducibility/legacy/** -text
+/reproducibility/followup/** -text
+*.pdf binary
+*.zip binary

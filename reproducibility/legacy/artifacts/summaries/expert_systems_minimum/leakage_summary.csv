@@ -1,0 +1,7 @@
+dataset,method,n,exact_answer_overlap_rate,alias_proxy_rate,supporting_title_rate,new_supporting_title_rate,count_exact_answer,count_alias_proxy,count_supporting_title_only,count_no_identifiable_gold_content
+hotpotqa,open_hyde_standard,500,0.234,0.014,0.786,0.134,117,7,276,100
+hotpotqa,open_hyde_evidence_only,500,0.252,0.016,0.758,0.122,126,8,257,109
+hotpotqa,open_query2doc_4shot,500,0.234,0.014,0.782,0.124,117,7,279,97
+2wiki,open_hyde_standard,500,0.452,0.012,0.984,0.046,226,6,261,7
+2wiki,open_hyde_evidence_only,500,0.432,0.022,0.994,0.052,216,11,271,2
+2wiki,open_query2doc_4shot,500,0.4,0.01,0.98,0.042,200,5,285,10

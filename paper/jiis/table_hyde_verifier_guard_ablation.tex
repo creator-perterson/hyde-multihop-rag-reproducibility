@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\caption{HyDE verifier guard ablation reconstructed from existing verifier outputs.}
+\label{tab:hyde_verifier_guard_ablation}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r r r c}
+\toprule
+Variant & $N$ & Verified & Changed & EM & F1 & $\Delta$F1 & W$\rightarrow$C / C$\rightarrow$W \\
+\midrule
+HyDE reader only & 500 & 0 & 0 & 0.6840 & 0.8105 & 0.0000 & 0 / 0 \\
+HyDE + verifier raw & 500 & 120 & 5 & 0.6840 & 0.8119 & 0.0013 & 2 / 2 \\
+HyDE + no-abstention guard & 500 & 120 & 5 & 0.6840 & 0.8119 & 0.0013 & 2 / 2 \\
+HyDE + numeric-unit guard & 500 & 120 & 3 & 0.6880 & 0.8135 & 0.0030 & 2 / 0 \\
+HyDE + both guards & 500 & 120 & 3 & 0.6880 & 0.8135 & 0.0030 & 2 / 0 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item All rows reuse the same HyDE reader answers and the same 120 risk-selected verifier outputs. The raw row applies verifier final answers directly. The final row applies both deterministic guards: block new abstentions and block unsupported numeric-unit additions. The ablation is intended to justify the verifier's safety boundary, not to present verification as the main performance driver.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

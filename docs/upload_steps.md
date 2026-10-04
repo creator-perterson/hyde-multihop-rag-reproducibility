@@ -1,34 +1,11 @@
-# GitHub Upload Steps
+# Maintaining the public JIIS package
 
-Run these commands from the repository root. Use an anonymous local Git identity for all review-release commits:
+This repository already exists. Preserve its history and use a normal commit/push after inspecting the exact diff; do not reinitialize it or force-push to replace history.
 
-```powershell
-cd <repo-root>
-git init
-git config user.name "Anonymous Authors"
-git config user.email "anonymous@example.com"
-git status
-git add .
-git commit -m "Initial reproducibility release"
-```
+The current publication allowlist is recorded in `release/github_publication_manifest.json`. Keep the current manuscript under `paper/jiis/`, numerical packages under `reproducibility/` and versioned downloads under `release/assets/`. Add only reviewed paths. Do not use a whole-checkout add operation.
 
-Create a new empty repository on GitHub, then connect and push:
+Before publishing changed numeric inputs, rerun their capsule commands and rejection tests in a clean directory. If a frozen file changes, establish a new version and update the associated manifest instead of silently rewriting the old archive. Rebuild manuscript sources when their text or figures change.
 
-```powershell
-git branch -M main
-git remote add origin https://github.com/creator-perterson/hyde-multihop-rag-reproducibility.git
-git push -u origin main
-```
+Do not add temporary/cache/virtual-environment files, corpora/questions/gold text, raw predictions/generations, private endpoints or credentials, model weights/indexes, submission cover letters, internal reviewer/author records or entire historical submission bundles. `.gitignore` does not remove files already tracked: inspect both the staged diff and existing tracked paths.
 
-If a non-anonymous initial commit was already pushed, rewrite the local initial commit with the anonymous identity and push with `--force-with-lease` after confirming this is allowed by the review policy.
-
-Before making the repository public:
-
-```powershell
-git status
-rg -n "api_key|apikey|secret|password|Authorization|BEGIN .*PRIVATE|LLM_API_KEY=|OPENAI_API_KEY=" .
-```
-
-Expected secret-scan hits should be limited to placeholders in `.env.example`, documentation, or code that reads environment variables. Do not publish real `.env` files, raw credentials, provider request exports, or private screenshots.
-
-For double-blind review, keep the repository private or anonymized until the venue policy allows public release.
+Only record a public commit URL, tag or DOI after the corresponding operation succeeds. No archival DOI currently exists. Current model-running code and local configuration candidates require separate scope/portability checks; successful capsule execution proves only its declared numerical scope.

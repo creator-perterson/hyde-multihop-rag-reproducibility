@@ -1,0 +1,25 @@
+\FloatBarrier
+\section{MultiHop-RAG Available-Condition External Validation}
+\label{sec:supp_mhrag_external}
+
+This section reports the completed available-condition matrix and the separate S3 retrieval robustness study. It does not certify completion of the full registered six-condition family or independent human validation. Framework, claim-stress and supporting-sentence audits are completed in Sections S21--S22; the planned human component was withdrawn under the scope amendment below. IRCoT's frozen local adapter is technically ineligible for this corpus; no failed or missing run is assigned a numerical score. Four observed method-versus-BM25 contrasts retain a conservative fifth multiplicity slot at 1.0. The primary endpoints are non-null all-support retrieval and answer EM; F1 and null abstention are secondary. All paired intervals resample questions 10,000 times with seed 13; binary main effects use exact McNemar tests, while reader interactions use paired sign-flip inference.
+
+The official release is pinned to revision \path{71ac0d0bd1f951d2d6b70311f7d2ae404e1ffa82}. The source has 2,556 fixed ordered questions, including 301 null queries. The BGE checkpoint revision is \path{a5beb1e3e68b9ab74eb54cfd186867f64f240e1a}; the cross-encoder revision is \path{953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e}. Parent evidence IDs define retrieval support. The frozen standard HyDE condition uses the question plus generated text, top-10 retrieval, greedy generation and the original prompt; hypothetical text is never reader evidence. The two revision-pinned readers retain the 450/900 character serializers, 2,000-token input budget, greedy seed 13 and 32-token output limit. The corrected serializer preserves the complete answer/chat suffix by budgeting evidence first. Five Qwen/450 cells have independently verified effective-token identity with the historical sealed source; all other cells belong to the new corrected execution namespace. The invalid historical Qwen/900 prefix is neither used nor overwritten.
+
+The answer seal binds 20 cells and 51,120 rows, including unique ordered IDs, recomputed scores, frozen parameters, actual effective-input hashes, EOS/output-cap termination and independent archive copies. The S3 seal binds 12 generation and 12 retrieval cells, each totaling 4,800 rows. The table reconstruction manifest is \path{artifacts/tables/jiis_chatfix_available_v2/manifest.json}; it binds all consumed summary hashes, both independent seals, the builder and generated tables. Its release-readiness and full-family flags are false. Complete paired EM/F1, abstention and secondary cost comparisons remain in \path{artifacts/summaries/jiis_acceptance_v3/reader_chatfix_v1/answers/paired_comparisons.csv}; reader interactions and cost summaries are separately hash-bound. Licensed/private text and the coordinator-only blind allocation key are outside these tables.
+
+\input{table_mhrag_available_answers_v2.tex}
+\input{table_mhrag_available_em_v2.tex}
+\input{table_mhrag_available_raw_null_v2.tex}
+\input{table_mhrag_available_interactions_v2.tex}
+\FloatBarrier
+
+The prompt subset contains 500 non-null questions, and the seed subset contains 300 different non-null questions. Prompt conditions are greedy standard, evidence-only and query2doc-style; the two target-versus-standard contrasts are Holm-corrected within each generator/endpoint. The seed study uses the standard prompt with temperature 0.7 at seeds 13, 37 and 101. All generation caps are 96 tokens. Question-level bootstrap preserves the three seed outcomes together. No alternative prompt or seed is promoted into the primary answer matrix, and no answer experiment has been performed for these S3 alternatives.
+
+\input{table_mhrag_available_prompts_v2.tex}
+\input{table_mhrag_available_seeds_v2.tex}
+\FloatBarrier
+\input{table_mhrag_available_cost_v2.tex}
+
+A retrospective scope amendment dated 2026-10-03 withdrew the planned 120-item independent human audit because qualified annotators could not be recruited. The amendment occurred after automated results were available, but no labels were collected; no annotation outcome informed the decision. Original plans, the packet and blank forms remain archived. The raw/adapted answer analysis is retained. No replacement LLM judge or human agreement statistic is introduced. Benchmark-based scores and official-sentence retention remain automated diagnostics, while the older single-annotator taxonomy remains illustrative. Independent human evidence sufficiency and error-category reliability were not evaluated. The versioned amendment and preserved-source hashes are recorded in \path{docs/experiments/jiis_human_audit_scope_amendment_2026-10-03.json}; original absence and release-readiness flags are not rewritten.
+\FloatBarrier

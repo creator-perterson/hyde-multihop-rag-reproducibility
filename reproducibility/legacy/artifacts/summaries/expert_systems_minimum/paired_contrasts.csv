@@ -1,0 +1,9 @@
+dataset,target,reference,endpoint,n,target_value,reference_value,paired_delta,ci_low,ci_high,mcnemar_gains,mcnemar_losses,mcnemar_discordant,mcnemar_p,holm_adjusted_p
+hotpotqa,open_hyde_standard,dense_bge,all-support hit@10,500,0.846,0.882,-0.036,-0.062,-0.01,14,32,46,0.011351591436778108,0.09081273149422486
+hotpotqa,open_query2doc_4shot,dense_bge,all-support hit@10,500,0.87,0.882,-0.012,-0.036,0.012,16,22,38,0.417692190836533,1.0
+hotpotqa,open_query2doc_4shot,open_hyde_standard,all-support hit@10,500,0.87,0.846,0.024,0.0,0.048,24,12,36,0.06524533522315323,0.3914720113389194
+hotpotqa,open_hyde_evidence_only,open_hyde_standard,all-support hit@10,500,0.816,0.846,-0.03,-0.054,-0.008,10,25,35,0.01667384780012071,0.11671693460084498
+2wiki,open_hyde_standard,dense_bge,all-support hit@10,500,0.492,0.51,-0.018,-0.048,0.012,24,33,57,0.2892437471090205,1.0
+2wiki,open_query2doc_4shot,dense_bge,all-support hit@10,500,0.488,0.51,-0.022,-0.05,0.006,19,30,49,0.15240777196147803,0.7620388598073902
+2wiki,open_query2doc_4shot,open_hyde_standard,all-support hit@10,500,0.488,0.492,-0.004,-0.03,0.022,20,22,42,0.8776143287523155,1.0
+2wiki,open_hyde_evidence_only,open_hyde_standard,all-support hit@10,500,0.488,0.492,-0.004,-0.028,0.018,17,19,36,0.8679394004284404,1.0

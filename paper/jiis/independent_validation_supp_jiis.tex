@@ -1,0 +1,27 @@
+\section{New-sample Validation of Frozen Selection Rules}
+\label{sec:supp_independent_validation_new}
+This experiment freezes rules using historical outcomes, then evaluates new query outputs without changing those rules. It is prospective for the new outputs, not retrospective preregistration of the entire paper. The pinned HotpotQA dev source contains 7,405 questions. All old project result/prompt records identify 500 previously observed dev IDs; the first 64 remaining IDs in source order are selected. No new result, stratification or outcome screen determines membership. Sanitized metrics, overlap counts, contract hashes and completion records are in \path{artifacts/summaries/jiis_priority_revision_20261003/independent_validation/}; full inventories, contracts and private inputs remain in the corresponding local directory.
+
+The retrieval-mean rule chooses among BM25, standard Qwen-HyDE/BM25 and the learned cross-encoder using old all-support means 0.298/0.348/0.468. The audit-informed rule uses their old equal-weight two-reader EM means 0.184/0.203/0.236. Ties resolve BM25, HyDE, then cross-encoder. Both rules choose the cross-encoder before new outcomes. Provenance, complete chat suffix and valid outputs are admissibility checks; they do not authorize changing the selected method or discarding unfavorable questions. This limited audit-informed rule does not operationalize every possible diagnostic or establish a general selection policy.
+
+The restored index contains 5,233,329 records with no failed shards. CPU preparation performs 128 searches, top-10 and top-100 for each of 64 questions, taking 42.885 seconds. Cross-encoding scores 6,400 question--paragraph pairs and takes 490.991 successful-stage seconds, excluding 9.994 seconds of model loading. The pinned readers run sequentially on ten 450-character paragraph prefixes with greedy seed 13, 2,000 input tokens and 32 output tokens. Actual effective inputs and sentence offsets are frozen before reading and verified at runtime. There is no new HyDE generation or new BM25/HyDE reader outcome in this selected-policy experiment.
+
+\begin{table*}[htbp]
+\centering\footnotesize
+\caption{Shared selected-policy results on 64 previously unobserved HotpotQA questions. Scores use the local full-wiki convention and fixed adapter. Both frozen rules select the same cross-encoder evidence; their performance difference is structural zero, without an inferential $p$-value.}
+\label{tab:priority_independent_validation}
+\begin{tabularx}{\textwidth}{l r r r r r r}
+\toprule
+Reader & $n$ & EM & F1 & Retrieved support & Final support & Length stops \\
+\midrule
+Qwen & 64 & 0.2813 & 0.3678 & 33/64 & 24/64 & 0/64 \\
+Mistral & 64 & 0.2188 & 0.3706 & 33/64 & 24/64 & 6/64 \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+All retrieved annotated support survives for 33/64 questions; 450-character serialization retains complete sentences for 24/64. Final token inputs retain the same 24/64, with no additional token truncation for either reader. Qwen emits EOS in all 64 outputs; Mistral has 58 EOS and six length stops. The fixed adapter changes nine Mistral texts and two score rows. All 128 reader calls, finite reranker scores, stable ordering, ID alignments, effective-input hashes and stored local scores pass verification.
+
+Because the policies share the same method and outputs, $\Delta\mathrm{EM}=\Delta\mathrm{F1}=0$ by construction. No significance test is reported for identical policies. This is no observed decision increment, rather than evidence that the complete audit can never improve selection. The 64-question descriptive check neither measures unselected-method performance nor validates general routing accuracy. Stage timings belong to this execution cohort, exclude orchestration gaps and do not constitute a complete comparable end-to-end cost matrix.
+
+\FloatBarrier

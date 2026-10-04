@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering
+\caption{Open-weight retrieval-stage confirmatory results. Deltas and 95\% paired-bootstrap confidence intervals use each condition's pre-registered reference: Dense for standard HyDE and the Query2doc-style adaptation, and standard HyDE for evidence-only HyDE.}
+\label{tab:open_generator_query2doc}
+\scriptsize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{llrrlrrrr}
+\toprule
+Dataset & Condition & All-support & Recall & Reference & Delta & 95\% CI & Exact-answer & Mean words \\
+\midrule
+HotpotQA & Dense & 0.8820 & 0.9380 & -- & -- & -- & -- & -- \\
+HotpotQA & Open HyDE & 0.8460 & 0.9180 & Dense & -0.0360 & [-0.0620, -0.0100] & 0.2340 & 53.2 \\
+HotpotQA & Evidence-only HyDE & 0.8160 & 0.9020 & Open HyDE & -0.0300 & [-0.0540, -0.0080] & 0.2520 & 71.6 \\
+HotpotQA & Query2doc-style (4-shot adaptation) & 0.8700 & 0.9320 & Dense & -0.0120 & [-0.0360, 0.0120] & 0.2340 & 34.6 \\
+\midrule
+2Wiki & Dense & 0.5100 & 0.7655 & -- & -- & -- & -- & -- \\
+2Wiki & Open HyDE & 0.4920 & 0.7495 & Dense & -0.0180 & [-0.0480, 0.0120] & 0.4520 & 50.2 \\
+2Wiki & Evidence-only HyDE & 0.4880 & 0.7390 & Open HyDE & -0.0040 & [-0.0280, 0.0180] & 0.4320 & 66.0 \\
+2Wiki & Query2doc-style (4-shot adaptation) & 0.4880 & 0.7505 & Dense & -0.0220 & [-0.0500, 0.0060] & 0.4000 & 33.5 \\
+\bottomrule
+\end{tabular}
+\end{table*}

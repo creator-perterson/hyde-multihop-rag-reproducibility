@@ -1,0 +1,3 @@
+reader,n,method,raw_em,raw_f1,adapted_em,adapted_f1,all_support_titles_count,all_support_sentences_retrieved_count,all_support_sentences_chars_count,all_support_sentences_actual_tokens_count,input_truncated_count,length_count,eos_count,reader_calls,successful_reader_seconds,policy_delta_em,policy_delta_f1,policy_p_value,status
+qwen,64,cross_encoder,0.28125,0.3677712912087912,0.28125,0.3677712912087912,33,33,24,24,0,0,64,64,58.92480909975711,0.0,0.0,,shared_CE_outputs_structural_zero_increment
+mistral,64,cross_encoder,0.21875,0.3743350371818621,0.21875,0.37061479908662404,33,33,24,24,0,6,58,64,88.94730240001809,0.0,0.0,,shared_CE_outputs_structural_zero_increment

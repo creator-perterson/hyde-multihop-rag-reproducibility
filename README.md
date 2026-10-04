@@ -1,71 +1,39 @@
-# HyDE-Style Query Expansion for Multi-Hop Evidence Acquisition
+# HyDE-Style Query Expansion: Reliability Boundaries
 
-This repository contains the code, paper sources, final manuscript PDFs, and lightweight reproducibility artifacts for:
+Code, manuscript sources and numerical audit materials for:
 
-**A Controlled Study of HyDE-Style Query Expansion for Multi-Hop Evidence Acquisition**
+**When Does HyDE-Style Query Expansion Help? Reliability Boundaries in Multi-Hop Intelligent Information Retrieval**
 
-The anonymized review repository is available at:
+Shiyong Xiong and Xingyun Chen, School of Computer Science and Technology, Chongqing University of Posts and Telecommunications, Chongqing, China.
 
-https://github.com/creator-perterson/hyde-multihop-rag-reproducibility
+## Current manuscript
 
-The repository is prepared for GitHub release without local secrets, virtual environments, build caches, raw processed datasets, private endpoint URLs, or large embedding/retrieval caches.
+- [Main manuscript](paper/jiis/manuscript_jiis.pdf): 25 pages.
+- [Supplementary Information](paper/jiis/supplementary_jiis.pdf): 69 pages, including the additional serializer and random 300-question experiments.
+- [Editable LaTeX sources](paper/jiis/): bibliography, figures and Springer class/style included.
+- [Versioned downloads](release/assets/): two numeric capsules and manuscript-source archives.
 
-## Repository Layout
+The JIIS manuscript is the current version. Earlier PDFs and `paper/latex/` files retained from the initial repository commit are historical drafts.
 
-```text
-configs/                 Optional experiment configuration files.
-experiments/             PowerShell runners for equal-budget diagnostics.
-src/                     Data preparation, retrieval, generation, evaluation, and verifier code.
-tests/                   Unit and regression tests used during manuscript preparation.
-paper/
-  manuscript_v0.pdf      Current compiled main manuscript.
-  supplemental_material.pdf
-  latex/                 LaTeX source files and bibliography.
-  figures/               Final exported figure assets.
-artifacts/
-  summaries/             Lightweight CSV/MD summaries used by the paper tables.
-  hashes/                LaTeX provenance/hash tables from the supplement.
-docs/                    Reproducibility notes, model invocation ledger, and upload steps.
-```
+## Numerical reproduction
 
-## What Is Not Included
+See [the reproduction entry point](reproducibility/README.md) and [scope guide](docs/jiis_followup_reproduction_guide.md).
 
-- Real API keys or `.env` files.
-- Full processed datasets and generated local corpora.
-- FAISS indexes, embedding caches, and `.pt` cache files.
-- Full hosted-reader output dumps unless represented by lightweight summaries.
-- LaTeX temporary files and visual-check screenshots.
+| Package | Command from its directory | Scope |
+|---|---|---|
+| [Legacy capsule](reproducibility/legacy/) | `python -S run.py` | Legacy table reconstruction and eight historical paired retrieval comparisons; Python 3.10+ standard library |
+| [Follow-up capsule](reproducibility/followup/) | `python -I scripts/reanalyze_jiis_followup_metrics.py --input-root data --out outputs` | Four serializer and 27 new-question comparisons, 615 numeric fields; Python 3.10+ and NumPy 2.2.6 |
 
-The paper reports upstream dataset commits, file hashes, and conversion outputs in the supplement and in `artifacts/hashes/`. When upstream dataset licenses or terms restrict redistribution, this repository provides provenance, manifests, hashes, preparation scripts, and derived table summaries rather than republishing the full processed corpora.
+For the follow-up capsule, first install its `requirements.txt` in your environment. It also includes seven input-rejection tests.
 
-## Environment
+These packages reproduce specified numerical results from frozen vectors. They do not rescore raw predictions, rerun models, rebuild full corpora/indexes or reproduce every result in the article. Corpora, questions, gold answers, raw predictions, prompts, reasoning traces, credentials, private request logs, model weights and indexes are excluded from this update. Existing code from the initial commit remains available, but the current complete model-running environment is not supplied by these capsules.
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-```
+## Provenance and licensing
 
-For hosted LLM calls, copy `.env.example` to `.env` and fill in local credentials. Do not commit `.env`.
+[Publication manifest](release/github_publication_manifest.json) binds the current numerical packages and paper files to their SHA-256 hashes. Frozen capsule manifests retain their original packaging-time `local_only` status and versions; the publication manifest records subsequent distribution separately. No archival DOI has been assigned.
 
-## Quick Checks
+Project-authored software and associated software documentation are under [MIT](LICENSE). Paper text, manuscript PDFs, figures, third-party datasets/models and the Springer template retain their separate terms; see [Third-party notices](THIRD_PARTY_NOTICES.md).
 
-```powershell
-pytest tests
-```
+## Publication maintenance
 
-Some tests or full reproduction scripts require local datasets, model caches, or hosted LLM access. The included summaries and manuscript PDFs are intended to support audit and review without uploading large generated artifacts.
-
-## Rebuild Main Tables From Frozen Summaries
-
-This command rebuilds compact LaTeX snapshots of the main reported tables from the included frozen CSV/MD summaries, without API keys or raw datasets:
-
-```powershell
-python scripts/rebuild_main_tables_from_summaries.py
-```
-
-The output is written to `artifacts/tables/rebuilt_main_tables.tex`.
-
-## GitHub Upload
-
-See `docs/upload_steps.md`.
+Use an explicit file allowlist and inspect staged changes. [Maintenance instructions](docs/upload_steps.md) explain the publication boundaries. Internal submission files, historical delivery directories, temporary files and raw experimental data are not part of this update.

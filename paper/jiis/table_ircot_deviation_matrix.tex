@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\caption{Official-code deviation matrix for the HotpotQA full-wiki IRCoT tier.}
+\label{tab:ircot_deviation_matrix}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.06}
+\begin{tabularx}{\textwidth}{
+  >{\raggedright\arraybackslash}p{0.14\textwidth}
+  >{\raggedright\arraybackslash}p{0.35\textwidth}
+  >{\raggedright\arraybackslash}X}
+\toprule
+Component & Frozen implementation & Relation to upstream or historical setup \\
+\midrule
+Upstream code & Official IRCoT commit \path{3c1820f698eea5eeddb4fba3c56b64c961e063e4}. & Retains the inference state machine and HotpotQA configuration generator. \\
+Generator & Local Qwen2.5-7B-Instruct, pinned revision, NF4, greedy decoding, seed 13. & Replaces the historical generator; model-level equivalence is not claimed. \\
+Compatibility alias & Upstream \texttt{flan-t5-base} API name retained only for routing; logs record Qwen. & Interface compatibility only, never reported as model identity. \\
+\texttt{/generate/} service & Localhost adapter returns upstream-compatible generated text, token count, timing, and model fields. & Local compatibility implementation; no external API call. \\
+Prompt handling & Official prompt text wrapped in a Qwen-Instruct chat template with a one-next-sentence instruction. & Required open-generator adaptation; model input is not byte-identical to the historical setup. \\
+Token/decode limits & 2,000 input tokens, at most 200 new tokens per chain call, greedy decoding. & Reduces the upstream generated configuration's 6,000-token model limit. \\
+Tokenizer hook & Official prompt reader loads the pinned local Qwen tokenizer through a scoped compatibility hook. & Test questions and retrieval logic are unchanged. \\
+Sentence adapter & Lightweight \texttt{ircot-sentence-adapter-1} in the frozen primary run. & Replaces the historical spaCy runtime while preserving the controller interface. \\
+Retrieval & Elasticsearch 7.10.2, official full-wiki schema, BM25 over title and paragraph, two documents per round. & Matches the selected official configuration and common frozen index. \\
+Exit controls & Official controller, at most 10 reasoning sentences, \path{global_max_num_paras=15}. & Retained from the generated official configuration/runtime. \\
+Evaluation subset & Frozen 500-question list; top-10 accumulated documents scored by supporting title. & Bounded confirmatory subset, not a full benchmark rerun. \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Remaining differences include generator training data, Qwen chat serialization, tokenizer, quantized inference, package versions, and the sentence adapter. The label is official-code/open-generator adaptation, not exact historical reproduction.
+\end{tablenotes}
+\end{table}

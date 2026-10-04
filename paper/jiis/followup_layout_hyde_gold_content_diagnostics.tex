@@ -1,0 +1,85 @@
+\begin{table}[htbp]
+\centering
+\caption{Automatic gold-content stratification of HyDE hypothetical passages.}
+\label{tab:hyde_gold_content_groups}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}Xrrr>{\centering\arraybackslash}p{0.25\textwidth}@{}}
+\toprule
+Dataset & Stratum & $N$ & Dense all & HyDE all & $\Delta$ all [95\% CI] \\
+\midrule
+HotpotQA & Exact answer & 292 & 0.6644 & 0.9452 & \shortstack{0.2808\\\mbox{[0.2295, 0.3322]}} \\
+\addlinespace[\jot]
+HotpotQA & Alias/proxy & 22 & 0.6818 & 0.9545 & \shortstack{0.2727\\\mbox{[0.0909, 0.4545]}} \\
+\addlinespace[\jot]
+HotpotQA & Supporting entity & 154 & 0.6104 & 0.7987 & \shortstack{0.1883\\\mbox{[0.1234, 0.2532]}} \\
+\addlinespace[\jot]
+HotpotQA & No identifiable content & 32 & 0.3750 & 0.4375 & \shortstack{0.0625\\\mbox{[0.0000, 0.1562]}} \\
+\addlinespace[\jot]
+2Wiki & Exact answer & 347 & 0.3458 & 0.6599 & \shortstack{0.3141\\\mbox{[0.2680, 0.3631]}} \\
+\addlinespace[\jot]
+2Wiki & Alias/proxy & 20 & 0.5500 & 0.9500 & \shortstack{0.4000\\\mbox{[0.1500, 0.6500]}} \\
+\addlinespace[\jot]
+2Wiki & Supporting entity & 132 & 0.3636 & 0.6515 & \shortstack{0.2879\\\mbox{[0.2121, 0.3712]}} \\
+\addlinespace[\jot]
+2Wiki & No identifiable content & 1 & 0.0000 & 0.0000 & \shortstack{0.0000\\\mbox{[0.0000, 0.0000]}} \\
+\addlinespace[\jot]
+\bottomrule
+\end{tabularx}
+\medskip\textbf{Recall and answer scores}\par\smallskip
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}Xccc@{}}
+\toprule
+Dataset & Stratum & \shortstack{Recall\\Dense / HyDE} & \shortstack{F1\\Dense / HyDE} & $\Delta$F1 [95\% CI] \\
+\midrule
+HotpotQA & Exact answer & \shortstack{0.8271\\0.9726} & \shortstack{0.7976\\0.9085} & \shortstack{0.1110\\\mbox{[0.0756, 0.1461]}} \\
+\addlinespace[\jot]
+HotpotQA & Alias/proxy & \shortstack{0.8409\\0.9773} & \shortstack{0.7072\\0.7841} & \shortstack{0.0768\\\mbox{[-0.0379, 0.2078]}} \\
+\addlinespace[\jot]
+HotpotQA & Supporting entity & \shortstack{0.8019\\0.8961} & \shortstack{0.6238\\0.6786} & \shortstack{0.0548\\\mbox{[-0.0006, 0.1057]}} \\
+\addlinespace[\jot]
+HotpotQA & No identifiable content & \shortstack{0.6406\\0.6406} & \shortstack{0.4828\\0.5693} & \shortstack{0.0865\\\mbox{[-0.0312, 0.2167]}} \\
+\addlinespace[\jot]
+2Wiki & Exact answer & \shortstack{0.6650\\0.8617} & \shortstack{0.6520\\0.7824} & \shortstack{0.1304\\\mbox{[0.0916, 0.1738]}} \\
+\addlinespace[\jot]
+2Wiki & Alias/proxy & \shortstack{0.7750\\0.9750} & \shortstack{0.5375\\0.7786} & \shortstack{0.2411\\\mbox{[0.0571, 0.4500]}} \\
+\addlinespace[\jot]
+2Wiki & Supporting entity & \shortstack{0.6667\\0.8314} & \shortstack{0.3889\\0.5863} & \shortstack{0.1974\\\mbox{[0.1304, 0.2642]}} \\
+\addlinespace[\jot]
+2Wiki & No identifiable content & \shortstack{0.5000\\0.5000} & \shortstack{0.0000\\0.0000} & \shortstack{0.0000\\\mbox{[0.0000, 0.0000]}} \\
+\addlinespace[\jot]
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The strata are mutually exclusive and assigned in the order shown: exact normalized gold answer, automatic alias/paraphrase proxy, supporting-title/entity mention, and no identifiable gold content. These diagnostics are not used for model selection or inference. The proxy is lexical and conservative; it does not replace human leakage annotation.
+\end{tablenotes}\par\smallskip\raggedright\emph{Panel key.} Short stratum labels denote exact-answer present, alias/paraphrase proxy present, supporting-entity present, and no identifiable gold content, respectively. In the second panel, each stacked pair lists Dense above HyDE.
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Gold-aware scrubbed HyDE retrieval-only diagnostic.}
+\label{tab:hyde_gold_content_scrubbed}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}Xrrcc@{}}
+\toprule
+Dataset & Retrieval query & All hit@10 & Recall@10 & \shortstack{$\Delta$ all vs Dense\\\mbox{[95\% CI]}} & \shortstack{$\Delta$ all vs\\original HyDE\\\mbox{[95\% CI]}} \\
+\midrule
+HotpotQA & Dense question only & 0.6300 & 0.8080 & \shortstack{0.0000\\\mbox{[0.0000, 0.0000]}} & \shortstack{-0.2380\\\mbox{[-0.2760, -0.2000]}} \\
+HotpotQA & Original HyDE q+h & 0.8680 & 0.9280 & \shortstack{0.2380\\\mbox{[0.2020, 0.2780]}} & \shortstack{0.0000\\\mbox{[0.0000, 0.0000]}} \\
+HotpotQA & Answer-scrubbed HyDE q+h & 0.8380 & 0.9120 & \shortstack{0.2080\\\mbox{[0.1720, 0.2460]}} & \shortstack{-0.0300\\\mbox{[-0.0460, -0.0160]}} \\
+HotpotQA & Answer+support-title-scrubbed HyDE q+h & 0.7800 & 0.8830 & \shortstack{0.1500\\\mbox{[0.1140, 0.1860]}} & \shortstack{-0.0880\\\mbox{[-0.1140, -0.0620]}} \\
+2Wiki & Dense question only & 0.3580 & 0.6695 & \shortstack{0.0000\\\mbox{[0.0000, 0.0000]}} & \shortstack{-0.3100\\\mbox{[-0.3520, -0.2700]}} \\
+2Wiki & Original HyDE q+h & 0.6680 & 0.8575 & \shortstack{0.3100\\\mbox{[0.2700, 0.3520]}} & \shortstack{0.0000\\\mbox{[0.0000, 0.0000]}} \\
+2Wiki & Answer-scrubbed HyDE q+h & 0.6480 & 0.8445 & \shortstack{0.2900\\\mbox{[0.2500, 0.3340]}} & \shortstack{-0.0200\\\mbox{[-0.0340, -0.0060]}} \\
+2Wiki & Answer+support-title-scrubbed HyDE q+h & 0.5640 & 0.7770 & \shortstack{0.2060\\\mbox{[0.1660, 0.2480]}} & \shortstack{-0.1040\\\mbox{[-0.1320, -0.0780]}} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The scrubbed rows are offline diagnostics that delete exact answer strings, then answer and supporting-title strings from the generated hypothetical passage before retrieval. They are not deployable inference methods because gold answers and supporting titles are unavailable at test time. Reader answers are not regenerated for scrubbed rows.
+\end{tablenotes}
+\end{table}

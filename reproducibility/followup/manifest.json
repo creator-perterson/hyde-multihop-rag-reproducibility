@@ -1,0 +1,102 @@
+{
+  "version": "0.2.0-local-20261004",
+  "status": "local_only",
+  "doi": null,
+  "files": [
+    {
+      "path": "data/holdout/descriptive_summary.csv",
+      "bytes": 3177,
+      "sha256": "5498448dd4135f85038c801dc59bc396fa01e6024ad50cfa897057b634cb82e1"
+    },
+    {
+      "path": "data/holdout/paired_comparisons.csv",
+      "bytes": 8484,
+      "sha256": "c57f730c8af740f3cec6b1c02bd08b35fa0482630438b798959f3fd96ff38de7"
+    },
+    {
+      "path": "data/holdout/per_example_metrics.csv",
+      "bytes": 270731,
+      "sha256": "0989ae79000a385d3182847bf42ec48cce4c14b09d1df5a6d008c21953732431"
+    },
+    {
+      "path": "data/holdout/retrieval_metrics_per_example.csv",
+      "bytes": 30930,
+      "sha256": "58ff8436c3a5b7cfb9b4eea07e3b2936be4f0dc09b03021a3218b4ff80d50135"
+    },
+    {
+      "path": "data/serializer/answer_metrics_per_example.csv",
+      "bytes": 46892,
+      "sha256": "5d688d115d4b886269ed86b4ab32f1ff76ca09123150ab3024d214cba6fdd6c1"
+    },
+    {
+      "path": "data/serializer/descriptive_summary.csv",
+      "bytes": 791,
+      "sha256": "096d2ebfae381a5130fd19d506651a3b25593f2ad48a9f3a89b76befabf772ab"
+    },
+    {
+      "path": "data/serializer/paired_comparisons.csv",
+      "bytes": 964,
+      "sha256": "99ff067537726393a9d870e95f828c1850cde952817abbdac6a0101172bc14c2"
+    },
+    {
+      "path": "data/serializer/support_per_example_sanitized.csv",
+      "bytes": 67012,
+      "sha256": "fe9bdd8f76228500775cc548552db7f0ea077a08b9db21b4a872ad8efa38110f"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1471,
+      "sha256": "937fe8dd0b5199a9dccd5f53ee009f4217f5fb3228b3c3a6b50470db905a4f5b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1965,
+      "sha256": "6f760fdde954837758ad537924e44e4d0a691133ea9d3b80b8232ae7ae4030e5"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 14,
+      "sha256": "5e6d55d17a3de59f3187483e217af4f7968325ffc490ab74ad6f806b0c314d6d"
+    },
+    {
+      "path": "scripts/analyze_jiis_revision_pairs.py",
+      "bytes": 14056,
+      "sha256": "afc3f7f8865fdb4e6b1aea1cdd7eedd50309b83cb9d79db97ef80bce8b5eb133"
+    },
+    {
+      "path": "scripts/reanalyze_jiis_followup_metrics.py",
+      "bytes": 11397,
+      "sha256": "51943f8c21fdcec273055930c9b0cdfc60e5b158166f30b209affbd70ba62a01"
+    },
+    {
+      "path": "source_provenance.json",
+      "bytes": 3418,
+      "sha256": "36ad53af4026645b99301d9a9d23a4c6790e65dac6f688feab5c2fb2fa34a8b3"
+    },
+    {
+      "path": "src/evaluation/paired_inference.py",
+      "bytes": 2997,
+      "sha256": "b31351a0c927c94d08678969c1cd4ac468f6925f5ff2f5bdcae01a84d30a6325"
+    },
+    {
+      "path": "src/ircot_fullwiki/analyze_fullwiki_retrieval.py",
+      "bytes": 8807,
+      "sha256": "c8bd1126a9e718b0bb6e9c4ea0846eec47b38e13b3fe6b7094ee37e3d2ad1e4f"
+    },
+    {
+      "path": "src/ircot_fullwiki/fullwiki_manifest.py",
+      "bytes": 6577,
+      "sha256": "9f2735940821b7b280003e737b2e5eeb78dd61010a442066b90558b67088662c"
+    },
+    {
+      "path": "tests/test_followup_metric_reanalysis.py",
+      "bytes": 2689,
+      "sha256": "8bda161c6db23e90529a4165f9e8e2c6faa7629a589e8d7d8d72cd45ed9e3242"
+    },
+    {
+      "path": "VERSION",
+      "bytes": 22,
+      "sha256": "e40bebb62733fb83796c79b2e8a40e75efa3a02c50bbba6bf9420db59fc102f3"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+\begin{table}[htbp]
+\centering
+\caption{Answer-absent subset paired analysis.}
+\label{tab:answer_absent_subset}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth}r>{\raggedright\arraybackslash}p{0.14\textwidth}>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X@{}}
+\toprule
+Dataset & $N$ & Method & All-hit & Recall & F1 \\
+\midrule
+HotpotQA & 208 & Dense & 0.5817 & 0.7812 & 0.6110 \\
+ &  & HyDE & 0.7596 & 0.8654 & 0.6730 \\
+2Wiki & 153 & Dense & 0.3856 & 0.6797 & 0.4058 \\
+ &  & HyDE & 0.6863 & 0.8480 & 0.6076 \\
+\bottomrule
+\end{tabularx}
+\medskip\textbf{Paired answer differences}\par\smallskip
+\begin{tabularx}{\textwidth}{@{}lXrc@{}}
+\toprule
+Dataset & $\Delta$F1 [95\% CI] & W$\rightarrow$C / C$\rightarrow$W & McNemar $p$ \\
+\midrule
+HotpotQA & \shortstack{0.0620\\\mbox{[0.0170, 0.1080]}} & 20 / 8 & 0.0357 \\
+2Wiki & \shortstack{0.2019\\\mbox{[0.1372, 0.2671]}} & 30 / 3 & $<0.0001$ \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item The subset contains examples where the normalized gold-answer string is absent from the generated HyDE hypothetical passage under the rules in Table~\ref{tab:answer_overlap_definition}. It is not a no-gold-content stratum: for HotpotQA it combines alias/proxy and supporting-entity cases with the 32 no-identifiable-content cases. Transitions and McNemar tests refer to EM; the confidence intervals refer to F1. All rows reuse frozen retrieval and reader answer artifacts. The diagnostic weakens an exact-string-only explanation, but it does not rule out paraphrased answer content, benchmark contamination, or model memorization.
+\end{tablenotes}
+\end{table}

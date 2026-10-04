@@ -1,0 +1,31 @@
+\begin{table*}[t]
+\centering
+\caption{Top-$k$ sensitivity and supporting-title rank audit for fixed-ranking retrieval variants.}
+\label{tab:topk_sensitivity}
+\footnotesize
+\begin{threeparttable}
+\setlength{\tabcolsep}{2.0pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{@{}l l r r r r r r r r r@{}}
+\toprule
+\multicolumn{2}{c}{Retrieval variant} & \multicolumn{3}{c}{All-support hit} & \multicolumn{3}{c}{Mean recall} & \multicolumn{3}{c}{Worst supporting-title rank} \\
+\cmidrule(lr){1-2}\cmidrule(lr){3-5}\cmidrule(lr){6-8}\cmidrule(lr){9-11}
+Dataset & Method & @5 & @10 & @20 & @5 & @10 & @20 & \shortstack{Mean\\rank} & \shortstack{Median\\rank} & \shortstack{Miss\\@20} \\
+\midrule
+HotpotQA & Dense & 0.5060 & 0.6300 & 0.7240 & 0.7340 & 0.8080 & 0.8570 & 9.56 & 5.0 & 138 \\
+HotpotQA & BM25 & 0.5080 & 0.7320 & 0.8520 & 0.7310 & 0.8590 & 0.9250 & 7.98 & 5.0 & 74 \\
+HotpotQA & Direct rewrite & 0.4760 & 0.6180 & 0.7100 & 0.7160 & 0.7990 & 0.8480 & 9.90 & 6.0 & 145 \\
+\rowcolor{gray!6} HotpotQA & HyDE & 0.7760 & 0.8680 & 0.9080 & 0.8800 & 0.9280 & 0.9510 & 5.20 & 2.0 & 46 \\
+\addlinespace[2pt]
+2Wiki & Dense & 0.2740 & 0.3580 & 0.4220 & 0.6185 & 0.6695 & 0.7100 & 14.50 & 21.0 & 289 \\
+2Wiki & BM25 & 0.3300 & 0.4320 & 0.4740 & 0.6645 & 0.7250 & 0.7495 & 13.31 & 21.0 & 263 \\
+2Wiki & Direct rewrite & 0.2860 & 0.3680 & 0.4240 & 0.6335 & 0.6800 & 0.7140 & 14.35 & 21.0 & 288 \\
+\rowcolor{gray!6} 2Wiki & HyDE & 0.5880 & 0.6680 & 0.7140 & 0.8085 & 0.8575 & 0.8825 & 8.81 & 4.0 & 143 \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item Rows are rescored from top-20 retrieval artifacts generated from frozen questions and frozen generated query text; no new LLM calls are used. All-support hit requires all annotated supporting titles within rank $k$; mean recall is supporting-title recall at $k$. Worst supporting-title rank is capped at 21 when a support is absent from the top 20; Miss@20 counts examples with at least one support still absent. The depth-sensitive RRF fusion control is omitted because changing per-branch depth changes the fused top-10 ranking.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}

@@ -40,3 +40,20 @@ tmp_*/
 
 .DS_Store
 Thumbs.db
+
+# Local JIIS preparation and excluded publication inputs
+.tmp/
+.tmp_task*/
+local-artifacts/
+reproducibility/*/outputs/
+reproducibility/*/.venv*/
+paper/submission/
+release/jiis_submission_*/
+release/jiis_reproduction_followup_local_*/
+release/jiis_followup_metric_capsule_local_*/
+docs/github_upload_*
+docs/jiis_*review*.md
+docs/jiis_*execution*.md
+docs/jiis_*author*.md
+docs/jiis_final_language_update_*.md
+docs/jiis_s5_terminology_update_*.md

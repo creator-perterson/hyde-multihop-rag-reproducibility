@@ -1,0 +1,21 @@
+\begin{table*}[t]
+\centering
+\caption{Retrieval-only HyDE query-composition check on the released IRCoT 2WikiMultihopQA \texttt{test\_subsampled} split.}
+\label{tab:2wiki_hyde_query_mechanism}
+\small
+\begin{threeparttable}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X r r r r}
+\toprule
+Query used for dense retrieval & $N$ & Any hit@10 & All hit@10 & Recall@10 \\
+\midrule
+Question only & 500 & 0.9840 & 0.3580 & 0.6695 \\
+Hypothetical passage only & 500 & \best{0.9940} & 0.6640 & 0.8530 \\
+Question + hypothetical passage & 500 & \best{0.9940} & \best{0.6680} & \best{0.8575} \\
+\bottomrule
+\end{tabularx}
+\begin{tablenotes}
+\footnotesize
+\item This no-new-LLM diagnostic reuses the existing 2Wiki HyDE generations and dense index, without additional reader calls. Complete supporting-title retrieval is higher for the hypothetical-only row than for question-only retrieval, while keeping the original question provides a small additional anchor.
+\end{tablenotes}
+\end{threeparttable}
+\end{table*}
