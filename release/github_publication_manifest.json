@@ -14,8 +14,8 @@
   "files": [
     {
       "path": "README.md",
-      "size_bytes": 3213,
-      "sha256": "df9e604924c9039469456110cb46756293d10816897d0eacc1f5eb1cb9efb5bd"
+      "size_bytes": 4070,
+      "sha256": "950dd530855cf5f69ffe5ea2fd70055529cf7c5fee7e3792908bd4d62c71e923"
     },
     {
       "path": ".gitignore",
@@ -74,13 +74,13 @@
     },
     {
       "path": "paper/jiis/conclusion_jiis.tex",
-      "size_bytes": 1840,
-      "sha256": "338d760b5e98fa2b83d4d269e9326990213d6596befb7989ff624ba8a05def67"
+      "size_bytes": 2140,
+      "sha256": "d25d7d4e508e137d11b6cf9aa7e37b73f807439604d0aa5661093211afe3a452"
     },
     {
       "path": "paper/jiis/discussion_jiis.tex",
-      "size_bytes": 9108,
-      "sha256": "fca168705b8cfa600f6c3a6d61b11e3c544fcc17f3f37b187b7948476ed66dcb"
+      "size_bytes": 9067,
+      "sha256": "3b0d7cfb57c9472df33dd81b7223c6cfcfbe775d625d27418be2e5d57b5061e0"
     },
     {
       "path": "paper/jiis/figure1_jiis.tex",
@@ -134,8 +134,8 @@
     },
     {
       "path": "paper/jiis/front_matter_jiis.tex",
-      "size_bytes": 2214,
-      "sha256": "1fb49ef87c85c8f62eaa1cd5ce35dd5b0cce3685fc066a7458850d4ad4016d4a"
+      "size_bytes": 2541,
+      "sha256": "b8b3f7485976c7a0bba0e9e3467ec9adb01ebe0890f1effe503a17d10854cabf"
     },
     {
       "path": "paper/jiis/independent_validation_supp_jiis.tex",
@@ -144,8 +144,8 @@
     },
     {
       "path": "paper/jiis/introduction_jiis.tex",
-      "size_bytes": 5131,
-      "sha256": "7bb8a0d8bc3f07647c4070b8ee9c632c7cc3862404bbbdec0405bd66090bfce9"
+      "size_bytes": 5317,
+      "sha256": "aeecd8e61b941b80c73a22a2a59e392e3b0ef4f6b71ac8c5c0ddb293b571491a"
     },
     {
       "path": "paper/jiis/jiis_supp_refs.tex",
@@ -154,8 +154,8 @@
     },
     {
       "path": "paper/jiis/manuscript_jiis.tex",
-      "size_bytes": 3519,
-      "sha256": "512ecc80ef05ca422aef9493d081ab1c10ea8ed552264345d5dfe6feb2a5f01d"
+      "size_bytes": 3453,
+      "sha256": "5c0956732d713fe5e7dd9fb70d1bb1f5c38ae4fd94ea291e67f2dc8bf1ea74ec"
     },
     {
       "path": "paper/jiis/methods_jiis.tex",
@@ -199,8 +199,8 @@
     },
     {
       "path": "paper/jiis/related_work_jiis.tex",
-      "size_bytes": 4923,
-      "sha256": "bc81db000e24f44f6c0d81c7c7b349c1b3a3ff13336b12b1f8276268361f3619"
+      "size_bytes": 4933,
+      "sha256": "e3c5d9c797e552467299108f50ccbbbe263eb28959d8371f7fb8d85d7d753f27"
     },
     {
       "path": "paper/jiis/results_jiis.tex",
@@ -219,8 +219,8 @@
     },
     {
       "path": "paper/jiis/supplementary_jiis.tex",
-      "size_bytes": 73830,
-      "sha256": "6fb746fa5f6a4f7d8111e3d9107c245b95ebb9187fc2058669d5b5dae8a051da"
+      "size_bytes": 73630,
+      "sha256": "1022c3347d41d84d155467aa19f94d366ee7977cea05941538204e42551db346"
     },
     {
       "path": "paper/jiis/table_2wiki_corpus_scale.tex",
@@ -474,13 +474,13 @@
     },
     {
       "path": "paper/jiis/manuscript_jiis.pdf",
-      "size_bytes": 592489,
-      "sha256": "55a53c94223b0af1b744427a70617083b309f656f10973a6485476b01a6d40c4"
+      "size_bytes": 592762,
+      "sha256": "6eb8585b79eb8cabdd9aa21b6ac585efad50eddba1d6cd824e1c84b15e4af8e2"
     },
     {
       "path": "paper/jiis/supplementary_jiis.pdf",
-      "size_bytes": 662832,
-      "sha256": "17feac00c4ec1de6283353315641c6188517af85a210c0fb51004d31c6c251b0"
+      "size_bytes": 662085,
+      "sha256": "f4dcac906c25912b476747034bbe4486a84657dbb0aeb96d060e4a40a18c9ae9"
     },
     {
       "path": "reproducibility/legacy/artifacts/summaries/equal_budget_query_diagnostic/equal_budget_query_pairwise_bootstrap.csv",
@@ -759,22 +759,32 @@
     },
     {
       "path": "release/assets/jiis_main_source_20261005.zip",
-      "size_bytes": 269649,
-      "sha256": "93cc8d04cc4c0c995e42213499de3a53f8104b9d3c3e6e4c0b75381e8f9de10c"
+      "size_bytes": 269869,
+      "sha256": "1470c59877acbf883e9d3d3dc3a2d6fdea404ac27a6a40553f64eb5262ba3497"
     },
     {
       "path": "release/assets/jiis_supplement_source_20261005.zip",
-      "size_bytes": 183092,
-      "sha256": "7ea3ee576f7ee1cb9795b7f7e53239801b96a4f26f4b76398d7eb63d01ae3c4e"
+      "size_bytes": 183215,
+      "sha256": "6c21755165d7e42c3ee415b27ce7c5d69e4ea2ff794eb37d9755af6b5299f709"
     },
     {
       "path": ".gitattributes",
       "size_bytes": 157,
       "sha256": "499c556bcf8ea69d9cf886252430471f6e420009d873e3585dba7bd73c164aa4"
+    },
+    {
+      "path": "release/assets/jiis_ESM_2_submission_20261005.zip",
+      "size_bytes": 96545,
+      "sha256": "0d51888d89fd8b55a7de20bc1f3e34642de3cec2aba976ce6b23c05bf153b3fb"
+    },
+    {
+      "path": "release/assets/jiis_ESM_3_submission_20261005.zip",
+      "size_bytes": 164695,
+      "sha256": "98566dedc14cf9e5af7a7234806d5d50636cae8904ebaedf144a815dcadfef33"
     }
   ],
   "initial_publication_commit": "a68aaaacdd5093eaaf0d094b34da5f418255317a",
-  "publication_commit_scope": "First verified publication of the frozen numerical capsules; current file hashes describe the tree containing this updated manifest.",
+  "publication_commit_scope": "publication_commit identifies the first verified publication of the unchanged numerical capsules. Current file hashes describe the repository tree containing this manifest; the title/scope/landscape/abstract revision is identified separately.",
   "publication_url": "https://github.com/creator-perterson/hyde-multihop-rag-reproducibility/commit/a68aaaacdd5093eaaf0d094b34da5f418255317a",
   "numerical_packages": [
     {
@@ -787,5 +797,32 @@
       "directory": "reproducibility/followup",
       "versioned_url": "https://github.com/creator-perterson/hyde-multihop-rag-reproducibility/tree/a68aaaacdd5093eaaf0d094b34da5f418255317a/reproducibility/followup"
     }
-  ]
+  ],
+  "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
+  "current_manuscript_revision": "2026-10-05-title-scope-landscape-final-abstract-baseline-terms",
+  "current_abstract_words": 243,
+  "prior_public_tree": "68efd6ca4a77cea881c403e85d3d206bfd16ea4f",
+  "submission_wrappers": [
+    {
+      "online_resource": 2,
+      "path": "release/assets/jiis_ESM_2_submission_20261005.zip",
+      "sha256": "0d51888d89fd8b55a7de20bc1f3e34642de3cec2aba976ce6b23c05bf153b3fb",
+      "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
+      "capsule_version": "0.1.0-local-20261004",
+      "packaging_revision": "jiis-title-scope-20261005",
+      "original_capsule_sha256": "160aa6c52cc1941240fcbad254d40a6c9f8c2e3d176a7b694625abb17afe4ad4",
+      "all_original_capsule_files_unchanged": true
+    },
+    {
+      "online_resource": 3,
+      "path": "release/assets/jiis_ESM_3_submission_20261005.zip",
+      "sha256": "98566dedc14cf9e5af7a7234806d5d50636cae8904ebaedf144a815dcadfef33",
+      "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
+      "capsule_version": "0.2.0-local-20261004",
+      "packaging_revision": "jiis-title-scope-20261005",
+      "original_capsule_sha256": "ffac46f7be027474e05d9ba01e650e2f798939ca455f93a21d4306385857d441",
+      "all_original_capsule_files_unchanged": true
+    }
+  ],
+  "baseline_terminology": "matched question-only baselines"
 }

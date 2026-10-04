@@ -31,8 +31,26 @@
 \setlength{\@fpbot}{0pt plus 1fil}
 \makeatother
 
+% Show full-page sideways tables upright in PDF readers. The referenced float
+% pages are resolved from the auxiliary file, so table pagination stays intact.
+\usepackage{refcount}
+\newcommand{\JIISRotatePageForTable}[1]{%
+  \ifnum\getpagerefnumber{#1}=\value{page}\relax
+    \pdfpageattr{/Rotate 90}%
+  \fi
+}
+\AddToHook{shipout/before}{%
+  \pdfpageattr{/Rotate 0}%
+  \JIISRotatePageForTable{tab:dataset_artifact_provenance}%
+  \JIISRotatePageForTable{tab:open_generator_leakage}%
+  \JIISRotatePageForTable{tab:hotpotqa_paired_statistics}%
+  \JIISRotatePageForTable{tab:2wiki_paired_statistics}%
+  \JIISRotatePageForTable{tab:efficiency_profile_full}%
+  \JIISRotatePageForTable{tab:corpus_scale_stress_full}%
+}
+
 \hypersetup{
-  pdftitle={Supplementary Information: When Does HyDE-Style Query Expansion Help? Reliability Boundaries in Multi-Hop Intelligent Information Retrieval},
+  pdftitle={Supplementary Information: Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval},
   pdfauthor={Shiyong Xiong; Xingyun Chen},
   pdfkeywords={intelligent information retrieval; retrieval-augmented generation; multi-hop question answering; query expansion; reproducibility}
 }
@@ -55,7 +73,7 @@
 \begin{center}
 {\Large Supplementary Information}\\[3pt]
 {\large Online Resource 1}\\[6pt]
-{\large When Does HyDE-Style Query Expansion Help? Reliability Boundaries in Multi-Hop Intelligent Information Retrieval}\\[6pt]
+{\large Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval}\\[6pt]
 {\normalsize Journal of Intelligent Information Systems}\\[3pt]
 {\normalsize Authors: Shiyong Xiong and Xingyun Chen}\\[2pt]
 {\normalsize Affiliation: School of Computer Science and Technology,}\\
