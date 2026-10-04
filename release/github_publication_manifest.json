@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "package_date": "2026-10-05",
-  "status": "prepared_for_publication",
+  "status": "published",
   "repository": "https://github.com/creator-perterson/hyde-multihop-rag-reproducibility",
   "archival_doi": null,
   "scope": "Current JIIS manuscript and bounded numerical reproduction; no full model rerun claim",
@@ -10,7 +10,7 @@
     "0.2.0-local-20261004"
   ],
   "frozen_capsule_metadata": "Packaging-time local_only fields retained unchanged",
-  "publication_commit": null,
+  "publication_commit": "a68aaaacdd5093eaaf0d094b34da5f418255317a",
   "files": [
     {
       "path": "README.md",
@@ -79,8 +79,8 @@
     },
     {
       "path": "paper/jiis/discussion_jiis.tex",
-      "size_bytes": 9095,
-      "sha256": "cf0cae37cdcae30f80f1ca58fc5a7dbfe08b4b601e8e81201dca7897caa72e7d"
+      "size_bytes": 9108,
+      "sha256": "fca168705b8cfa600f6c3a6d61b11e3c544fcc17f3f37b187b7948476ed66dcb"
     },
     {
       "path": "paper/jiis/figure1_jiis.tex",
@@ -154,8 +154,8 @@
     },
     {
       "path": "paper/jiis/manuscript_jiis.tex",
-      "size_bytes": 3451,
-      "sha256": "d6bc6717178a296bc3a93c8dd96cddf646998262dbad05429a23f9b6a17147a3"
+      "size_bytes": 3519,
+      "sha256": "512ecc80ef05ca422aef9493d081ab1c10ea8ed552264345d5dfe6feb2a5f01d"
     },
     {
       "path": "paper/jiis/methods_jiis.tex",
@@ -219,8 +219,8 @@
     },
     {
       "path": "paper/jiis/supplementary_jiis.tex",
-      "size_bytes": 73762,
-      "sha256": "d501c72546d4e6f8cd5a76404a390151a7092cb8d6a12aa0e6304cb0e3313056"
+      "size_bytes": 73830,
+      "sha256": "6fb746fa5f6a4f7d8111e3d9107c245b95ebb9187fc2058669d5b5dae8a051da"
     },
     {
       "path": "paper/jiis/table_2wiki_corpus_scale.tex",
@@ -474,13 +474,13 @@
     },
     {
       "path": "paper/jiis/manuscript_jiis.pdf",
-      "size_bytes": 589091,
-      "sha256": "3dffb2b8c28204b8726a6d1d1aee67d316476cbbdecebe63ad51d1f634ecc1ca"
+      "size_bytes": 592489,
+      "sha256": "55a53c94223b0af1b744427a70617083b309f656f10973a6485476b01a6d40c4"
     },
     {
       "path": "paper/jiis/supplementary_jiis.pdf",
-      "size_bytes": 662736,
-      "sha256": "18b9c5f1c02b44c2036f3abf77557884f9226f89fdc7e263acebbe20cd4de548"
+      "size_bytes": 662832,
+      "sha256": "17feac00c4ec1de6283353315641c6188517af85a210c0fb51004d31c6c251b0"
     },
     {
       "path": "reproducibility/legacy/artifacts/summaries/equal_budget_query_diagnostic/equal_budget_query_pairwise_bootstrap.csv",
@@ -759,18 +759,33 @@
     },
     {
       "path": "release/assets/jiis_main_source_20261005.zip",
-      "size_bytes": 269621,
-      "sha256": "59fa0235f55b1edf03ea98c756723e174b3aec0e05801c1b2a87bb997826a09e"
+      "size_bytes": 269649,
+      "sha256": "93cc8d04cc4c0c995e42213499de3a53f8104b9d3c3e6e4c0b75381e8f9de10c"
     },
     {
       "path": "release/assets/jiis_supplement_source_20261005.zip",
-      "size_bytes": 183070,
-      "sha256": "0cb8734037c3a6e9a23ec2ef0f4d76f7d49c77d84f36b44050e622dad594353a"
+      "size_bytes": 183092,
+      "sha256": "7ea3ee576f7ee1cb9795b7f7e53239801b96a4f26f4b76398d7eb63d01ae3c4e"
     },
     {
       "path": ".gitattributes",
       "size_bytes": 157,
       "sha256": "499c556bcf8ea69d9cf886252430471f6e420009d873e3585dba7bd73c164aa4"
+    }
+  ],
+  "initial_publication_commit": "a68aaaacdd5093eaaf0d094b34da5f418255317a",
+  "publication_commit_scope": "First verified publication of the frozen numerical capsules; current file hashes describe the tree containing this updated manifest.",
+  "publication_url": "https://github.com/creator-perterson/hyde-multihop-rag-reproducibility/commit/a68aaaacdd5093eaaf0d094b34da5f418255317a",
+  "numerical_packages": [
+    {
+      "version": "0.1.0-local-20261004",
+      "directory": "reproducibility/legacy",
+      "versioned_url": "https://github.com/creator-perterson/hyde-multihop-rag-reproducibility/tree/a68aaaacdd5093eaaf0d094b34da5f418255317a/reproducibility/legacy"
+    },
+    {
+      "version": "0.2.0-local-20261004",
+      "directory": "reproducibility/followup",
+      "versioned_url": "https://github.com/creator-perterson/hyde-multihop-rag-reproducibility/tree/a68aaaacdd5093eaaf0d094b34da5f418255317a/reproducibility/followup"
     }
   ]
 }
