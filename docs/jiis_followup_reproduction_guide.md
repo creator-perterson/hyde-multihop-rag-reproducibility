@@ -40,7 +40,9 @@ The original ZIPs retain their recorded hashes and packaging-time metadata. Copy
 | Material | Current public file | Synchronization and scope |
 |---|---|---|
 | Online Resource 1 | [Supplementary Information](../paper/jiis/supplementary_jiis.pdf) | Current title and identification; 69 pages, six wide-table pages displayed in landscape. |
-| Online Resource 2 | [Article-identified ZIP](../release/assets/jiis_ESM_2_submission_20261005.zip) | Current article metadata and usage instructions around the unchanged legacy numerical capsule. |
-| Online Resource 3 | [Article-identified ZIP](../release/assets/jiis_ESM_3_submission_20261005.zip) | Current article metadata and usage instructions around the unchanged follow-up numerical capsule. |
+| Online Resource 2 | [Article-identified ZIP](../release/assets/jiis_ESM_2_submission_20261008.zip) | Current article metadata and usage instructions around the unchanged legacy numerical capsule. |
+| Online Resource 3 | [Article-identified ZIP](../release/assets/jiis_ESM_3_submission_20261008.zip) | Current article metadata and usage instructions around the unchanged follow-up numerical capsule. |
 
-Both ZIP wrappers use packaging revision `jiis-materials-sync-20261005` in their README and JSON metadata. Original frozen capsule versions, manifests, inputs and archive bytes remain unchanged. Current wrapper and manuscript/source hashes are recorded in [the publication manifest](../release/github_publication_manifest.json). Local submission cover letters and internal revision records are not part of the public package.
+Both ZIP wrappers use packaging revision `jiis-author-order-20261008` in their README and JSON metadata. Original frozen capsule versions, manifests, inputs and archive bytes remain unchanged. Current wrapper and manuscript/source hashes are recorded in [the publication manifest](../release/github_publication_manifest.json). Local submission cover letters and internal revision records are not part of the public package.
+
+Current authors (in manuscript order): Xingyun Chen; Shiyong Xiong. Corresponding author: Xingyun Chen, cxy201318@qq.com. Both authors are affiliated with the School of Computer Science and Technology, Chongqing University of Posts and Telecommunications, Chongqing 400065, China. Author identification was updated on 2026-10-08; the numerical capsule payloads are unchanged.

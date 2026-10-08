@@ -4,15 +4,17 @@ Code, manuscript sources and numerical audit materials for:
 
 **Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval**
 
-Shiyong Xiong and Xingyun Chen, School of Computer Science and Technology, Chongqing University of Posts and Telecommunications, Chongqing, China.
+Xingyun Chen and Shiyong Xiong, School of Computer Science and Technology, Chongqing University of Posts and Telecommunications, Chongqing, China.
+
+Corresponding author: Xingyun Chen (cxy201318@qq.com).
 
 ## Current manuscript
 
 - [Main manuscript](paper/jiis/manuscript_jiis.pdf): 25 pages.
 - [Supplementary Information](paper/jiis/supplementary_jiis.pdf): 69 pages, including the additional serializer and random 300-question experiments.
 - [Editable LaTeX sources](paper/jiis/): bibliography, figures and Springer class/style included.
-- [Main source archive](release/assets/jiis_main_source_20261005.zip) and [supplement source archive](release/assets/jiis_supplement_source_20261005.zip): synchronized with the current PDFs.
-- [Online Resource 2](release/assets/jiis_ESM_2_submission_20261005.zip) and [Online Resource 3](release/assets/jiis_ESM_3_submission_20261005.zip): numerical capsules with article title, authors, affiliation, corresponding contact and usage instructions.
+- [Main source archive](release/assets/jiis_main_source_20261008.zip) and [supplement source archive](release/assets/jiis_supplement_source_20261008.zip): synchronized with the current PDFs.
+- [Online Resource 2](release/assets/jiis_ESM_2_submission_20261008.zip) and [Online Resource 3](release/assets/jiis_ESM_3_submission_20261008.zip): numerical capsules with article title, authors, affiliation, corresponding contact and usage instructions.
 - [Original frozen downloads](release/assets/): the two numerical capsule archives retain their original bytes and versions.
 
 The JIIS manuscript is the current version. Earlier PDFs and `paper/latex/` files retained from the initial repository commit are historical drafts. The 2026-10-05 revision adopts the reliability-boundaries title and the finalized abstract, limits Introduction/Conclusion claims to tested configurations, uses consistent matched question-only baseline terminology, and displays the six wide supplementary tables in landscape orientation. The ESM wrappers add article identification outside the unchanged frozen capsules; their ZIP hashes differ from the original capsule archives.

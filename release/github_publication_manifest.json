@@ -14,8 +14,8 @@
   "files": [
     {
       "path": "README.md",
-      "size_bytes": 4070,
-      "sha256": "950dd530855cf5f69ffe5ea2fd70055529cf7c5fee7e3792908bd4d62c71e923"
+      "size_bytes": 4126,
+      "sha256": "578e8b511bdf3c1ad4cd3bd00335d1b306cc034386f1aec7d4b6ed51cba25ef8"
     },
     {
       "path": ".gitignore",
@@ -39,13 +39,13 @@
     },
     {
       "path": "docs/jiis_followup_reproduction_guide.md",
-      "size_bytes": 5277,
-      "sha256": "cffcd37239503b8a666e7dca88a1416302a34308a51e8408243ce3ecf72eb23e"
+      "size_bytes": 5652,
+      "sha256": "e40e039af7f5c80f1e1128d125bc8d2356f99fac3e63f91c0c86dda968190452"
     },
     {
       "path": "reproducibility/README.md",
-      "size_bytes": 3169,
-      "sha256": "1fbe42c621af860084aeacc03e2cd8e0b2bf083d62fea13656450c63ed2aa56f"
+      "size_bytes": 3544,
+      "sha256": "c3e43cecae979879fb021dae070885cdd805ef7d28e86495c371e357dc4457a6"
     },
     {
       "path": "paper/jiis/Fig1_Workflow.pdf",
@@ -134,8 +134,8 @@
     },
     {
       "path": "paper/jiis/front_matter_jiis.tex",
-      "size_bytes": 2541,
-      "sha256": "b8b3f7485976c7a0bba0e9e3467ec9adb01ebe0890f1effe503a17d10854cabf"
+      "size_bytes": 2540,
+      "sha256": "6bc3144039fdc50d717e6471c4cd6569c1011f6d792ecf74ccbaa65d36c89bf4"
     },
     {
       "path": "paper/jiis/independent_validation_supp_jiis.tex",
@@ -155,7 +155,7 @@
     {
       "path": "paper/jiis/manuscript_jiis.tex",
       "size_bytes": 3453,
-      "sha256": "5c0956732d713fe5e7dd9fb70d1bb1f5c38ae4fd94ea291e67f2dc8bf1ea74ec"
+      "sha256": "257afe6040f9ed74badb26e1a2330c8e60fdf6f5412158a309634dd97d0279ff"
     },
     {
       "path": "paper/jiis/methods_jiis.tex",
@@ -219,8 +219,8 @@
     },
     {
       "path": "paper/jiis/supplementary_jiis.tex",
-      "size_bytes": 73630,
-      "sha256": "1022c3347d41d84d155467aa19f94d366ee7977cea05941538204e42551db346"
+      "size_bytes": 73627,
+      "sha256": "dee9ea70a85cdbdfe41f769f2f55b2539418f9410552f935cf8535b2bedb4c40"
     },
     {
       "path": "paper/jiis/table_2wiki_corpus_scale.tex",
@@ -474,13 +474,13 @@
     },
     {
       "path": "paper/jiis/manuscript_jiis.pdf",
-      "size_bytes": 592762,
-      "sha256": "6eb8585b79eb8cabdd9aa21b6ac585efad50eddba1d6cd824e1c84b15e4af8e2"
+      "size_bytes": 592752,
+      "sha256": "c9d50bebc2dc6aaaec126457c553f26c9613b7f78e333c402ac520c50a5aca42"
     },
     {
       "path": "paper/jiis/supplementary_jiis.pdf",
-      "size_bytes": 662085,
-      "sha256": "f4dcac906c25912b476747034bbe4486a84657dbb0aeb96d060e4a40a18c9ae9"
+      "size_bytes": 662074,
+      "sha256": "d18fc41516dec048e6e7f0aa4e8dc718d703a6c290329b97b0d2c5284f8ea217"
     },
     {
       "path": "reproducibility/legacy/artifacts/summaries/equal_budget_query_diagnostic/equal_budget_query_pairwise_bootstrap.csv",
@@ -781,6 +781,26 @@
       "path": "release/assets/jiis_ESM_3_submission_20261005.zip",
       "size_bytes": 165013,
       "sha256": "634d8ffbaf599c728f6bcc066a18cd1324ef5bfc1e5875a82eb0c0d16b07caf2"
+    },
+    {
+      "path": "release/assets/jiis_main_source_20261008.zip",
+      "size_bytes": 269868,
+      "sha256": "02000886688aeeeb11ac34349a009aace7fa86f6deaaa033dc493827acf265f9"
+    },
+    {
+      "path": "release/assets/jiis_supplement_source_20261008.zip",
+      "size_bytes": 183217,
+      "sha256": "262e18634d7f0191136129305dab6f4900d914ce6ff16304d57720e5ecba7d99"
+    },
+    {
+      "path": "release/assets/jiis_ESM_2_submission_20261008.zip",
+      "size_bytes": 96853,
+      "sha256": "6d0a98afe0bb834e816964117006c12c755165ce6230532fc9004b8576794309"
+    },
+    {
+      "path": "release/assets/jiis_ESM_3_submission_20261008.zip",
+      "size_bytes": 165009,
+      "sha256": "ecbc6ca2f409b582eefe674ea7d2eea2070044dbe474732682b512be6f12517b"
     }
   ],
   "initial_publication_commit": "a68aaaacdd5093eaaf0d094b34da5f418255317a",
@@ -799,33 +819,61 @@
     }
   ],
   "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
-  "current_manuscript_revision": "2026-10-05-title-scope-landscape-final-abstract-baseline-terms",
+  "current_manuscript_revision": "2026-10-08-author-order-corresponding-author",
   "current_abstract_words": 243,
   "prior_public_tree": "68efd6ca4a77cea881c403e85d3d206bfd16ea4f",
   "submission_wrappers": [
     {
       "online_resource": 2,
-      "path": "release/assets/jiis_ESM_2_submission_20261005.zip",
-      "sha256": "aea0a34eac5e4a891c903b87c96cc497e0c31f75fcdc964c631ea55ee2df716b",
+      "path": "release/assets/jiis_ESM_2_submission_20261008.zip",
+      "sha256": "6d0a98afe0bb834e816964117006c12c755165ce6230532fc9004b8576794309",
       "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
       "capsule_version": "0.1.0-local-20261004",
-      "packaging_revision": "jiis-materials-sync-20261005",
+      "packaging_revision": "jiis-author-order-20261008",
       "original_capsule_sha256": "160aa6c52cc1941240fcbad254d40a6c9f8c2e3d176a7b694625abb17afe4ad4",
       "all_original_capsule_files_unchanged": true,
-      "README_and_metadata_revision_match": true
+      "README_and_metadata_revision_match": true,
+      "author_order": [
+        "Xingyun Chen",
+        "Shiyong Xiong"
+      ],
+      "corresponding_author": {
+        "name": "Xingyun Chen",
+        "email": "cxy201318@qq.com"
+      }
     },
     {
       "online_resource": 3,
-      "path": "release/assets/jiis_ESM_3_submission_20261005.zip",
-      "sha256": "634d8ffbaf599c728f6bcc066a18cd1324ef5bfc1e5875a82eb0c0d16b07caf2",
+      "path": "release/assets/jiis_ESM_3_submission_20261008.zip",
+      "sha256": "ecbc6ca2f409b582eefe674ea7d2eea2070044dbe474732682b512be6f12517b",
       "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
       "capsule_version": "0.2.0-local-20261004",
-      "packaging_revision": "jiis-materials-sync-20261005",
+      "packaging_revision": "jiis-author-order-20261008",
       "original_capsule_sha256": "ffac46f7be027474e05d9ba01e650e2f798939ca455f93a21d4306385857d441",
       "all_original_capsule_files_unchanged": true,
-      "README_and_metadata_revision_match": true
+      "README_and_metadata_revision_match": true,
+      "author_order": [
+        "Xingyun Chen",
+        "Shiyong Xiong"
+      ],
+      "corresponding_author": {
+        "name": "Xingyun Chen",
+        "email": "cxy201318@qq.com"
+      }
     }
   ],
   "baseline_terminology": "matched question-only baselines",
-  "supplementary_identification_revision": "jiis-materials-sync-20261005"
+  "supplementary_identification_revision": "jiis-author-order-20261008",
+  "authors": [
+    "Xingyun Chen",
+    "Shiyong Xiong"
+  ],
+  "corresponding_author": {
+    "name": "Xingyun Chen",
+    "email": "cxy201318@qq.com"
+  },
+  "current_source_archives": {
+    "main": "release/assets/jiis_main_source_20261008.zip",
+    "supplement": "release/assets/jiis_supplement_source_20261008.zip"
+  }
 }
