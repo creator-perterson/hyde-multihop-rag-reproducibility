@@ -12,6 +12,15 @@
 \usepackage{xurl}
 \usepackage{multicol}
 
+% Compact only front-matter gaps so the abstract and keywords share page one.
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@maketitle}{\vskip20pt\artauthors}{\vskip12pt\artauthors}{}{\PackageError{jiis-layout}{Author spacing patch failed}{Check sn-jnl title macro.}}
+\patchcmd{\@maketitle}{\vskip24pt}{\vskip16pt}{}{\PackageError{jiis-layout}{Email spacing patch failed}{Check sn-jnl title macro.}}
+\patchcmd{\@maketitle}{\vskip24pt}{\vskip16pt}{}{\PackageError{jiis-layout}{Abstract spacing patch failed}{Check sn-jnl title macro.}}
+\patchcmd{\abstracthead}{-22pt}{-16pt}{}{\PackageError{jiis-layout}{Abstract heading patch failed}{Check sn-jnl abstract macro.}}
+\makeatother
+
 \setlength{\textfloatsep}{10pt plus 2pt minus 2pt}
 \setlength{\floatsep}{10pt plus 2pt minus 2pt}
 \setlength{\intextsep}{10pt plus 2pt minus 2pt}

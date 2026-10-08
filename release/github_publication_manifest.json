@@ -14,8 +14,8 @@
   "files": [
     {
       "path": "README.md",
-      "size_bytes": 4126,
-      "sha256": "578e8b511bdf3c1ad4cd3bd00335d1b306cc034386f1aec7d4b6ed51cba25ef8"
+      "size_bytes": 4302,
+      "sha256": "9234ebb50c7bbd031d05f289ce0f41298b75ebd255446e0a9a4e6663c98ef25e"
     },
     {
       "path": ".gitignore",
@@ -154,8 +154,8 @@
     },
     {
       "path": "paper/jiis/manuscript_jiis.tex",
-      "size_bytes": 3453,
-      "sha256": "257afe6040f9ed74badb26e1a2330c8e60fdf6f5412158a309634dd97d0279ff"
+      "size_bytes": 4133,
+      "sha256": "1488e900696879b98650b9ff80324a5f9ea670338f886dad1474f793b8b69429"
     },
     {
       "path": "paper/jiis/methods_jiis.tex",
@@ -474,8 +474,8 @@
     },
     {
       "path": "paper/jiis/manuscript_jiis.pdf",
-      "size_bytes": 592752,
-      "sha256": "c9d50bebc2dc6aaaec126457c553f26c9613b7f78e333c402ac520c50a5aca42"
+      "size_bytes": 592873,
+      "sha256": "d169d61fe1d5b3b1d8bc640ef0e42138e42c831cbafa45aa7089939cd99d9b6f"
     },
     {
       "path": "paper/jiis/supplementary_jiis.pdf",
@@ -801,6 +801,11 @@
       "path": "release/assets/jiis_ESM_3_submission_20261008.zip",
       "size_bytes": 165009,
       "sha256": "ecbc6ca2f409b582eefe674ea7d2eea2070044dbe474732682b512be6f12517b"
+    },
+    {
+      "path": "release/assets/jiis_main_source_20261008_keywords.zip",
+      "size_bytes": 270067,
+      "sha256": "f6493bf314e6bf7b846ae26d450bf401c4d94992378e5248f3447547ca7efeec"
     }
   ],
   "initial_publication_commit": "a68aaaacdd5093eaaf0d094b34da5f418255317a",
@@ -819,7 +824,7 @@
     }
   ],
   "article_title": "Reliability Boundaries of HyDE-Style Query Expansion in Multi-Hop Intelligent Information Retrieval",
-  "current_manuscript_revision": "2026-10-08-author-order-corresponding-author",
+  "current_manuscript_revision": "2026-10-08-keywords-on-first-page",
   "current_abstract_words": 243,
   "prior_public_tree": "68efd6ca4a77cea881c403e85d3d206bfd16ea4f",
   "submission_wrappers": [
@@ -873,7 +878,14 @@
     "email": "cxy201318@qq.com"
   },
   "current_source_archives": {
-    "main": "release/assets/jiis_main_source_20261008.zip",
+    "main": "release/assets/jiis_main_source_20261008_keywords.zip",
     "supplement": "release/assets/jiis_supplement_source_20261008.zip"
+  },
+  "first_page_layout": {
+    "keywords_on_page_1": true,
+    "abstract_on_page_1": true,
+    "all_five_keywords_present": true,
+    "font_sizes_and_page_margins_unchanged": true,
+    "main_pages": 25
   }
 }
